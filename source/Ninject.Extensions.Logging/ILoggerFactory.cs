@@ -43,5 +43,11 @@ namespace Ninject.Extensions.Logging
         /// <param name="type">The type to create the logger for.</param>
         /// <returns>The newly-created logger.</returns>
         ILogger GetLogger( IContext context );
+
+        /// <summary>
+        /// Gets the logger for the class calling this method.
+        /// </summary>
+        /// <returns>The newly-created logger.</returns>
+        ILogger GetCurrentClassLogger();
     }
 }

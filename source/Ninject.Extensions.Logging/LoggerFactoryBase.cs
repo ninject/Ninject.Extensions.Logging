@@ -23,6 +23,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using Ninject.Activation;
 using Ninject.Components;
 
@@ -73,6 +75,17 @@ namespace Ninject.Extensions.Logging
         public ILogger GetLogger( IContext context )
         {
             return GetLogger( context.Request.Target.Member.DeclaringType );
+        }
+
+        /// <summary>
+        /// Gets the logger for the class calling this method.
+        /// </summary>
+        /// <returns>The newly-created logger.</returns>
+        [MethodImpl( MethodImplOptions.NoInlining )]
+        public ILogger GetCurrentClassLogger()
+        {
+            var frame = new StackFrame( 1, false );
+            return GetLogger( frame.GetMethod().DeclaringType );
         }
 
         #endregion

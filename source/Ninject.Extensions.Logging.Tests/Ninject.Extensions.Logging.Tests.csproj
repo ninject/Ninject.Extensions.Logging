@@ -63,6 +63,8 @@
   <ItemGroup>
     <Compile Include="Classes\CtorPropertyLoggerClass.cs" />
     <Compile Include="Classes\NonPublicPropertyLoggerClass.cs" />
+    <Compile Include="Classes\ObjectGetsItsOwnLogger.cs" />
+    <Compile Include="Classes\ObjectGetsItsOwnLoggerUsingCurrentClassMethod.cs" />
     <Compile Include="Infrastructure\CommonTests.cs" />
     <Compile Include="Infrastructure\ILoggingTestContext.cs" />
     <Compile Include="Infrastructure\Log4netTestingContext.cs" />

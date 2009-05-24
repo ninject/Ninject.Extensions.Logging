@@ -45,6 +45,30 @@ namespace Ninject.Extensions.Logging.Tests.Infrastructure
             }
         }
 
+        [Fact]
+        public void ObjectCanGetsItsOwnLogger()
+        {
+            using ( var kernel = CreateKernel() )
+            {
+                var loggerClass = kernel.Get<ObjectGetsItsOwnLogger>();
+                Assert.NotNull( loggerClass.Logger );
+                Assert.Equal( typeof (ObjectGetsItsOwnLogger), loggerClass.Logger.Type );
+                Assert.Equal( LoggerType, loggerClass.Logger.GetType() );
+            }
+        }
+
+        [Fact]
+        public void ObjectCanGetsItsOwnLoggerUsingGetCurrentClassLogger()
+        {
+            using ( var kernel = CreateKernel() )
+            {
+                var loggerClass = kernel.Get<ObjectGetsItsOwnLoggerUsingCurrentClassMethod>();
+                Assert.NotNull( loggerClass.Logger );
+                Assert.Equal( typeof (ObjectGetsItsOwnLoggerUsingCurrentClassMethod), loggerClass.Logger.Type );
+                Assert.Equal( LoggerType, loggerClass.Logger.GetType() );
+            }
+        }
+
         protected virtual IKernel CreateKernel()
         {
             var settings = CreateSettings();
