@@ -47,9 +47,8 @@ namespace Ninject.Extensions.Logging.Tests.Infrastructure
 
         protected virtual IKernel CreateKernel()
         {
-            var settings = new NinjectSettings();
-            settings.LoadExtensions = false;
-            return new StandardKernel( CreateSettings(), TestModule );
+            var settings = CreateSettings();
+            return new StandardKernel( settings, TestModule );
         }
 
         protected virtual INinjectSettings CreateSettings()
