@@ -22,13 +22,12 @@ namespace Ninject.Extensions.Logging.Tests.Infrastructure
         }
 
         [Fact]
-        public void PrivateLoggerPropertyIsInjected()
+        public void NonPublicLoggerPropertyIsNotInjected()
         {
             using ( var kernel = CreateKernel() )
             {
-                var loggerClass = kernel.Get<PrivatePropertyLoggerClass>();
-                Assert.NotNull( loggerClass.Logger );
-                Assert.Equal( typeof (PrivatePropertyLoggerClass), loggerClass.Logger.Type );
+                var loggerClass = kernel.Get<NonPublicPropertyLoggerClass>();
+                Assert.Null( loggerClass.Logger );
             }
         }
 
