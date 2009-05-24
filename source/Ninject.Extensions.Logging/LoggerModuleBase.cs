@@ -20,28 +20,24 @@
 
 #region Using Directives
 
-using System;
-using Ninject.Activation;
-using Ninject.Components;
+using Ninject.Modules;
 
 #endregion
 
 namespace Ninject.Extensions.Logging
 {
-    public interface ILoggerFactory : INinjectComponent
+    public class LoggerModuleBase : NinjectModule
     {
-        /// <summary>
-        /// Gets the logger for the specified type, creating it if necessary.
-        /// </summary>
-        /// <param name="type">The type to create the logger for.</param>
-        /// <returns>The newly-created logger.</returns>
-        ILogger GetLogger( Type type );
+        #region Overrides of NinjectModule
 
         /// <summary>
-        /// Gets the logger for the specified activation context, creating it if necessary.
+        /// Loads the module into the kernel.
         /// </summary>
-        /// <param name="type">The type to create the logger for.</param>
-        /// <returns>The newly-created logger.</returns>
-        ILogger GetLogger( IContext context );
+        public override void Load()
+        {
+            Bind<ILogger>().ToMethod( ( context ) => context.Kernel.Get<ILoggerFactory>().GetLogger( context ) );
+        }
+
+        #endregion
     }
 }

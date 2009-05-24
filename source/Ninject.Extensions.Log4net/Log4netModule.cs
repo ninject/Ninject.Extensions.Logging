@@ -32,7 +32,7 @@ namespace Ninject.Extensions.Logging.Log4net
     /// Extends the functionality of the kernel, providing integration between the Ninject
     /// logging infrastructure and log4net.
     /// </summary>
-    public class Log4netModule : NinjectModule
+    public class Log4netModule : LoggerModuleBase
     {
         /// <summary>
         /// Loads the module into the kernel.
@@ -40,8 +40,7 @@ namespace Ninject.Extensions.Logging.Log4net
         public override void Load()
         {
             Bind<ILoggerFactory>().ToConstant( new Log4netLoggerFactory() );
-
-            Bind<ILogger>().ToMethod( ( context ) => context.Kernel.Get<ILoggerFactory>().GetLogger( context ) );
+            base.Load();
         }
     }
 }

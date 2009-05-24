@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ninject.Extensions.Log4net"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ninject.Extensions.NLog", "..\source\Ninject.Extensions.NLog\Ninject.Extensions.NLog.csproj", "{3BDACDF8-ADCB-42FD-AB5F-E7E54A674D93}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ninject.Extensions.Logging.Tests", "..\source\Ninject.Extensions.Logging.Tests\Ninject.Extensions.Logging.Tests.csproj", "{60AE94DD-7F89-49D7-8A87-49511D59DCE2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{3BDACDF8-ADCB-42FD-AB5F-E7E54A674D93}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3BDACDF8-ADCB-42FD-AB5F-E7E54A674D93}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3BDACDF8-ADCB-42FD-AB5F-E7E54A674D93}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60AE94DD-7F89-49D7-8A87-49511D59DCE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60AE94DD-7F89-49D7-8A87-49511D59DCE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60AE94DD-7F89-49D7-8A87-49511D59DCE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60AE94DD-7F89-49D7-8A87-49511D59DCE2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -53,6 +53,7 @@
     <Compile Include="ILoggerFactory.cs" />
     <Compile Include="LoggerBase.cs" />
     <Compile Include="LoggerFactoryBase.cs" />
+    <Compile Include="LoggerModuleBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

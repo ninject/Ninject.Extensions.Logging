@@ -2,8 +2,9 @@
 
 //
 // Author: Ivan Porto Carrero <ivan@flanders.co.nz>
-// Copyright (c) 2008, Flanders International Marketing Ltd.
-// Copyright (c) 2007-2009, Enkari, Ltd.
+// Copyright © 2008, Flanders International Marketing Ltd.
+// Copyright © 2007-2009, Enkari, Ltd.
+// Copyright © 2009 Ian Davis <ian.f.davis@gmail.com>
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -23,7 +24,6 @@
 #region Using Directives
 
 using Ninject.Extensions.Logging.NLog.Infrastructure;
-using Ninject.Modules;
 
 #endregion
 
@@ -33,7 +33,7 @@ namespace Ninject.Extensions.Logging.NLog
     /// Extends the functionality of the kernel, providing integration between the Ninject
     /// logging infrastructure and nlog.
     /// </summary>
-    public class NLogModule : NinjectModule
+    public class NLogModule : LoggerModuleBase
     {
         /// <summary>
         /// Loads the module into the kernel.
@@ -41,7 +41,7 @@ namespace Ninject.Extensions.Logging.NLog
         public override void Load()
         {
             Bind<ILoggerFactory>().ToConstant( new NLogLoggerFactory() );
-            Bind<ILogger>().To<NLogLogger>();
+            base.Load();
         }
     }
 }
