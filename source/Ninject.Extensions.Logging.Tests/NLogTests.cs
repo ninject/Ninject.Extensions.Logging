@@ -8,6 +8,16 @@ namespace Ninject.Extensions.Logging.Tests
 {
     public class NLogTests : NLogTestingContext
     {
-        // todo, add log4net specific tests
+        // todo, add nlog specific tests
+    }
+
+    public class NLogAutoloadTests : NLogTestingContext
+    {
+        protected override IKernel CreateKernel()
+        {
+            var settings = new NinjectSettings();
+            settings.LoadExtensions = true;
+            return new StandardKernel( settings );
+        }
     }
 }

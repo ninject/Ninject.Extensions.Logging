@@ -10,4 +10,14 @@ namespace Ninject.Extensions.Logging.Tests
     {
         // todo, add log4net specific tests
     }
+
+    public class Log4netAutoloadTests : Log4netTestingContext
+    {
+        protected override IKernel CreateKernel()
+        {
+            var settings = new NinjectSettings();
+            settings.LoadExtensions = true;
+            return new StandardKernel( settings );
+        }
+    }
 }

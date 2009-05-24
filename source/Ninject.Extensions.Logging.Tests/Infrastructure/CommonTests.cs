@@ -43,8 +43,7 @@ namespace Ninject.Extensions.Logging.Tests.Infrastructure
             }
         }
 
-
-        private IKernel CreateKernel()
+        protected virtual IKernel CreateKernel()
         {
             var settings = new NinjectSettings();
             settings.LoadExtensions = false;
