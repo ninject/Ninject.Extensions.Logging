@@ -22,6 +22,7 @@
 #region Using Directives
 
 using System;
+using Ninject.Activation;
 using Ninject.Components;
 
 #endregion
@@ -36,5 +37,12 @@ namespace Ninject.Extensions.Logging
         /// <param name="type">The type to create the logger for.</param>
         /// <returns>The newly-created logger.</returns>
         ILogger GetLogger( Type type );
+
+        /// <summary>
+        /// Gets the logger for the specified activation context, creating it if necessary.
+        /// </summary>
+        /// <param name="type">The type to create the logger for.</param>
+        /// <returns>The newly-created logger.</returns>
+        ILogger GetLogger( IContext context );
     }
 }

@@ -40,7 +40,8 @@ namespace Ninject.Extensions.Logging.Log4net
         public override void Load()
         {
             Bind<ILoggerFactory>().ToConstant( new Log4netLoggerFactory() );
-            Bind<ILogger>().To<Log4netLogger>();
+
+            Bind<ILogger>().ToMethod( ( context ) => context.Kernel.Get<ILoggerFactory>().GetLogger( context ) );
         }
     }
 }

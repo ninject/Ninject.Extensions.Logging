@@ -23,6 +23,7 @@
 
 using System;
 using System.Collections.Generic;
+using Ninject.Activation;
 using Ninject.Components;
 
 #endregion
@@ -62,6 +63,16 @@ namespace Ninject.Extensions.Logging
 
                 return logger;
             }
+        }
+
+        /// <summary>
+        /// Gets the logger for the specified activation context, creating it if necessary.
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns>The newly-created logger.</returns>
+        public ILogger GetLogger( IContext context )
+        {
+            return GetLogger( context.Request.Target.Member.DeclaringType );
         }
 
         #endregion
