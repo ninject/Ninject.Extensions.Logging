@@ -1,6 +1,8 @@
 #region Using Directives
 
+using System;
 using Ninject.Extensions.Logging.NLog;
+using Ninject.Extensions.Logging.NLog.Infrastructure;
 using Ninject.Modules;
 
 #endregion
@@ -21,6 +23,11 @@ namespace Ninject.Extensions.Logging.Tests.Infrastructure
         public override INinjectModule TestModule
         {
             get { return _module; }
+        }
+
+        public override Type LoggerType
+        {
+            get { return typeof (NLogLogger); }
         }
 
         #endregion

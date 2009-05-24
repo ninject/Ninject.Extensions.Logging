@@ -13,11 +13,12 @@ namespace Ninject.Extensions.Logging.Tests
 
     public class NLogAutoloadTests : NLogTestingContext
     {
-        protected override IKernel CreateKernel()
+        protected virtual INinjectSettings CreateSettings()
         {
             var settings = new NinjectSettings();
             settings.LoadExtensions = true;
-            return new StandardKernel( settings );
+            settings.ExtensionSearchPattern = "Ninject.Extensions.Logging.NLog.dll";
+            return settings;
         }
     }
 }

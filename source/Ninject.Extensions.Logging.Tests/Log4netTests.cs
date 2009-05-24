@@ -13,11 +13,12 @@ namespace Ninject.Extensions.Logging.Tests
 
     public class Log4netAutoloadTests : Log4netTestingContext
     {
-        protected override IKernel CreateKernel()
+        protected virtual INinjectSettings CreateSettings()
         {
             var settings = new NinjectSettings();
             settings.LoadExtensions = true;
-            return new StandardKernel( settings );
+            settings.ExtensionSearchPattern = "Ninject.Extensions.Logging.Log4net.dll";
+            return settings;
         }
     }
 }

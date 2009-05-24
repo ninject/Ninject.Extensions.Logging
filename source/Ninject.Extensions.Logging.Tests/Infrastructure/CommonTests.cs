@@ -1,5 +1,6 @@
 ﻿#region Using Directives
 
+using System;
 using Ninject.Extensions.Logging.Tests.Classes;
 using Ninject.Modules;
 using Xunit;
@@ -18,6 +19,7 @@ namespace Ninject.Extensions.Logging.Tests.Infrastructure
                 var loggerClass = kernel.Get<PublicPropertyLoggerClass>();
                 Assert.NotNull( loggerClass.Logger );
                 Assert.Equal( typeof (PublicPropertyLoggerClass), loggerClass.Logger.Type );
+                Assert.Equal( LoggerType, loggerClass.Logger.GetType() );
             }
         }
 
@@ -39,6 +41,7 @@ namespace Ninject.Extensions.Logging.Tests.Infrastructure
                 var loggerClass = kernel.Get<CtorPropertyLoggerClass>();
                 Assert.NotNull( loggerClass.Logger );
                 Assert.Equal( typeof (CtorPropertyLoggerClass), loggerClass.Logger.Type );
+                Assert.Equal( LoggerType, loggerClass.Logger.GetType() );
             }
         }
 
@@ -46,12 +49,20 @@ namespace Ninject.Extensions.Logging.Tests.Infrastructure
         {
             var settings = new NinjectSettings();
             settings.LoadExtensions = false;
-            return new StandardKernel( settings, TestModule );
+            return new StandardKernel( CreateSettings(), TestModule );
+        }
+
+        protected virtual INinjectSettings CreateSettings()
+        {
+            var settings = new NinjectSettings();
+            settings.LoadExtensions = false;
+            return settings;
         }
 
         #region Implementation of ILoggingTestContext
 
         public abstract INinjectModule TestModule { get; }
+        public abstract Type LoggerType { get; }
 
         #endregion
     }
