@@ -14,6 +14,7 @@
 
 using System;
 using log4net;
+using log4net.Core;
 
 #endregion
 
@@ -46,6 +47,14 @@ namespace Ninject.Extensions.Logging.Log4net.Infrastructure
         public override bool IsInfoEnabled
         {
             get { return _log4netLogger.IsInfoEnabled; }
+        }
+
+        /// <summary>
+        /// Gets a value indicating whether messages with Trace severity should be logged.
+        /// </summary>
+        public override bool IsTraceEnabled
+        {
+            get { return _log4netLogger.Logger.IsEnabledFor( Level.Trace ); }
         }
 
         /// <summary>
@@ -130,6 +139,27 @@ namespace Ninject.Extensions.Logging.Log4net.Infrastructure
         public override void Info( Exception exception, string format, object[] args )
         {
             _log4netLogger.Info( String.Format( format, args ), exception );
+        }
+
+        /// <summary>
+        /// Logs the specified message with Trace severity.
+        /// </summary>
+        /// <param name="format">The message or format template.</param>
+        /// <param name="args">Any arguments required for the format template.</param>
+        public override void Trace( string format, object[] args )
+        {
+            _log4netLogger.Logger.Log( Type, Level.Trace, String.Format( format, args ), null );
+        }
+
+        /// <summary>
+        /// Logs the specified exception with Trace severity.
+        /// </summary>
+        /// <param name="exception">The exception to log.</param>
+        /// <param name="format">The message or format template.</param>
+        /// <param name="args">Any arguments required for the format template.</param>
+        public override void Trace( Exception exception, string format, object[] args )
+        {
+            _log4netLogger.Logger.Log( Type, Level.Trace, String.Format( format, args ), exception );
         }
 
         /// <summary>

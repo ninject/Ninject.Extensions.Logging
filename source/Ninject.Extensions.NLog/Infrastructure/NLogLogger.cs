@@ -54,6 +54,14 @@ namespace Ninject.Extensions.Logging.NLog.Infrastructure
         }
 
         /// <summary>
+        /// Gets a value indicating whether messages with Trace severity should be logged.
+        /// </summary>
+        public override bool IsTraceEnabled
+        {
+            get { return _nlogLogger.IsTraceEnabled; }
+        }
+
+        /// <summary>
         /// Gets a value indicating whether messages with Warn severity should be logged.
         /// </summary>
         public override bool IsWarnEnabled
@@ -159,6 +167,27 @@ namespace Ninject.Extensions.Logging.NLog.Infrastructure
         public override void Info( Exception exception, string format, object[] args )
         {
             _nlogLogger.InfoException( string.Format( format, args ), exception );
+        }
+
+        /// <summary>
+        /// Logs the specified message with Trace severity.
+        /// </summary>
+        /// <param name="format">The message or format template.</param>
+        /// <param name="args">Any arguments required for the format template.</param>
+        public override void Trace( string format, object[] args )
+        {
+            _nlogLogger.Trace( format, args );
+        }
+
+        /// <summary>
+        /// Logs the specified exception with Trace severity.
+        /// </summary>
+        /// <param name="exception">The exception to log.</param>
+        /// <param name="format">The message or format template.</param>
+        /// <param name="args">Any arguments required for the format template.</param>
+        public override void Trace( Exception exception, string format, object[] args )
+        {
+            _nlogLogger.TraceException( string.Format( format, args ), exception );
         }
 
         /// <summary>

@@ -19,6 +19,9 @@ using Ninject.Infrastructure.Disposal;
 
 namespace Ninject.Extensions.Logging
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public abstract class LoggerBase : DisposableObject, ILogger
     {
         #region Properties
@@ -37,6 +40,11 @@ namespace Ninject.Extensions.Logging
         /// Gets a value indicating whether messages with Info severity should be logged.
         /// </summary>
         public abstract bool IsInfoEnabled { get; }
+
+        /// <summary>
+        /// Gets a value indicating whether messages with Trace severity should be logged.
+        /// </summary>
+        public abstract bool IsTraceEnabled { get; }
 
         /// <summary>
         /// Gets a value indicating whether messages with Warn severity should be logged.
@@ -103,6 +111,21 @@ namespace Ninject.Extensions.Logging
         /// <param name="format">The message or format template.</param>
         /// <param name="args">Any arguments required for the format template.</param>
         public abstract void Info( Exception exception, string format, params object[] args );
+
+        /// <summary>
+        /// Logs the specified message with Trace severity.
+        /// </summary>
+        /// <param name="format">The message or format template.</param>
+        /// <param name="args">Any arguments required for the format template.</param>
+        public abstract void Trace( string format, params object[] args );
+
+        /// <summary>
+        /// Logs the specified exception with Trace severity.
+        /// </summary>
+        /// <param name="exception">The exception to log.</param>
+        /// <param name="format">The message or format template.</param>
+        /// <param name="args">Any arguments required for the format template.</param>
+        public abstract void Trace( Exception exception, string format, params object[] args );
 
         /// <summary>
         /// Logs the specified message with Warn severity.
