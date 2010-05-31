@@ -18,7 +18,7 @@ using Ninject.Modules;
 
 namespace Ninject.Extensions.Logging
 {
-    public class LoggerModuleBase : NinjectModule
+    public abstract class LoggerModuleBase : NinjectModule
     {
         #region Overrides of NinjectModule
 

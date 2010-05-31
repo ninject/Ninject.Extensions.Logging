@@ -9,6 +9,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ninject.Extensions.NLog", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ninject.Extensions.Logging.Tests", "..\source\Ninject.Extensions.Logging.Tests\Ninject.Extensions.Logging.Tests.csproj", "{60AE94DD-7F89-49D7-8A87-49511D59DCE2}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{B389020C-DB2A-4F38-BAF1-B87A1F68E553}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NLog", "NLog", "{52F20FAC-A46F-42AF-BE36-8990358265A3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Log4net", "Log4net", "{82819C2A-20AF-42F0-BA95-8FBECBB0082C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{4AD11989-B18D-4CFE-B7D1-95A39FCDE39A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -34,5 +42,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1C0E875E-B2D2-4DDA-874B-D8A9E45A3888} = {B389020C-DB2A-4F38-BAF1-B87A1F68E553}
+		{3BDACDF8-ADCB-42FD-AB5F-E7E54A674D93} = {52F20FAC-A46F-42AF-BE36-8990358265A3}
+		{17FBF64E-E523-412D-B507-077B5DE726AD} = {82819C2A-20AF-42F0-BA95-8FBECBB0082C}
+		{60AE94DD-7F89-49D7-8A87-49511D59DCE2} = {4AD11989-B18D-4CFE-B7D1-95A39FCDE39A}
 	EndGlobalSection
 EndGlobal

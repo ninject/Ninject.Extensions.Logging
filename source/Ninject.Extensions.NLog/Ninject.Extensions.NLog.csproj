@@ -42,7 +42,7 @@
     </Reference>
     <Reference Include="NLog, Version=1.0.0.505, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\contrib\NLog\bin\.NET Framework 2.0\NLog.dll</HintPath>
+      <HintPath>..\..\contrib\NLog\net-3.5\NLog.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
@@ -62,7 +62,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Ninject.Extensions.Logging\Ninject.Extensions.Logging.csproj">
       <Project>{1C0E875E-B2D2-4DDA-874B-D8A9E45A3888}</Project>
-      <Name>Ninject.Integration.Logging</Name>
+      <Name>Ninject.Extensions.Logging</Name>
       <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
