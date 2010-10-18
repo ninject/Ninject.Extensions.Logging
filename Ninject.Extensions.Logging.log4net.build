@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<project name="Ninject.log4net" >
+	<property name="product.assembly.log4net" value="${product.name}.Log4Net.dll" overwrite="false"/>
+	<property name="product.assembly.test.log4net" value="${product.name}.log4net.Test.dll" overwrite="false"/>
+	
+	<target name="buildLog4Net" unless="${string::contains(build.platform, 'silverlight')}">
+		<property name="current.path.lib.log4net" value="${path.lib}/log4Net/net-3.5" unless="${nant.settings.currentframework == 'mono-2.0' or nant.settings.currentframework == 'netcf-3.5'}" />
+		<property name="current.path.lib.log4net" value="${path.lib}/log4Net/${nant.settings.currentframework}" if="${nant.settings.currentframework == 'mono-2.0' or nant.settings.currentframework == 'netcf-3.5'}" />
+		<copy todir="${current.path.build}/log4net/lib">
+			<fileset basedir="${current.path.lib.log4net}">
+				<include name="**/*.dll"/>
+				<include name="**/*.xml"/>
+			</fileset>
+		</copy>
+		
+		<csc noconfig="true" warnaserror="true" target="library" debug="${build.debug}" optimize="${build.optimize}" define="${build.defines}" 
+		     output="${current.path.build}/log4net/${product.assembly.log4net}" 
+			 doc="${current.path.build}/log4net/${product.name}.Log4Net.xml" keyfile="${path.src}/${product.keyfile}">
+			<arg line="/filealign:512" unless="${nant.settings.currentframework == 'mono-2.0'}"/>
+			<sources basedir="${path.src}">
+				<include name="${build.asminfo}"/>
+				<include name="${product.name}.Log4Net/**/*.cs"/>
+			</sources>
+			<references>
+				<include name="mscorlib.dll"/>
+				<include name="System.dll"/>
+				<include name="System.Core.dll"/>
+				<include name="System.Web.dll" unless="${build.platform == 'silverlight-2.0'}"/>
+				<include name="${current.path.lib.log4net}/log4net.dll"/>
+				<include name="${path.lib}/Ninject/${build.platform}/Ninject.dll"/>
+				<include name="${current.path.build}/${product.assembly}"/>
+			</references>
+		</csc>		
+	</target>
+	
+	<target name="compile-log4net-tests" depends="core compile-tests" unless="${skip.tests}" if="${not(string::contains(build.platform, 'silverlight') or build.platform == 'netcf-3.5')}">
+		<property name="current.path.test.log4net" value="${path.build}/${build.platform}/tests/log4net"/>
+		<mkdir dir="${current.path.test.log4net}"/>
+		<copy todir="${current.path.test.log4net}" flatten="true">
+			<fileset basedir="${current.path.test}">
+				<include name="**/*.dll"/>
+			</fileset>
+		</copy>
+		<copy todir="${current.path.test.log4net}" flatten="true">
+			<fileset basedir="${current.path.build}/log4net">
+				<include name="**/*.dll"/>
+			</fileset>
+		</copy>		
+		<csc noconfig="true" warnaserror="true" target="library" debug="${build.debug}" optimize="${build.optimize}" define="${build.defines}"
+             output="${current.path.test.log4net}/${product.assembly.test.log4net}">
+			<sources basedir="${path.src}">
+				<include name="${product.name}.Log4Net.Test/**/*.cs"/>
+			</sources>
+			<references basedir="${current.path.test.log4net}">
+				<include name="mscorlib.dll"/>
+				<include name="System.dll"/>
+				<include name="System.Core.dll"/>
+				<include name="Moq.dll"/>
+				<include name="xunit.dll"/>
+                <include name="xunit.should.dll"/>
+				<include name="${current.path.lib.log4net}/log4net.dll"/>
+				<include name="${product.assembly}"/>
+				<include name="${product.assembly.log4net}"/>
+				<include name="${current.path.test}/${product.assembly.test}"/>
+				<include name="${path.lib}/Ninject/${build.platform}/Ninject.dll"/>
+			</references>
+			<nowarn>
+				<warning number="1584"/>
+			</nowarn>
+		</csc>
+	</target>
+ 
+	<target name="testLog4Net" depends="compile-log4net-tests" unless="${skip.tests}" if="${not(string::contains(build.platform, 'silverlight') or build.platform == 'netcf-3.5')}">
+		<exec program="${path.tools.xunit.console}" workingdir="${current.path.test.log4net}" commandline="${product.assembly.test.log4net} /html ${current.path.test.log4net}/results.html" failonerror="true"/>
+	</target>
+</project>

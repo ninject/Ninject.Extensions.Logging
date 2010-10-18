@@ -1,0 +1,147 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<project name="Ninject.NLog2" default="all">
+	<property name="product.assembly.NLog2" value="${product.name}.NLog2.dll" overwrite="false"/>
+		<property name="product.assembly.test.NLog2" value="${product.name}.NLog2.Test.dll" overwrite="false"/>
+
+	<target name="buildNLog2">
+		<property name="current.path.lib.NLog2" value="${path.lib}/NLog2/net-3.5" unless="${string::contains(build.platform, 'silverlight') or nant.settings.currentframework == 'mono-2.0' or nant.settings.currentframework == 'netcf-3.5'}" />
+		<property name="current.path.lib.NLog2" value="${path.lib}/NLog2/${nant.settings.currentframework}" if="${string::contains(build.platform, 'silverlight') or nant.settings.currentframework == 'mono-2.0' or nant.settings.currentframework == 'netcf-3.5'}" />
+		<copy todir="${current.path.build}/NLog2/lib">
+			<fileset basedir="${current.path.lib.NLog2}">
+				<include name="**/*.dll"/>
+				<include name="**/*.xml"/>
+			</fileset>
+		</copy>
+		
+		<csc noconfig="true" warnaserror="true" target="library" debug="${build.debug}" optimize="${build.optimize}" define="${build.defines}" 
+		     output="${current.path.build}/NLog2/${product.assembly.NLog2}" 
+			 doc="${current.path.build}/NLog2/${product.name}.NLog2.xml" keyfile="${path.src}/${product.keyfile}">
+			<arg line="/filealign:512" unless="${nant.settings.currentframework == 'mono-2.0'}"/>
+			<sources basedir="${path.src}">
+				<include name="${build.asminfo}"/>
+				<include name="${product.name}.NLog2/**/*.cs"/>
+			</sources>
+			<references>
+				<include name="mscorlib.dll"/>
+				<include name="System.dll"/>
+				<include name="System.Core.dll"/>
+				<include name="System.Web.dll" unless="${build.platform == 'silverlight-2.0'}"/>
+				<include name="${current.path.lib.NLog2}/NLog.dll"/>
+				<include name="${path.lib}/Ninject/${build.platform}/Ninject.dll"/>
+				<include name="${current.path.build}/${product.assembly}"/>
+			</references>
+		</csc>		
+	</target>
+
+	<target name="compile-NLog2-tests" depends="core compile-tests" unless="${skip.tests}" if="${not(string::contains(build.platform, 'silverlight') or build.platform == 'netcf-3.5')}">
+		<property name="current.path.test.NLog2" value="${path.build}/${build.platform}/tests/NLog2"/>
+		<mkdir dir="${current.path.test.NLog2}"/>
+		<copy todir="${current.path.test.NLog2}" flatten="true">
+			<fileset basedir="${current.path.test}">
+				<include name="*.dll"/>
+			</fileset>
+		</copy>
+		<copy todir="${current.path.test.NLog2}" flatten="true">
+			<fileset basedir="${current.path.build}/NLog2">
+				<include name="**/*.dll"/>
+			</fileset>
+		</copy>		
+		<csc noconfig="true" warnaserror="true" target="library" debug="${build.debug}" optimize="${build.optimize}" define="${build.defines}"
+             output="${current.path.test.NLog2}/${product.assembly.test.NLog2}">
+			<sources basedir="${path.src}">
+				<include name="${product.name}.NLog2.Test/**/*.cs"/>
+			</sources>
+			<references basedir="${current.path.test.NLog2}">
+				<include name="mscorlib.dll"/>
+				<include name="System.dll"/>
+				<include name="System.Core.dll"/>
+				<include name="Moq.dll"/>
+				<include name="xunit.dll"/>
+                <include name="xunit.should.dll"/>
+				<include name="${current.path.lib.NLog2}/NLog.dll"/>
+				<include name="${product.assembly}"/>
+				<include name="${product.assembly.NLog2}"/>
+				<include name="${current.path.test}/${product.assembly.test}"/>
+				<include name="${path.lib}/Ninject/${build.platform}/Ninject.dll"/>
+			</references>
+			<nowarn>
+				<warning number="1584"/>
+			</nowarn>
+		</csc>
+	</target>
+ 
+	<target name="testNLog2" depends="compile-NLog2-tests" unless="${skip.tests}" if="${not(string::contains(build.platform, 'silverlight') or build.platform == 'netcf-3.5')}">
+		<exec program="${path.tools.xunit.console}" workingdir="${current.path.test.NLog2}" commandline="${product.assembly.test.NLog2} /html ${current.path.test.NLog2}/results.html" failonerror="true"/>
+	</target>	
+	
+    <target name="compile-silverlight-tests-NLog2" depends="core" unless="${skip.tests or skip.silverlightTests}" if="${string::contains(build.platform, 'silverlight')}">
+		<property name="current.path.test.NLog2" value="${path.build}/${build.platform}/tests/NLog2"/>
+		<property name="product.assembly.silverlighttest.NLog2" value="${product.name}.NLog2.SilverlightTests.xap"/>
+        <mkdir dir="${current.path.test}"/>
+		<copy todir="${current.path.test.NLog2}" flatten="true">
+			<fileset basedir="${current.path.build}">
+				<include name="*.dll"/>
+				<include name="lib/*.dll"/>
+			</fileset>
+		</copy>
+		<copy todir="${current.path.test.NLog2}" flatten="true">
+			<fileset basedir="${current.path.build}/NLog2">
+				<include name="**/*.dll"/>
+			</fileset>
+		</copy>		
+        <copy todir="${current.path.test.NLog2}">
+            <fileset basedir="${path.tools.moq}/silverlight">
+                <include name="Moq.Silverlight.dll"/>
+                <include name="Castle.DynamicProxy-Silverlight.dll"/>
+                <include name="Castle.Core-Silverlight.dll"/>
+            </fileset>
+        </copy>
+        <copy todir="${current.path.test.NLog2}">
+            <fileset basedir="${path.tools.unitdriven}">
+                <include name="UnitDrivenLight.dll"/>
+            </fileset>
+        </copy>
+        <csc noconfig="true" warnaserror="true" target="library" debug="${build.debug}" optimize="${build.optimize}" define="${build.defines}"
+             output="${current.path.test.NLog2}/${product.name}.NLog2.SilverlightTests.dll">
+            <sources basedir="${path.src}">
+                <include name="${product.name}.Tests/**/*.cs"/>
+				<include name="${product.name}.NLog2.Test/**/*.cs"/>
+                <include name="${product.name}.NLog2.SilverlightTests/*.cs"/>
+                <include name="${product.name}.NLog2.SilverlightTests/Properties/*.cs"/>
+				<exclude name="${product.name}.Tests/MSTestAttributes/*.cs"/>
+				<exclude name="${product.name}.Tests/Properties/*.cs"/>
+				<exclude name="${product.name}.NLog2.Test/Properties/*.cs"/>
+            </sources>
+            <references basedir="${current.path.test.NLog2}">
+                <include name="mscorlib.dll"/>
+                <include name="System.dll"/>
+                <include name="System.Core.dll"/>
+                <include name="System.Windows.dll"/>
+                <include name="System.Windows.Browser.dll"/>
+                <include name="System.Net.dll"/>
+                <include name="Moq.Silverlight.dll"/>
+                <include name="UnitDrivenLight.dll"/>
+				<include name="${current.path.lib.NLog2}/NLog.dll"/>
+				<include name="${product.assembly}"/>
+				<include name="${product.assembly.NLog2}"/>
+				<include name="${current.path.test}/${product.assembly.test}"/>
+				<include name="${path.lib}/Ninject/${build.platform}/Ninject.dll"/>
+            </references>
+            <nowarn>
+                <warning number="1584"/>
+            </nowarn>
+        </csc>
+		<zip zipfile="${current.path.test.NLog2}/${product.assembly.silverlighttest.NLog2}">
+			<fileset basedir="${current.path.test.NLog2}">
+				<include name="*.dll" />
+			</fileset>
+            <fileset basedir="${path.src}/${product.name}.NLog2.SilverlightTests">
+                <include name="AppManifest.xaml"/>
+            </fileset>
+		</zip>
+    </target>	
+
+	<target name="silverlight-test-NLog2" depends="compile-silverlight-tests-NLog2" unless="${skip.tests or skip.silverlightTests}" if="${string::contains(build.platform, 'silverlight')}">
+		<exec program="${path.tools.statlight}" workingdir="${current.path.test.NLog2}" commandline='-x"${product.assembly.silverlighttest.NLog2}" -o=UnitDriven --teamcity' failonerror="true"/>
+	</target>	
+</project>

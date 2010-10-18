@@ -1,0 +1,10 @@
+﻿<Deployment xmlns="http://schemas.microsoft.com/client/2007/deployment" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" EntryPointAssembly="Ninject.Extensions.Logging.NLog2.SilverlightTests" EntryPointType="Ninject.Extensions.Logging.NLog2.SilverlightTests.App" RuntimeVersion="4.0.50401.0">
+  <Deployment.Parts>
+    <AssemblyPart x:Name="Ninject.Extensions.Logging.NLog2.SilverlightTests" Source="Ninject.Extensions.Logging.NLog2.SilverlightTests.dll" />
+    <AssemblyPart x:Name="Ninject" Source="Ninject.dll" />
+    <AssemblyPart x:Name="Ninject.Extensions.Logging" Source="Ninject.Extensions.Logging.dll" />
+    <AssemblyPart x:Name="Ninject.Extensions.Logging.NLog2" Source="Ninject.Extensions.Logging.NLog2.dll" />
+    <AssemblyPart x:Name="NLog" Source="NLog.dll" />
+    <AssemblyPart x:Name="UnitDrivenLight" Source="UnitDrivenLight.dll" />
+  </Deployment.Parts>
+</Deployment>
