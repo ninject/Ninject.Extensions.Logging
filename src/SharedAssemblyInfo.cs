@@ -15,7 +15,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyProductAttribute("Ninject.Extensions.Logging: Logging Extension for Ninject")]
 [assembly: AssemblyCompanyAttribute("Innovatian, LLC")]
 [assembly: AssemblyCopyrightAttribute("Copyright © 2007-2010 Innovatian, LLC and contributors")]
-[assembly: AssemblyVersionAttribute("2.1.0.14")]
+[assembly: AssemblyVersionAttribute("2.1.0.16")]
 [assembly: ComVisibleAttribute(false)]
 [assembly: CLSCompliantAttribute(true)]
 

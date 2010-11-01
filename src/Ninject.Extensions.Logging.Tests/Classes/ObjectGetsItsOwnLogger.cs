@@ -4,7 +4,7 @@ using System.Reflection;
 
 #endregion
 
-namespace Ninject.Extensions.Logging.Tests.Classes
+namespace Ninject.Extensions.Logging.Classes
 {
     public class ObjectGetsItsOwnLogger
     {

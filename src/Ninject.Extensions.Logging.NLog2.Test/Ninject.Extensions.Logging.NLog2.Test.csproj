@@ -8,7 +8,7 @@
     <ProjectGuid>{F968F25B-97A5-4E47-8C6C-6FB59B21641C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Ninject.Extensions.Logging.NLog2.Test</RootNamespace>
+    <RootNamespace>Ninject.Extensions.Logging.NLog2</RootNamespace>
     <AssemblyName>Ninject.Extensions.Logging.NLog2.Test</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

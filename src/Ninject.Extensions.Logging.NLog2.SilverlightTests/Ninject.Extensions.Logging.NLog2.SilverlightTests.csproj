@@ -9,7 +9,7 @@
     <ProjectTypeGuids>{A1591282-1198-4647-A2B1-27E5FF5F6F3B};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Ninject.Extensions.Logging.NLog2.SilverlightTests</RootNamespace>
+    <RootNamespace>Ninject.Extensions.Logging.NLog2</RootNamespace>
     <AssemblyName>Ninject.Extensions.Logging.NLog2.SilverlightTests</AssemblyName>
     <TargetFrameworkIdentifier>Silverlight</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
@@ -20,7 +20,7 @@
     <GenerateSilverlightManifest>true</GenerateSilverlightManifest>
     <XapFilename>Ninject.Extensions.Logging.NLog2.SilverlightTests.xap</XapFilename>
     <SilverlightManifestTemplate>Properties\AppManifest.xml</SilverlightManifestTemplate>
-    <SilverlightAppEntry>Ninject.Extensions.Logging.NLog2.SilverlightTests.App</SilverlightAppEntry>
+    <SilverlightAppEntry>Ninject.Extensions.Logging.NLog2.App</SilverlightAppEntry>
     <TestPageFileName>TestPage.html</TestPageFileName>
     <CreateTestPage>true</CreateTestPage>
     <ValidateXaml>true</ValidateXaml>

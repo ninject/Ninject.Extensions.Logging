@@ -1,4 +1,4 @@
-namespace Ninject.Extensions.Logging.Tests.Classes
+namespace Ninject.Extensions.Logging.Classes
 {
     public class PublicPropertyLoggerClass
     {

@@ -1,11 +1,6 @@
-#region Using Directives
-
-using Ninject.Extensions.Logging.Tests.Infrastructure;
-
-#endregion
-
-namespace Ninject.Extensions.Logging.Tests
+namespace Ninject.Extensions.Logging.NLog
 {
+    using Ninject.Extensions.Logging.NLog.Infrastructure;
     using Ninject.Modules;
 
     public class NLogTests : NLogTestingContext

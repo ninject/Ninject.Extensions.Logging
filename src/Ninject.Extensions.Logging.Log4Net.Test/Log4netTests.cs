@@ -1,7 +1,7 @@
-namespace Ninject.Extensions.Logging.Tests
+namespace Ninject.Extensions.Logging.Log4Net
 {
     using Ninject;
-    using Ninject.Extensions.Logging.Log4Net.Test.Infrastructure;
+    using Ninject.Extensions.Logging.Log4Net.Infrastructure;
     using Ninject.Modules;
 
     public class Log4netTests : Log4netTestingContext

@@ -1,10 +1,10 @@
-namespace Ninject.Extensions.Logging.Log4Net.Test.Infrastructure
+namespace Ninject.Extensions.Logging.Log4Net.Infrastructure
 {
     using System;
     using log4net.Config;
+    using Ninject.Extensions.Logging.Infrastructure;
     using Ninject.Extensions.Logging.Log4net;
     using Ninject.Extensions.Logging.Log4net.Infrastructure;
-    using Ninject.Extensions.Logging.Tests.Infrastructure;
     using Ninject.Modules;
 
     public abstract class Log4netTestingContext : CommonTests

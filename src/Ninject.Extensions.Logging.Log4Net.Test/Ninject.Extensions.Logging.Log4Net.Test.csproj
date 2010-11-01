@@ -8,7 +8,7 @@
     <ProjectGuid>{8A7DB3BC-D01F-49A4-9603-8A31A998728C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Ninject.Extensions.Logging.Log4Net.Test</RootNamespace>
+    <RootNamespace>Ninject.Extensions.Logging.Log4Net</RootNamespace>
     <AssemblyName>Ninject.Extensions.Logging.Log4Net.Test</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>
@@ -16,7 +16,7 @@
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>

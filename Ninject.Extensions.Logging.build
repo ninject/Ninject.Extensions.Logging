@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<project name="Ninject" default="all">
+<project name="Ninject" default="rebuild">
 	<property name="version" value="2.1.0.0" overwrite="true"/>
 	<property name="product.name" value="Ninject.Extensions.Logging" overwrite="false"/>
 	<property name="product.company" value="Innovatian, LLC" overwrite="false"/>

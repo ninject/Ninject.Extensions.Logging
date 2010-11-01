@@ -1,16 +1,14 @@
-﻿namespace Ninject.Extensions.Logging.Tests.Infrastructure
+﻿namespace Ninject.Extensions.Logging.Infrastructure
 {
     using System;
-    using Ninject.Extensions.Logging.Tests.Classes;
+    using Ninject.Extensions.Logging.Classes;
     using Ninject.Modules;
 #if SILVERLIGHT
 #if SILVERLIGHT_MSTEST
     using MsTest.Should;
-    using Assert = Ninject.SilverlightTests.AssertWithThrows;
     using Fact = Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute;
 #else
     using UnitDriven.Should;
-    using Assert = Ninject.SilverlightTests.AssertWithThrows;
     using Fact = UnitDriven.TestMethodAttribute;
 #endif
 #else

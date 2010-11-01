@@ -1,12 +1,8 @@
-#region Using Directives
-
-using System;
-using Ninject.Modules;
-
-#endregion
-
-namespace Ninject.Extensions.Logging.Tests.Infrastructure
+namespace Ninject.Extensions.Logging.Infrastructure
 {
+    using System;
+    using Ninject.Modules;
+
     public interface ILoggingTestContext
     {
         INinjectModule[] TestModules { get; }

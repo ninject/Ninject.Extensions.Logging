@@ -1,6 +1,7 @@
 ﻿//-------------------------------------------------------------------------------
 // <copyright file="TestClassAttribute.cs" company="bbv Software Services AG">
-//   Copyright (c) 2008 bbv Software Services AG
+//   Copyright (c) 2010 Software Services AG
+//   Remo Gloor (remo.gloor@gmail.com)
 //
 //   Licensed under the Apache License, Version 2.0 (the "License");
 //   you may not use this file except in compliance with the License.
@@ -16,7 +17,7 @@
 // </copyright>
 //-------------------------------------------------------------------------------
 
-namespace Ninject.Extensions.Logging.Tests.MSTestAttributes
+namespace Ninject.Extensions.Logging.MSTestAttributes
 {
     using System;
 
