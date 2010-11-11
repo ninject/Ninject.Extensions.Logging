@@ -1,5 +1,5 @@
-//-------------------------------------------------------------------------------
-// <copyright file="NLogTestingContext.cs" company="bbv Software Services AG">
+﻿//-------------------------------------------------------------------------------
+// <copyright file="NLogAutoloadTests.cs" company="bbv Software Services AG">
 //   Copyright (c) 2010 Software Services AG
 //   Remo Gloor (remo.gloor@gmail.com)
 //
@@ -17,28 +17,28 @@
 // </copyright>
 //-------------------------------------------------------------------------------
 
-namespace Ninject.Extensions.Logging.NLog2.Infrastructure
+namespace Ninject.Extensions.Logging.NLog2
 {
-    using System;
-    using Ninject.Extensions.Logging.Infrastructure;
+#if !SILVERLIGHT && !NETCF
+    using Ninject.Extensions.Logging.NLog2.Infrastructure;
     using Ninject.Modules;
 
     /// <summary>
-    /// The context for testing NLog2
+    /// Tests with the module loaded by auto load extensions
     /// </summary>
-    public abstract class NLogTestingContext : CommonTests
+    public class NLogAutoloadTests : NLogTestingContext
     {
         /// <summary>
-        /// The NLog2 module
+        /// Creates the settings.
         /// </summary>
-        private readonly INinjectModule module;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="NLogTestingContext"/> class.
-        /// </summary>
-        protected NLogTestingContext()
+        /// <returns>The ninject settings</returns>
+        protected override INinjectSettings CreateSettings()
         {
-            this.module = new NLogModule();
+            return new NinjectSettings
+                {
+                    LoadExtensions = true, 
+                    ExtensionSearchPattern = "Ninject.Extensions.Logging.NLog2.dll"
+                };
         }
 
         /// <summary>
@@ -47,19 +47,8 @@ namespace Ninject.Extensions.Logging.NLog2.Infrastructure
         /// <value>The test modules.</value>
         public override INinjectModule[] TestModules
         {
-            get { return new[] { this.module }; }
-        }
-
-        /// <summary>
-        /// Gets the type of the logger.
-        /// </summary>
-        /// <value>The type of the logger.</value>
-        public override Type LoggerType
-        {
-            get
-            {
-                return typeof(NLogLogger);
-            }
+            get { return new INinjectModule[0]; }
         }
     }
+#endif
 }

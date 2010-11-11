@@ -12,6 +12,8 @@
 namespace Ninject.Extensions.Logging.Log4net.Infrastructure
 {
     using System;
+    using System.Diagnostics;
+    using System.Globalization;
     using log4net;
     using log4net.Core;
 

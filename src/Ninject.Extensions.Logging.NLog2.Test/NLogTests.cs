@@ -17,42 +17,186 @@
 // </copyright>
 //-------------------------------------------------------------------------------
 
-namespace Ninject.Extensions.Logging.Tests
+namespace Ninject.Extensions.Logging.NLog2
 {
+    using System;
+    using System.Reflection;
+    using Ninject.Extensions.Logging.Classes;
+    using Ninject.Extensions.Logging.NLog2.Infrastructure;
+    using NLog;
+    using NLog.Config;
 #if SILVERLIGHT
 #if SILVERLIGHT_MSTEST
     using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using MsTest.Should;
+    using Fact = Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute;
 #else
     using UnitDriven;
+    using UnitDriven.Should;
+    using Fact = UnitDriven.TestMethodAttribute;
 #endif
 #else
     using Ninject.Extensions.Logging.MSTestAttributes;
+    using Xunit;
+    using Xunit.Should;
 #endif
-    using Ninject.Extensions.Logging.NLog2.Infrastructure;
-    using Ninject.Modules;
 
     [TestClass]
     public class NLogTests : NLogTestingContext
     {
-        // todo, add nlog specific tests
-    }
+        /// <summary>
+        /// the target that is used to intercept the logging events
+        /// </summary>
+        private static readonly TestTarget testTarget;
 
-#if !SILVERLIGHT && !NETCF
-    public class NLogAutoloadTests : NLogTestingContext
-    {
-        protected override INinjectSettings CreateSettings()
+        /// <summary>
+        /// Initializes a new instance of the <see cref="NLogTests"/> class.
+        /// </summary>
+        static NLogTests()
         {
-            return new NinjectSettings
-                {
-                    LoadExtensions = true, 
-                    ExtensionSearchPattern = "Ninject.Extensions.Logging.NLog2.dll"
-                };
+            testTarget = new TestTarget { Layout = "${callsite}" };
+            SimpleConfigurator.ConfigureForTargetLogging(testTarget, LogLevel.Trace);
         }
 
-        public override INinjectModule[] TestModules
+        /// <summary>
+        /// Tests info logging
+        /// </summary>
+        [Fact]
+        public void LogInfo()
         {
-            get { return new INinjectModule[0]; }
+            this.TestLog(LogLevel.Info, typeof(CtorPropertyLoggerClass).GetMethod("LogInfo"));
+        }
+
+        /// <summary>
+        /// Tests info logging with exception
+        /// </summary>
+        [Fact]
+        public void LogInfoWithException()
+        {
+            this.TestLogWithException(LogLevel.Info, typeof(CtorPropertyLoggerClass).GetMethod("LogInfoWithException"));
+        }
+
+        /// <summary>
+        /// Tests debug logging
+        /// </summary>
+        [Fact]
+        public void LogDebug()
+        {
+            this.TestLog(LogLevel.Debug, typeof(CtorPropertyLoggerClass).GetMethod("LogDebug"));
+        }
+
+        /// <summary>
+        /// Tests debug logging with exception
+        /// </summary>
+        [Fact]
+        public void LogDebugWithException()
+        {
+            this.TestLogWithException(LogLevel.Debug, typeof(CtorPropertyLoggerClass).GetMethod("LogDebugWithException"));
+        }
+
+        /// <summary>
+        /// Tests warn logging
+        /// </summary>
+        [Fact]
+        public void LogWarn()
+        {
+            this.TestLog(LogLevel.Warn, typeof(CtorPropertyLoggerClass).GetMethod("LogWarn"));
+        }
+
+        /// <summary>
+        /// Tests warn logging with exception
+        /// </summary>
+        [Fact]
+        public void LogWarnWithException()
+        {
+            this.TestLogWithException(LogLevel.Warn, typeof(CtorPropertyLoggerClass).GetMethod("LogWarnWithException"));
+        }
+
+        /// <summary>
+        /// Tests error logging
+        /// </summary>
+        [Fact]
+        public void LogError()
+        {
+            this.TestLog(LogLevel.Error, typeof(CtorPropertyLoggerClass).GetMethod("LogError"));
+        }
+
+        /// <summary>
+        /// Tests error logging with exception
+        /// </summary>
+        [Fact]
+        public void LogErrorWithException()
+        {
+            this.TestLogWithException(LogLevel.Error, typeof(CtorPropertyLoggerClass).GetMethod("LogErrorWithException"));
+        }
+
+        /// <summary>
+        /// Tests fatal logging
+        /// </summary>
+        [Fact]
+        public void LogFatal()
+        {
+            this.TestLog(LogLevel.Fatal, typeof(CtorPropertyLoggerClass).GetMethod("LogFatal"));
+        }
+
+        /// <summary>
+        /// Tests fatal logging with exception
+        /// </summary>
+        [Fact]
+        public void LogFatalWithException()
+        {
+            this.TestLogWithException(LogLevel.Fatal, typeof(CtorPropertyLoggerClass).GetMethod("LogFatalWithException"));
+        }
+
+        /// <summary>
+        /// Tests the logging without exception.
+        /// </summary>
+        /// <param name="logLevel">The log level to be tested.</param>
+        /// <param name="methodInfo">The method info to be called to invoke the method to be tested.</param>
+        private void TestLog(LogLevel logLevel, MethodInfo methodInfo)
+        {
+            using (var kernel = this.CreateKernel())
+            {
+                var loggerClass = kernel.Get<CtorPropertyLoggerClass>();
+
+                methodInfo.Invoke(loggerClass, new object[] { "message {0}", new object[] { 1 } });
+
+                var lastLogEvent = testTarget.LastLogEvent;
+                lastLogEvent.ShouldNotBeNull();
+                lastLogEvent.FormattedMessage.ShouldBe("message 1");
+                lastLogEvent.Level.ShouldBe(logLevel);
+                lastLogEvent.LoggerName.ShouldBe(loggerClass.GetType().FullName);
+                lastLogEvent.Exception.ShouldBeNull();
+                // testTarget.LastMessage.ShouldBe(methodInfo.DeclaringType.FullName + "." + methodInfo.Name);
+                // lastLogEvent.UserStackFrame.GetMethod().ShouldBe(methodInfo);
+            }
+
+        }
+
+        /// <summary>
+        /// Tests the logging with exception.
+        /// </summary>
+        /// <param name="logLevel">The log level to be tested.</param>
+        /// <param name="methodInfo">The method info to be called to invoke the method to be tested.</param>
+        private void TestLogWithException(LogLevel logLevel, MethodInfo methodInfo)
+        {
+            using (var kernel = this.CreateKernel())
+            {
+                var loggerClass = kernel.Get<CtorPropertyLoggerClass>();
+                var exception = new ArgumentException();
+
+                methodInfo.Invoke(loggerClass, new object[] { exception, "message {0}", new object[] { 1 } });
+
+                var lastLogEvent = testTarget.LastLogEvent;
+                lastLogEvent.ShouldNotBeNull();
+                lastLogEvent.FormattedMessage.ShouldBe("message 1");
+                lastLogEvent.Level.ShouldBe(logLevel);
+                lastLogEvent.LoggerName.ShouldBe(loggerClass.GetType().FullName);
+                lastLogEvent.Exception.ShouldBeSameAs(exception);
+                // testTarget.LastMessage.ShouldBe(methodInfo.DeclaringType.FullName + "." + methodInfo.Name);
+                // lastLogEvent.UserStackFrame.GetMethod().ShouldBe(methodInfo);
+            }
+
         }
     }
-#endif
 }

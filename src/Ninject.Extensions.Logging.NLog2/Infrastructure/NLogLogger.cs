@@ -28,7 +28,7 @@ namespace Ninject.Extensions.Logging.NLog2.Infrastructure
     public class NLogLogger : LoggerBase
     {
         /// <summary>
-        /// The logger used by this instance.
+        /// NLog logger.
         /// </summary>
         private readonly Logger nlogLogger;
 
@@ -98,7 +98,10 @@ namespace Ninject.Extensions.Logging.NLog2.Infrastructure
         /// <param name="args">Any arguments required for the format template.</param>
         public override void Debug(Exception exception, string format, params object[] args)
         {
-            this.nlogLogger.DebugException(string.Format(format, args), exception);
+            if (this.IsDebugEnabled)
+            {
+                this.Log(LogLevel.Debug, exception, format, args);
+            }
         }
 
         /// <summary>
@@ -108,7 +111,10 @@ namespace Ninject.Extensions.Logging.NLog2.Infrastructure
         /// <param name="args">Any arguments required for the format template.</param>
         public override void Debug(string format, params object[] args)
         {
-            this.nlogLogger.Debug(format, args);
+            if (this.IsDebugEnabled)
+            {
+                this.Log(LogLevel.Debug, format, args);
+            }
         }
 
         /// <summary>
@@ -119,7 +125,10 @@ namespace Ninject.Extensions.Logging.NLog2.Infrastructure
         /// <param name="args">Any arguments required for the format template.</param>
         public override void Error(Exception exception, string format, params object[] args)
         {
-            this.nlogLogger.ErrorException(string.Format(format, args), exception);
+            if (this.IsErrorEnabled)
+            {
+                this.Log(LogLevel.Error, exception, format, args);
+            }
         }
 
         /// <summary>
@@ -129,7 +138,10 @@ namespace Ninject.Extensions.Logging.NLog2.Infrastructure
         /// <param name="args">Any arguments required for the format template.</param>
         public override void Error(string format, params object[] args)
         {
-            this.nlogLogger.Error(format, args);
+            if (this.IsErrorEnabled)
+            {
+                this.Log(LogLevel.Error, format, args);
+            }
         }
 
         /// <summary>
@@ -139,7 +151,10 @@ namespace Ninject.Extensions.Logging.NLog2.Infrastructure
         /// <param name="args">Any arguments required for the format template.</param>
         public override void Fatal(string format, params object[] args)
         {
-            this.nlogLogger.Fatal(format, args);
+            if (this.IsFatalEnabled)
+            {
+                this.Log(LogLevel.Fatal, format, args);
+            }
         }
 
         /// <summary>
@@ -150,7 +165,10 @@ namespace Ninject.Extensions.Logging.NLog2.Infrastructure
         /// <param name="args">Any arguments required for the format template.</param>
         public override void Fatal(Exception exception, string format, params object[] args)
         {
-            this.nlogLogger.FatalException(string.Format(format, args), exception);
+            if (this.IsFatalEnabled)
+            {
+                this.Log(LogLevel.Fatal, exception, format, args);
+            }
         }
 
         /// <summary>
@@ -160,7 +178,10 @@ namespace Ninject.Extensions.Logging.NLog2.Infrastructure
         /// <param name="args">Any arguments required for the format template.</param>
         public override void Info(string format, params object[] args)
         {
-            this.nlogLogger.Info(format, args);
+            if (this.IsInfoEnabled)
+            {
+                this.Log(LogLevel.Info, format, args);
+            }
         }
 
         /// <summary>
@@ -171,7 +192,10 @@ namespace Ninject.Extensions.Logging.NLog2.Infrastructure
         /// <param name="args">Any arguments required for the format template.</param>
         public override void Info(Exception exception, string format, params object[] args)
         {
-            this.nlogLogger.InfoException(string.Format(format, args), exception);
+            if (this.IsInfoEnabled)
+            {
+                this.Log(LogLevel.Info, exception, format, args);
+            }
         }
 
         /// <summary>
@@ -181,7 +205,10 @@ namespace Ninject.Extensions.Logging.NLog2.Infrastructure
         /// <param name="args">Any arguments required for the format template.</param>
         public override void Trace(string format, params object[] args)
         {
-            this.nlogLogger.Trace(format, args);
+            if (this.IsTraceEnabled)
+            {
+                this.Log(LogLevel.Trace, format, args);
+            }
         }
 
         /// <summary>
@@ -192,7 +219,10 @@ namespace Ninject.Extensions.Logging.NLog2.Infrastructure
         /// <param name="args">Any arguments required for the format template.</param>
         public override void Trace(Exception exception, string format, params object[] args)
         {
-            this.nlogLogger.TraceException(string.Format(format, args), exception);
+            if (this.IsTraceEnabled)
+            {
+                this.Log(LogLevel.Trace, exception, format, args);
+            }
         }
 
         /// <summary>
@@ -202,7 +232,10 @@ namespace Ninject.Extensions.Logging.NLog2.Infrastructure
         /// <param name="args">Any arguments required for the format template.</param>
         public override void Warn(string format, params object[] args)
         {
-            this.nlogLogger.Warn(format, args);
+            if (this.IsWarnEnabled)
+            {
+                this.Log(LogLevel.Warn, format, args);
+            }
         }
 
         /// <summary>
@@ -213,7 +246,35 @@ namespace Ninject.Extensions.Logging.NLog2.Infrastructure
         /// <param name="args">Any arguments required for the format template.</param>
         public override void Warn(Exception exception, string format, params object[] args)
         {
-            this.nlogLogger.WarnException(string.Format(format, args), exception);
+            if (this.IsWarnEnabled)
+            {
+                this.Log(LogLevel.Warn, exception, format, args);
+            }
+        }
+
+        /// <summary>
+        /// Logs with the specified level while preserving the call site.
+        /// </summary>
+        /// <param name="level">The log level.</param>
+        /// <param name="format">The message format.</param>
+        /// <param name="args">The argsuments.</param>
+        private void Log(LogLevel level, string format, params object[] args)
+        {
+            var le = new LogEventInfo(level, this.nlogLogger.Name, null, format, args);
+            this.nlogLogger.Log(typeof(NLogLogger), le);
+        }
+
+        /// <summary>
+        /// Logs with the specified level while preserving the call site.
+        /// </summary>
+        /// <param name="level">The log level.</param>
+        /// <param name="exception">The exception.</param>
+        /// <param name="format">The message format.</param>
+        /// <param name="args">The argsuments.</param>
+        private void Log(LogLevel level, Exception exception, string format, params object[] args)
+        {
+            var le = new LogEventInfo(level, this.nlogLogger.Name, null, format, args, exception);
+            this.nlogLogger.Log(typeof(NLogLogger), le);
         }
     }
 }

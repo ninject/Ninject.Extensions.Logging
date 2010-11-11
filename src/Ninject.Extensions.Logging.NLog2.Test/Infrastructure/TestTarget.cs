@@ -1,5 +1,5 @@
 //-------------------------------------------------------------------------------
-// <copyright file="NLogTestingContext.cs" company="bbv Software Services AG">
+// <copyright file="TestTarget.cs" company="bbv Software Services AG">
 //   Copyright (c) 2010 Software Services AG
 //   Remo Gloor (remo.gloor@gmail.com)
 //
@@ -19,47 +19,35 @@
 
 namespace Ninject.Extensions.Logging.NLog2.Infrastructure
 {
-    using System;
-    using Ninject.Extensions.Logging.Infrastructure;
-    using Ninject.Modules;
+    using global::NLog;
+    using NLog.Targets;
 
     /// <summary>
-    /// The context for testing NLog2
+    /// A log target that provides the last log event.
     /// </summary>
-    public abstract class NLogTestingContext : CommonTests
+    public class TestTarget : TargetWithLayout
     {
         /// <summary>
-        /// The NLog2 module
+        /// Gets the last log event.
         /// </summary>
-        private readonly INinjectModule module;
+        /// <value>The last log event.</value>
+        public LogEventInfo LastLogEvent { get; private set; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="NLogTestingContext"/> class.
+        /// Gets the last message.
         /// </summary>
-        protected NLogTestingContext()
-        {
-            this.module = new NLogModule();
-        }
+        /// <value>The last message.</value>
+        public string LastMessage { get; private set; }
 
         /// <summary>
-        /// Gets the test modules.
+        /// Writes logging event to the log target. Must be overridden in inheriting
+        /// classes.
         /// </summary>
-        /// <value>The test modules.</value>
-        public override INinjectModule[] TestModules
+        /// <param name="logEvent">Logging event to be written out.</param>
+        protected override void Write(LogEventInfo logEvent)
         {
-            get { return new[] { this.module }; }
-        }
-
-        /// <summary>
-        /// Gets the type of the logger.
-        /// </summary>
-        /// <value>The type of the logger.</value>
-        public override Type LoggerType
-        {
-            get
-            {
-                return typeof(NLogLogger);
-            }
+            this.LastLogEvent = logEvent;
+            this.LastMessage = this.Layout.Render(logEvent);
         }
     }
 }

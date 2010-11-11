@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Ninject.Extensions.Logging.NLog</RootNamespace>
     <AssemblyName>Ninject.Extensions.Logging.NLog.Test</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -38,8 +38,9 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Ninject">
-      <HintPath>..\..\lib\Ninject\net-3.5\Ninject.dll</HintPath>
+    <Reference Include="Ninject, Version=2.1.0.80, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\Ninject\net-4.0\Ninject.dll</HintPath>
     </Reference>
     <Reference Include="NLog">
       <HintPath>..\..\lib\NLog\net-3.5\NLog.dll</HintPath>
@@ -50,14 +51,21 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="xunit, Version=1.6.0.1516, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\tools\xunit.net\xunit.dll</HintPath>
+    </Reference>
+    <Reference Include="xunit.should, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\tools\xunit.net\xunit.should.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Infrastructure\NLogTestingContext.cs" />
+    <Compile Include="NLogAutoloadTests.cs" />
     <Compile Include="NLogTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
+    <Compile Include="Infrastructure\TestTarget.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Ninject.Extensions.Logging.NLog\Ninject.Extensions.Logging.NLog.csproj">
