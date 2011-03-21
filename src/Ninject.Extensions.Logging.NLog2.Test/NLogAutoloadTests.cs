@@ -37,7 +37,7 @@ namespace Ninject.Extensions.Logging.NLog2
             return new NinjectSettings
                 {
                     LoadExtensions = true, 
-                    ExtensionSearchPattern = "Ninject.Extensions.Logging.NLog2.dll"
+                    ExtensionSearchPatterns = new[] { "Ninject.Extensions.Logging.NLog2.dll" }
                 };
         }
 

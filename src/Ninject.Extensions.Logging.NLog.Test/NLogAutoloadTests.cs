@@ -11,7 +11,7 @@
             return new NinjectSettings
                 {
                     LoadExtensions = true, 
-                    ExtensionSearchPattern = "Ninject.Extensions.Logging.NLog.dll"
+                    ExtensionSearchPatterns = new[] { "Ninject.Extensions.Logging.NLog.dll" }
                 };
         }
 

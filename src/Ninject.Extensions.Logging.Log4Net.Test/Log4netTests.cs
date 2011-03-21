@@ -16,8 +16,8 @@ namespace Ninject.Extensions.Logging.Log4Net
         {
             return new NinjectSettings
                 {
-                    LoadExtensions = true, 
-                    ExtensionSearchPattern = "Ninject.Extensions.Logging.Log4net.dll"
+                    LoadExtensions = true,
+                    ExtensionSearchPatterns = new[] { "Ninject.Extensions.Logging.Log4net.dll" }
                 };
         }
 
