@@ -14,7 +14,7 @@
 		</copy>
 		
 		<csc noconfig="true" warnaserror="true" target="library" debug="${build.debug}" optimize="${build.optimize}" define="${build.defines}" 
-		     output="${current.path.build}/NLog/${product.assembly.NLog}" 
+			 output="${current.path.build}/NLog/${product.assembly.NLog}" 
 			 doc="${current.path.build}/NLog/${product.name}.NLog.xml" keyfile="${path.src}/${product.keyfile}">
 			<arg line="/filealign:512" unless="${nant.settings.currentframework == 'mono-2.0'}"/>
 			<sources basedir="${path.src}">
@@ -30,7 +30,7 @@
 				<include name="${path.lib}/Ninject/${build.platform}/Ninject.dll"/>
 				<include name="${current.path.build}/${product.assembly}"/>
 			</references>
-		</csc>		
+		</csc>
 	</target>
 	
 	<target name="compile-NLog-tests" depends="core compile-tests" unless="${skip.tests}" if="${not(string::contains(build.platform, 'silverlight') or build.platform == 'netcf-3.5')}">
@@ -41,13 +41,29 @@
 				<include name="**/*.dll"/>
 			</fileset>
 		</copy>
+		<copy todir="${current.path.test}">
+			<fileset basedir="${path.tools.xunit}">
+				<include name="xunit.dll"/>
+				<include name="xunit.should.dll"/>
+			</fileset>
+		</copy>
+		<copy todir="${current.path.test}" if="${not(string::contains(build.platform, 'net-4.0'))}">
+			<fileset basedir="${path.tools.moq}/net35">
+				<include name="Moq.dll"/>
+			</fileset>
+		</copy>
+		<copy todir="${current.path.test}" if="${string::contains(build.platform, 'net-4.0')}">
+			<fileset basedir="${path.tools.moq}/net40">
+				<include name="Moq.dll"/>
+			</fileset>
+		</copy>
 		<copy todir="${current.path.test.NLog}" flatten="true">
 			<fileset basedir="${current.path.build}/NLog">
 				<include name="**/*.dll"/>
 			</fileset>
 		</copy>		
 		<csc noconfig="true" warnaserror="true" target="library" debug="${build.debug}" optimize="${build.optimize}" define="${build.defines}"
-             output="${current.path.test.NLog}/${product.assembly.test.NLog}">
+			 output="${current.path.test.NLog}/${product.assembly.test.NLog}">
 			<sources basedir="${path.src}">
 				<include name="${product.name}.NLog.Test/**/*.cs"/>
 			</sources>
@@ -57,7 +73,7 @@
 				<include name="System.Core.dll"/>
 				<include name="Moq.dll"/>
 				<include name="xunit.dll"/>
-                <include name="xunit.should.dll"/>
+				<include name="xunit.should.dll"/>
 				<include name="${current.path.lib.NLog}/NLog.dll"/>
 				<include name="${product.assembly}"/>
 				<include name="${product.assembly.NLog}"/>

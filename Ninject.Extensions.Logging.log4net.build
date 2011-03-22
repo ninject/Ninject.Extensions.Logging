@@ -14,7 +14,7 @@
 		</copy>
 		
 		<csc noconfig="true" warnaserror="true" target="library" debug="${build.debug}" optimize="${build.optimize}" define="${build.defines}" 
-		     output="${current.path.build}/log4net/${product.assembly.log4net}" 
+			 output="${current.path.build}/log4net/${product.assembly.log4net}" 
 			 doc="${current.path.build}/log4net/${product.name}.Log4Net.xml" keyfile="${path.src}/${product.keyfile}">
 			<arg line="/filealign:512" unless="${nant.settings.currentframework == 'mono-2.0'}"/>
 			<sources basedir="${path.src}">
@@ -41,13 +41,29 @@
 				<include name="**/*.dll"/>
 			</fileset>
 		</copy>
+		<copy todir="${current.path.test}">
+			<fileset basedir="${path.tools.xunit}">
+				<include name="xunit.dll"/>
+				<include name="xunit.should.dll"/>
+			</fileset>
+		</copy>
+		<copy todir="${current.path.test}" if="${not(string::contains(build.platform, 'net-4.0'))}">
+			<fileset basedir="${path.tools.moq}/net35">
+				<include name="Moq.dll"/>
+			</fileset>
+		</copy>
+		<copy todir="${current.path.test}" if="${string::contains(build.platform, 'net-4.0')}">
+			<fileset basedir="${path.tools.moq}/net40">
+				<include name="Moq.dll"/>
+			</fileset>
+		</copy>
 		<copy todir="${current.path.test.log4net}" flatten="true">
 			<fileset basedir="${current.path.build}/log4net">
 				<include name="**/*.dll"/>
 			</fileset>
 		</copy>		
 		<csc noconfig="true" warnaserror="true" target="library" debug="${build.debug}" optimize="${build.optimize}" define="${build.defines}"
-             output="${current.path.test.log4net}/${product.assembly.test.log4net}">
+			 output="${current.path.test.log4net}/${product.assembly.test.log4net}">
 			<sources basedir="${path.src}">
 				<include name="${product.name}.Log4Net.Test/**/*.cs"/>
 			</sources>
@@ -57,7 +73,7 @@
 				<include name="System.Core.dll"/>
 				<include name="Moq.dll"/>
 				<include name="xunit.dll"/>
-                <include name="xunit.should.dll"/>
+				<include name="xunit.should.dll"/>
 				<include name="${current.path.lib.log4net}/log4net.dll"/>
 				<include name="${product.assembly}"/>
 				<include name="${product.assembly.log4net}"/>
