@@ -73,4 +73,16 @@
 	<target name="testLog4Net" depends="compile-log4net-tests" unless="${skip.tests}" if="${not(string::contains(build.platform, 'silverlight') or build.platform == 'netcf-3.5')}">
 		<exec program="${path.tools.xunit.console}" workingdir="${current.path.test.log4net}" commandline="${product.assembly.test.log4net} /html ${current.path.test.log4net}/results.html" failonerror="true"/>
 	</target>
+	
+	<target name="nuget-log4net">
+		<property name="nuget.sourcedir" value="${path.base}/nuget-log4net" />
+		<property name="nuget.basedir" value="${path.base}/build/nuget-log4net" />
+		<property name="nuget.platforms" value="net-3.5,net-3.5-no-web,net-4.0,net-4.0-no-web" />
+		<property name="nuget.name" value="${product.name}.Log4Net" />
+		<property name="nuget.releaseDirectory" value="${path.build}\${build.platform}\release\log4net" dynamic="true"/>
+		<property name="nuget.dependencies" value="Ninject.Extensions.Logging" />
+		<property name="nuget.additionalFiles" value="-" />
+		
+		<call target="nuget-run"/>
+	</target>
 </project>

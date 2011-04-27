@@ -144,4 +144,16 @@
 	<target name="silverlight-test-NLog2" depends="compile-silverlight-tests-NLog2" unless="${skip.tests or skip.silverlightTests}" if="${string::contains(build.platform, 'silverlight')}">
 		<exec program="${path.tools.statlight}" workingdir="${current.path.test.NLog2}" commandline='-x"${product.assembly.silverlighttest.NLog2}" -o=UnitDriven --teamcity' failonerror="true"/>
 	</target>	
+	
+	<target name="nuget-nlog2">
+		<property name="nuget.sourcedir" value="${path.base}/nuget-nlog2" />
+		<property name="nuget.basedir" value="${path.base}/build/nuget-nlog2" />
+		<property name="nuget.platforms" value="net-3.5,net-3.5-no-web,net-4.0,net-4.0-no-web,silverlight-4.0,silverlight-3.0,silverlight-2.0,silverlight-4.0-wp7" />
+		<property name="nuget.name" value="${product.name}.nlog2" />
+		<property name="nuget.releaseDirectory" value="${path.build}\${build.platform}\release\nlog2" dynamic="true"/>
+		<property name="nuget.dependencies" value="Ninject.Extensions.Logging" />
+		<property name="nuget.additionalFiles" value="-" />
+	
+		<call target="nuget-run"/>
+	</target>
 </project>
