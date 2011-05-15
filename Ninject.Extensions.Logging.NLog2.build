@@ -46,18 +46,17 @@
 				<include name="**/*.dll"/>
 			</fileset>
 		</copy>
-		<copy todir="${current.path.test}">
+		<copy todir="${current.path.test.NLog2}">
 			<fileset basedir="${path.tools.xunit}">
 				<include name="xunit.dll"/>
-				<include name="xunit.should.dll"/>
 			</fileset>
 		</copy>
-		<copy todir="${current.path.test}" if="${not(string::contains(build.platform, 'net-4.0'))}">
+		<copy todir="${current.path.test.NLog2}" if="${not(string::contains(build.platform, 'net-4.0'))}">
 			<fileset basedir="${path.tools.moq}/net35">
 				<include name="Moq.dll"/>
 			</fileset>
 		</copy>
-		<copy todir="${current.path.test}" if="${string::contains(build.platform, 'net-4.0')}">
+		<copy todir="${current.path.test.NLog2}" if="${string::contains(build.platform, 'net-4.0')}">
 			<fileset basedir="${path.tools.moq}/net40">
 				<include name="Moq.dll"/>
 			</fileset>
@@ -73,7 +72,6 @@
 				<include name="System.Core.dll"/>
 				<include name="Moq.dll"/>
 				<include name="xunit.dll"/>
-				<include name="xunit.should.dll"/>
 				<include name="${current.path.lib.NLog2}/NLog.dll"/>
 				<include name="${product.assembly}"/>
 				<include name="${product.assembly.NLog2}"/>
@@ -105,13 +103,13 @@
 				<include name="**/*.dll"/>
 			</fileset>
 		</copy>
-		<copy todir="${current.path.test}" if="${string::contains(build.platform, 'silverlight-4.0')}">
+		<copy todir="${current.path.test.NLog2}" if="${string::contains(build.platform, 'silverlight-4.0')}">
 			<fileset basedir="${path.tools.moq}/silverlight4">
 				<include name="Moq.Silverlight.dll"/>
 				<include name="Castle.Core.dll"/>
 			</fileset>
 		</copy>
-		<copy todir="${current.path.test}" unless="${string::contains(build.platform, 'silverlight-4.0')}">
+		<copy todir="${current.path.test.NLog2}" unless="${string::contains(build.platform, 'silverlight-4.0')}">
 			<fileset basedir="${path.tools.moq}/silverlight3">
 				<include name="Moq.Silverlight.dll"/>
 				<include name="Castle.Core-Silverlight.dll"/>
@@ -119,8 +117,8 @@
 			</fileset>
 		</copy>
 		<copy todir="${current.path.test.NLog2}">
-			<fileset basedir="${path.tools.unitdriven}">
-				<include name="UnitDrivenLight.dll"/>
+			<fileset basedir="${path.tools.xunit.sl}${build.platform}">
+				<include name="*.dll"/>
 			</fileset>
 		</copy>
 		<csc noconfig="true" warnaserror="true" target="library" debug="${build.debug}" optimize="${build.optimize}" define="${build.defines}"
@@ -141,11 +139,14 @@
 				<include name="System.Windows.dll"/>
 				<include name="System.Windows.Browser.dll"/>
 				<include name="System.Net.dll"/>
-				<include name="Moq.Silverlight.dll"/>
-				<include name="Castle.Core.dll" if="${string::contains(build.platform, 'silverlight-4.0')}"/>
+				<include name="Microsoft.Phone.dll" if="${string::contains(build.platform, 'wp7')}"/>
+				<include name="Microsoft.Phone.Interop.dll" if="${string::contains(build.platform, 'wp7')}"/>
+				<include name="Moq.Silverlight.dll" unless="${string::contains(build.platform, 'wp7')}"/>
+				<include name="Castle.Core.dll" if="${build.platform == 'silverlight-4.0'}"/>
 				<include name="Castle.Core-Silverlight.dll" unless="${string::contains(build.platform, 'silverlight-4.0')}"/>
 				<include name="Castle.DynamicProxy-Silverlight.dll" unless="${string::contains(build.platform, 'silverlight-4.0')}"/>
-				<include name="UnitDrivenLight.dll"/>
+				<include name="xunit.runner.silverlight.dll"/>
+				<include name="xunit-silverlight.dll"/>
 				<include name="${current.path.lib.NLog2}/NLog.dll"/>
 				<include name="${product.assembly}"/>
 				<include name="${product.assembly.NLog2}"/>

@@ -25,23 +25,9 @@ namespace Ninject.Extensions.Logging.NLog2
     using Ninject.Extensions.Logging.NLog2.Infrastructure;
     using NLog;
     using NLog.Config;
-#if SILVERLIGHT
-#if SILVERLIGHT_MSTEST
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using MsTest.Should;
-    using Fact = Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute;
-#else
-    using UnitDriven;
-    using UnitDriven.Should;
-    using Fact = UnitDriven.TestMethodAttribute;
-#endif
-#else
-    using Ninject.Extensions.Logging.MSTestAttributes;
     using Xunit;
     using Xunit.Should;
-#endif
 
-    [TestClass]
     public class NLogTests : NLogTestingContext
     {
         /// <summary>

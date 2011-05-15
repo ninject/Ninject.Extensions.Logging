@@ -3,18 +3,8 @@
     using System;
     using Ninject.Extensions.Logging.Classes;
     using Ninject.Modules;
-#if SILVERLIGHT
-#if SILVERLIGHT_MSTEST
-    using MsTest.Should;
-    using Fact = Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute;
-#else
-    using UnitDriven.Should;
-    using Fact = UnitDriven.TestMethodAttribute;
-#endif
-#else
     using Xunit;
     using Xunit.Should;
-#endif
 
     public abstract class CommonTests : ILoggingTestContext
     {

@@ -41,18 +41,17 @@
 				<include name="**/*.dll"/>
 			</fileset>
 		</copy>
-		<copy todir="${current.path.test}">
+		<copy todir="${current.path.test.NLog}">
 			<fileset basedir="${path.tools.xunit}">
 				<include name="xunit.dll"/>
-				<include name="xunit.should.dll"/>
 			</fileset>
 		</copy>
-		<copy todir="${current.path.test}" if="${not(string::contains(build.platform, 'net-4.0'))}">
+		<copy todir="${current.path.test.NLog}" if="${not(string::contains(build.platform, 'net-4.0'))}">
 			<fileset basedir="${path.tools.moq}/net35">
 				<include name="Moq.dll"/>
 			</fileset>
 		</copy>
-		<copy todir="${current.path.test}" if="${string::contains(build.platform, 'net-4.0')}">
+		<copy todir="${current.path.test.NLog}" if="${string::contains(build.platform, 'net-4.0')}">
 			<fileset basedir="${path.tools.moq}/net40">
 				<include name="Moq.dll"/>
 			</fileset>
@@ -73,7 +72,6 @@
 				<include name="System.Core.dll"/>
 				<include name="Moq.dll"/>
 				<include name="xunit.dll"/>
-				<include name="xunit.should.dll"/>
 				<include name="${current.path.lib.NLog}/NLog.dll"/>
 				<include name="${product.assembly}"/>
 				<include name="${product.assembly.NLog}"/>

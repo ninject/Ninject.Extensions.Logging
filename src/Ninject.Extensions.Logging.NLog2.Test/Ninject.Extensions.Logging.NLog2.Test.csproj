@@ -47,9 +47,6 @@
     <Reference Include="xunit">
       <HintPath>..\..\tools\xunit.net\xunit.dll</HintPath>
     </Reference>
-    <Reference Include="xunit.should">
-      <HintPath>..\..\tools\xunit.net\xunit.should.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Infrastructure\NLogTestingContext.cs" />

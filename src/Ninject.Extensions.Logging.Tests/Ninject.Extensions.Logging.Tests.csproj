@@ -70,9 +70,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\tools\xunit.net\xunit.dll</HintPath>
     </Reference>
-    <Reference Include="xunit.should">
-      <HintPath>..\..\tools\xunit.net\xunit.should.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\CtorPropertyLoggerClass.cs" />
@@ -81,10 +78,9 @@
     <Compile Include="Classes\ObjectGetsItsOwnLoggerUsingCurrentClassMethod.cs" />
     <Compile Include="Infrastructure\CommonTests.cs" />
     <Compile Include="Infrastructure\ILoggingTestContext.cs" />
-    <Compile Include="MSTestAttributes\TestClassAttribute.cs" />
-    <Compile Include="MSTestAttributes\TestInitialize.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Classes\PublicPropertyLoggerClass.cs" />
+    <Compile Include="XUnitShould.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Ninject.Extensions.Logging\Ninject.Extensions.Logging.csproj">
