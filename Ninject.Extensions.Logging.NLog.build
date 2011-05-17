@@ -96,6 +96,9 @@
 		<property name="nuget.releaseDirectory" value="${path.build}\${build.platform}\release\nlog" dynamic="true"/>
 		<property name="nuget.dependencies" value="Ninject.Extensions.Logging" />
 		<property name="nuget.additionalFiles" value="-" />
+		<property name="nuget.packageName" value="${nuget.name}${product.packagePostfix}.${build.version}" />	
+		<property name="nuget.symbol.basedir" value="${path.base}/build/nuget-nlog_symbol" />
+		<property name="nuget.project" value="${path.src}/${product.name}.NLog/${product.name}.NLog.csproj" />
 		
 		<call target="nuget-run"/>
 	</target>	
