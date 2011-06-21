@@ -1,10 +1,12 @@
 ﻿namespace Ninject.Extensions.Logging.Infrastructure
 {
     using System;
+
+    using FluentAssertions;
+
     using Ninject.Extensions.Logging.Classes;
     using Ninject.Modules;
     using Xunit;
-    using Xunit.Should;
 
     public abstract class CommonTests : ILoggingTestContext
     {
@@ -14,9 +16,9 @@
             using (var kernel = this.CreateKernel())
             {
                 var loggerClass = kernel.Get<PublicPropertyLoggerClass>();
-                loggerClass.Logger.ShouldNotBeNull();
-                loggerClass.Logger.Type.ShouldBe(typeof(PublicPropertyLoggerClass));
-                loggerClass.Logger.GetType().ShouldBe(this.LoggerType);
+                loggerClass.Logger.Should().NotBeNull();
+                loggerClass.Logger.Type.Should().Be(typeof(PublicPropertyLoggerClass));
+                loggerClass.Logger.GetType().Should().Be(this.LoggerType);
             }
         }
 
@@ -26,7 +28,7 @@
             using (var kernel = this.CreateKernel())
             {
                 var loggerClass = kernel.Get<NonPublicPropertyLoggerClass>();
-                loggerClass.Logger.ShouldBeNull();
+                loggerClass.Logger.Should().BeNull();
             }
         }
 
@@ -36,9 +38,9 @@
             using (var kernel = this.CreateKernel())
             {
                 var loggerClass = kernel.Get<CtorPropertyLoggerClass>();
-                loggerClass.Logger.ShouldNotBeNull();
-                loggerClass.Logger.Type.ShouldBe(typeof(CtorPropertyLoggerClass));
-                loggerClass.Logger.GetType().ShouldBe(this.LoggerType);
+                loggerClass.Logger.Should().NotBeNull();
+                loggerClass.Logger.Type.Should().Be(typeof(CtorPropertyLoggerClass));
+                loggerClass.Logger.GetType().Should().Be(this.LoggerType);
             }
         }
 
@@ -48,9 +50,9 @@
             using (var kernel = this.CreateKernel())
             {
                 var loggerClass = kernel.Get<ObjectGetsItsOwnLogger>();
-                loggerClass.Logger.ShouldNotBeNull();
-                loggerClass.Logger.Type.ShouldBe(typeof(ObjectGetsItsOwnLogger));
-                loggerClass.Logger.GetType().ShouldBe(this.LoggerType);
+                loggerClass.Logger.Should().NotBeNull();
+                loggerClass.Logger.Type.Should().Be(typeof(ObjectGetsItsOwnLogger));
+                loggerClass.Logger.GetType().Should().Be(this.LoggerType);
             }
         }
 
@@ -61,9 +63,9 @@
             using (var kernel = this.CreateKernel())
             {
                 var loggerClass = kernel.Get<ObjectGetsItsOwnLoggerUsingCurrentClassMethod>();
-                loggerClass.Logger.ShouldNotBeNull();
-                loggerClass.Logger.Type.ShouldBe(typeof(ObjectGetsItsOwnLoggerUsingCurrentClassMethod));
-                loggerClass.Logger.GetType().ShouldBe(this.LoggerType);
+                loggerClass.Logger.Should().NotBeNull();
+                loggerClass.Logger.Type.Should().Be(typeof(ObjectGetsItsOwnLoggerUsingCurrentClassMethod));
+                loggerClass.Logger.GetType().Should().Be(this.LoggerType);
             }
         }
 #endif

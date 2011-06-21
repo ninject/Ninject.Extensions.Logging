@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FluentAssertions">
+      <HintPath>..\..\tools\FluentAssertions\Net-3.5\FluentAssertions.dll</HintPath>
+    </Reference>
     <Reference Include="Ninject">
       <HintPath>..\..\lib\Ninject\net-3.5\Ninject.dll</HintPath>
     </Reference>

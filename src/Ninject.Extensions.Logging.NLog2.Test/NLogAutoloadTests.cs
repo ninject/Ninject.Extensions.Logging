@@ -29,6 +29,15 @@ namespace Ninject.Extensions.Logging.NLog2
     public class NLogAutoloadTests : NLogTestingContext
     {
         /// <summary>
+        /// Gets the test modules.
+        /// </summary>
+        /// <value>The test modules.</value>
+        public override INinjectModule[] TestModules
+        {
+            get { return new INinjectModule[0]; }
+        }
+        
+        /// <summary>
         /// Creates the settings.
         /// </summary>
         /// <returns>The ninject settings</returns>
@@ -39,15 +48,6 @@ namespace Ninject.Extensions.Logging.NLog2
                     LoadExtensions = true, 
                     ExtensionSearchPatterns = new[] { "Ninject.Extensions.Logging.NLog2.dll" }
                 };
-        }
-
-        /// <summary>
-        /// Gets the test modules.
-        /// </summary>
-        /// <value>The test modules.</value>
-        public override INinjectModule[] TestModules
-        {
-            get { return new INinjectModule[0]; }
         }
     }
 #endif

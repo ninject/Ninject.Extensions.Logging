@@ -41,16 +41,10 @@
 				<include name="lib/*.dll"/>
 			</fileset>
 		</copy>
-		<copy todir="${current.path.test}">
-			<fileset basedir="${path.tools.xunit}">
-				<include name="xunit.dll"/>
-			</fileset>
-		</copy>
-		<copy todir="${current.path.test}" if="${not(string::contains(build.platform, 'net-4.0'))}">
-			<fileset basedir="${path.tools.moq}/net35">
-				<include name="Moq.dll"/>
-			</fileset>
-		</copy>
+		<call target="CopyXUnit"/>
+		<call target="CopyFluentAssertions"/>
+		<call target="CopyMoq"/>
+
 		<csc noconfig="true" warnaserror="true" target="library" debug="${build.debug}" optimize="${build.optimize}" define="${build.defines}"
 		 output="${current.path.test}/${product.assembly.test}">
 			<sources basedir="${path.src}">
@@ -62,6 +56,7 @@
 				<include name="System.Core.dll"/>
 				<include name="Moq.dll"/>
 				<include name="xunit.dll"/>
+				<include name="FluentAssertions.dll"/>
 				<include name="${product.assembly}"/>
 				<include name="${path.lib}/Ninject/${build.platform}/Ninject.dll"/>
 			</references>

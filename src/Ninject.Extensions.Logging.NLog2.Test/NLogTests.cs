@@ -21,12 +21,14 @@ namespace Ninject.Extensions.Logging.NLog2
 {
     using System;
     using System.Reflection;
+
+    using FluentAssertions;
+
     using Ninject.Extensions.Logging.Classes;
     using Ninject.Extensions.Logging.NLog2.Infrastructure;
     using NLog;
     using NLog.Config;
     using Xunit;
-    using Xunit.Should;
 
     public class NLogTests : NLogTestingContext
     {
@@ -148,11 +150,11 @@ namespace Ninject.Extensions.Logging.NLog2
                 methodInfo.Invoke(loggerClass, new object[] { "message {0}", new object[] { 1 } });
 
                 var lastLogEvent = testTarget.LastLogEvent;
-                lastLogEvent.ShouldNotBeNull();
-                lastLogEvent.FormattedMessage.ShouldBe("message 1");
-                lastLogEvent.Level.ShouldBe(logLevel);
-                lastLogEvent.LoggerName.ShouldBe(loggerClass.GetType().FullName);
-                lastLogEvent.Exception.ShouldBeNull();
+                lastLogEvent.Should().NotBeNull();
+                lastLogEvent.FormattedMessage.Should().Be("message 1");
+                lastLogEvent.Level.Should().Be(logLevel);
+                lastLogEvent.LoggerName.Should().Be(loggerClass.GetType().FullName);
+                lastLogEvent.Exception.Should().BeNull();
                 // testTarget.LastMessage.ShouldBe(methodInfo.DeclaringType.FullName + "." + methodInfo.Name);
                 // lastLogEvent.UserStackFrame.GetMethod().ShouldBe(methodInfo);
             }
@@ -174,11 +176,11 @@ namespace Ninject.Extensions.Logging.NLog2
                 methodInfo.Invoke(loggerClass, new object[] { exception, "message {0}", new object[] { 1 } });
 
                 var lastLogEvent = testTarget.LastLogEvent;
-                lastLogEvent.ShouldNotBeNull();
-                lastLogEvent.FormattedMessage.ShouldBe("message 1");
-                lastLogEvent.Level.ShouldBe(logLevel);
-                lastLogEvent.LoggerName.ShouldBe(loggerClass.GetType().FullName);
-                lastLogEvent.Exception.ShouldBeSameAs(exception);
+                lastLogEvent.Should().NotBeNull();
+                lastLogEvent.FormattedMessage.Should().Be("message 1");
+                lastLogEvent.Level.Should().Be(logLevel);
+                lastLogEvent.LoggerName.Should().Be(loggerClass.GetType().FullName);
+                lastLogEvent.Exception.Should().BeSameAs(exception);
                 // testTarget.LastMessage.ShouldBe(methodInfo.DeclaringType.FullName + "." + methodInfo.Name);
                 // lastLogEvent.UserStackFrame.GetMethod().ShouldBe(methodInfo);
             }

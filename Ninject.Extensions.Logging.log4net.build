@@ -61,6 +61,16 @@
 				<include name="**/*.dll"/>
 			</fileset>
 		</copy>		
+		<copy todir="${current.path.test.log4net}" if="${string::contains(build.platform, 'net-4.0')}">
+			<fileset basedir="${path.tools.fluentassertions}/Net-4.0">
+				<include name="FluentAssertions.dll"/>
+			</fileset>
+		</copy>
+		<copy todir="${current.path.test.log4net}" unless="${string::contains(build.platform, 'net-4.0')}">
+			<fileset basedir="${path.tools.fluentassertions}/Net-3.5">
+				<include name="FluentAssertions.dll"/>
+			</fileset>
+		</copy>
 		<csc noconfig="true" warnaserror="true" target="library" debug="${build.debug}" optimize="${build.optimize}" define="${build.defines}"
 			 output="${current.path.test.log4net}/${product.assembly.test.log4net}">
 			<sources basedir="${path.src}">
@@ -72,6 +82,7 @@
 				<include name="System.Core.dll"/>
 				<include name="Moq.dll"/>
 				<include name="xunit.dll"/>
+				<include name="FluentAssertions.dll"/>
 				<include name="${current.path.lib.log4net}/log4net.dll"/>
 				<include name="${product.assembly}"/>
 				<include name="${product.assembly.log4net}"/>
@@ -91,7 +102,7 @@
 	<target name="nuget-log4net">
 		<property name="nuget.sourcedir" value="${path.base}/nuget-log4net" />
 		<property name="nuget.basedir" value="${path.base}/build/nuget-log4net" />
-		<property name="nuget.platforms" value="net-3.5,net-3.5-no-web,net-4.0,net-4.0-no-web" />
+		<property name="nuget.platforms" value="net-3.5,net-4.0" />
 		<property name="nuget.name" value="${product.name}.Log4Net" />
 		<property name="nuget.releaseDirectory" value="${path.build}\${build.platform}\release\log4net" dynamic="true"/>
 		<property name="nuget.dependencies" value="Ninject.Extensions.Logging" />
