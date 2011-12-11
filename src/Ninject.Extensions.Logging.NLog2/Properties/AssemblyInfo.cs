@@ -25,6 +25,5 @@ using System.Security;
 [assembly: Guid("DB448757-1C51-4A3A-892D-AEDCADF812A4")]
 
 #if !NO_PARTIAL_TRUST
-
 [assembly: AllowPartiallyTrustedCallers]
 #endif
