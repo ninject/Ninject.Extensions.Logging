@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="c:\program files (x86)\microsoft visual studio 10.0\team tools\static analysis tools\fxcop\Xml\CodeAnalysisReport.xsl"?>
+<?xml-stylesheet type="text/xsl" href="c:\program files\microsoft visual studio 10.0\team tools\static analysis tools\fxcop\Xml\CodeAnalysisReport.xsl"?>
 <FxCopReport Version="10.0">
  <Localized>
   <String Key="Category">Category</String>
