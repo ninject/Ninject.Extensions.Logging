@@ -107,10 +107,12 @@
 		<property name="nuget.releaseDirectory" value="${path.build}\${build.platform}\release\log4net" dynamic="true"/>
 		<property name="nuget.dependencies" value="Ninject.Extensions.Logging" />
 		<property name="nuget.additionalFiles" value="-" />
-		<property name="nuget.packageName" value="${nuget.name}${product.packagePostfix}.${build.version}" />	
+		<property name="nuget.packageName" value="${nuget.name}${product.packagePostfix}" />	
 		<property name="nuget.symbol.basedir" value="${path.base}/build/nuget-log4net_symbol" />
 		<property name="nuget.project" value="${path.src}/${product.name}.Log4Net/${product.name}.Log4Net.csproj" />
 		
+		<property name="nant.settings.currentframework" value="net-4.0"/>
+		<msbuild project="${nuget.project}" />
 		<call target="nuget-run"/>
 	</target>
 </project>
