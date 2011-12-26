@@ -28,7 +28,7 @@ namespace Ninject.Extensions.Logging.NLog2.Infrastructure
     /// <summary>
     /// The context for testing NLog2
     /// </summary>
-    public class NLogTestingContext : CommonTests
+    public abstract class NLogTestingContext : CommonTests
     {
         /// <summary>
         /// The NLog2 module
