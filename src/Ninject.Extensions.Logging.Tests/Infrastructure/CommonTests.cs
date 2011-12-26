@@ -10,6 +10,7 @@
 
     public abstract class CommonTests : ILoggingTestContext
     {
+#if!WINDOWS_PHONE // WINDOWS Phone runner bug. Running tests from base classes is not possible
         [Fact]
         public void PublicLoggerPropertyIsInjected()
         {
@@ -31,9 +32,9 @@
                 loggerClass.Logger.Should().BeNull();
             }
         }
-
+ 
         [Fact]
-        public void CtorLoggerPropertyIsInjected()
+        public virtual void CtorLoggerPropertyIsInjected()
         {
             using (var kernel = this.CreateKernel())
             {
@@ -55,6 +56,7 @@
                 loggerClass.Logger.GetType().Should().Be(this.LoggerType);
             }
         }
+#endif
 
 #if !SILVERLIGHT && !NETCF
         [Fact]

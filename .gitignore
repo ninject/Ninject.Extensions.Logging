@@ -7,5 +7,6 @@ build
 *.suo
 *resharper*
 *.user
+*.dotCover
 /lib/Ninject/*.zip
 /lib/Ninject/*/**

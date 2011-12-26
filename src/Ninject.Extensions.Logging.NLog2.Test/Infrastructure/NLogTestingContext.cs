@@ -23,10 +23,12 @@ namespace Ninject.Extensions.Logging.NLog2.Infrastructure
     using Ninject.Extensions.Logging.Infrastructure;
     using Ninject.Modules;
 
+    using Xunit;
+
     /// <summary>
     /// The context for testing NLog2
     /// </summary>
-    public abstract class NLogTestingContext : CommonTests
+    public class NLogTestingContext : CommonTests
     {
         /// <summary>
         /// The NLog2 module

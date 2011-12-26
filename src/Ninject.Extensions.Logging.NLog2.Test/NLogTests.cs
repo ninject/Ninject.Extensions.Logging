@@ -136,6 +136,54 @@ namespace Ninject.Extensions.Logging.NLog2
             this.TestLogWithException(LogLevel.Fatal, typeof(CtorPropertyLoggerClass).GetMethod("LogFatalWithException"));
         }
 
+#if WINDOWS_PHONE
+        [Fact]
+        public void PublicLoggerPropertyIsInjected()
+        {
+            using (var kernel = this.CreateKernel())
+            {
+                var loggerClass = kernel.Get<PublicPropertyLoggerClass>();
+                loggerClass.Logger.Should().NotBeNull();
+                loggerClass.Logger.Type.Should().Be(typeof(PublicPropertyLoggerClass));
+                loggerClass.Logger.GetType().Should().Be(this.LoggerType);
+            }
+        }
+
+        [Fact]
+        public void NonPublicLoggerPropertyIsNotInjected()
+        {
+            using (var kernel = this.CreateKernel())
+            {
+                var loggerClass = kernel.Get<NonPublicPropertyLoggerClass>();
+                loggerClass.Logger.Should().BeNull();
+            }
+        }
+
+        [Fact]
+        public virtual void CtorLoggerPropertyIsInjected()
+        {
+            using (var kernel = this.CreateKernel())
+            {
+                var loggerClass = kernel.Get<CtorPropertyLoggerClass>();
+                loggerClass.Logger.Should().NotBeNull();
+                loggerClass.Logger.Type.Should().Be(typeof(CtorPropertyLoggerClass));
+                loggerClass.Logger.GetType().Should().Be(this.LoggerType);
+            }
+        }
+
+        [Fact]
+        public void ObjectCanGetsItsOwnLogger()
+        {
+            using (var kernel = this.CreateKernel())
+            {
+                var loggerClass = kernel.Get<ObjectGetsItsOwnLogger>();
+                loggerClass.Logger.Should().NotBeNull();
+                loggerClass.Logger.Type.Should().Be(typeof(ObjectGetsItsOwnLogger));
+                loggerClass.Logger.GetType().Should().Be(this.LoggerType);
+            }
+        }
+#endif
+
         /// <summary>
         /// Tests the logging without exception.
         /// </summary>

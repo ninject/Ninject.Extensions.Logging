@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.20506</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{BECDA738-C474-4D79-AC0F-6CBEEEAD183F}</ProjectGuid>
+    <ProjectTypeGuids>{C089C8C0-30E0-4E22-80C0-CE093F111A43};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Ninject.Extensions.Logging.NLog2.WindowsPhone7Tests</RootNamespace>
+    <AssemblyName>Ninject.Extensions.Logging.NLog2.WindowsPhone7Tests</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
+    <TargetFrameworkProfile>WindowsPhone</TargetFrameworkProfile>
+    <TargetFrameworkIdentifier>Silverlight</TargetFrameworkIdentifier>
+    <SilverlightApplication>true</SilverlightApplication>
+    <SupportedCultures>
+    </SupportedCultures>
+    <XapOutputs>true</XapOutputs>
+    <GenerateSilverlightManifest>true</GenerateSilverlightManifest>
+    <XapFilename>Ninject.Extensions.Logging.NLog2.WindowsPhone7Tests.xap</XapFilename>
+    <SilverlightManifestTemplate>Properties\AppManifest.xml</SilverlightManifestTemplate>
+    <SilverlightAppEntry>Ninject.Extensions.Logging.NLog2.WindowsPhone7Tests.App</SilverlightAppEntry>
+    <ValidateXaml>true</ValidateXaml>
+    <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\build\debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="FluentAssertions.Silverlight">
+      <HintPath>..\..\tools\FluentAssertions\Silverlight-4.0-wp7\FluentAssertions.Silverlight.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Phone" />
+    <Reference Include="Microsoft.Phone.Interop" />
+    <Reference Include="Ninject, Version=2.3.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\..\lib\Ninject\silverlight-4.0-wp7\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Extensions.Logging, Version=2.3.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\..\build\silverlight-4.0-wp7\release\Ninject.Extensions.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Extensions.Logging.NLog2">
+      <HintPath>..\..\build\silverlight-4.0-wp7\release\NLog2\Ninject.Extensions.Logging.NLog2.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog">
+      <HintPath>..\..\lib\NLog2\silverlight-4.0-wp7\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows" />
+    <Reference Include="system" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Xml" />
+    <Reference Include="xunit-silverlight">
+      <HintPath>..\..\tools\xunit.sl\Silverlight-4.0-wp7\xunit-silverlight.dll</HintPath>
+    </Reference>
+    <Reference Include="xunit.extensions-silverlight">
+      <HintPath>..\..\tools\xunit.sl\Silverlight-4.0-wp7\xunit.extensions-silverlight.dll</HintPath>
+    </Reference>
+    <Reference Include="xunit.runner.silverlight">
+      <HintPath>..\..\tools\xunit.sl\Silverlight-4.0-wp7\xunit.runner.silverlight.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\Ninject.Extensions.Logging.NLog2.Test\Infrastructure\NLogTestingContext.cs">
+      <Link>Infrastructure\NLogTestingContext.cs</Link>
+    </Compile>
+    <Compile Include="..\Ninject.Extensions.Logging.NLog2.Test\Infrastructure\TestTarget.cs">
+      <Link>Infrastructure\TestTarget.cs</Link>
+    </Compile>
+    <Compile Include="..\Ninject.Extensions.Logging.NLog2.Test\NLogAutoloadTests.cs">
+      <Link>NLogAutoloadTests.cs</Link>
+    </Compile>
+    <Compile Include="..\Ninject.Extensions.Logging.NLog2.Test\NLogTests.cs">
+      <Link>NLogTests.cs</Link>
+    </Compile>
+    <Compile Include="..\Ninject.Extensions.Logging.Tests\Classes\CtorPropertyLoggerClass.cs">
+      <Link>Classes\CtorPropertyLoggerClass.cs</Link>
+    </Compile>
+    <Compile Include="..\Ninject.Extensions.Logging.Tests\Classes\NonPublicPropertyLoggerClass.cs">
+      <Link>Classes\NonPublicPropertyLoggerClass.cs</Link>
+    </Compile>
+    <Compile Include="..\Ninject.Extensions.Logging.Tests\Classes\ObjectGetsItsOwnLogger.cs">
+      <Link>Classes\ObjectGetsItsOwnLogger.cs</Link>
+    </Compile>
+    <Compile Include="..\Ninject.Extensions.Logging.Tests\Classes\ObjectGetsItsOwnLoggerUsingCurrentClassMethod.cs">
+      <Link>Classes\ObjectGetsItsOwnLoggerUsingCurrentClassMethod.cs</Link>
+    </Compile>
+    <Compile Include="..\Ninject.Extensions.Logging.Tests\Classes\PublicPropertyLoggerClass.cs">
+      <Link>Classes\PublicPropertyLoggerClass.cs</Link>
+    </Compile>
+    <Compile Include="..\Ninject.Extensions.Logging.Tests\Infrastructure\CommonTests.cs">
+      <Link>Infrastructure\CommonTests.cs</Link>
+    </Compile>
+    <Compile Include="..\Ninject.Extensions.Logging.Tests\Infrastructure\ILoggingTestContext.cs">
+      <Link>Infrastructure\ILoggingTestContext.cs</Link>
+    </Compile>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </ApplicationDefinition>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\AppManifest.xml" />
+    <None Include="Properties\WMAppManifest.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ApplicationIcon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Background.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SplashScreenImage.jpg" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.$(TargetFrameworkProfile).Overrides.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ProjectExtensions />
+</Project>
