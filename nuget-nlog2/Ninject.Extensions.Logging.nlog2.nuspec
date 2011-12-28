@@ -7,7 +7,6 @@
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
 	<licenseUrl>https://github.com/ninject/ninject.extensions.logging/raw/master/LICENSE.txt</licenseUrl>
     <description>NLog2 Logging extension for Ninject</description>
-    <summary></summary>
     <language>en-US</language>
 	<tags>Ninject ioc di logging nlog2</tags>
 	<iconUrl>https://github.com/ninject/ninject/raw/master/logos/Ninject-Logo32.png</iconUrl>

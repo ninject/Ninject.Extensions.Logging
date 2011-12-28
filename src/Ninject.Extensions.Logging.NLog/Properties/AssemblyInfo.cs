@@ -8,3 +8,4 @@ using System.Security;
 #if !NO_PARTIAL_TRUST
 [assembly: AllowPartiallyTrustedCallers]
 #endif
+[assembly: AssemblyDescriptionAttribute("NLog Logging extension for Ninject")]
