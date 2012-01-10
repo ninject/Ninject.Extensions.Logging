@@ -5,8 +5,8 @@
 	<property name="product.company" value="Innovatian, LLC" overwrite="false"/>
 	<property name="product.duration" value="2007-2011" overwrite="false"/>
 	<property name="product.description" value="Logging Extension for Ninject" overwrite="false"/>
-	<property name="product.platforms" value="mono-2.0,net-3.5,net-4.0,silverlight-4.0,silverlight-3.0,silverlight-2.0,silverlight-4.0-wp7,netcf-3.5"  overwrite="false"/>
-	<property name="product.buildserverPlatforms" value="mono-2.0,net-3.5,net-4.0,silverlight-4.0,silverlight-3.0,silverlight-2.0,netcf-3.5"  overwrite="false"/>
+	<property name="product.platforms" value="mono-2.0,net-3.5,net-4.0,net-4.5,silverlight-5.0,silverlight-4.0,silverlight-3.0,silverlight-2.0,silverlight-4.0-wp7,silverlight-4.0-wp7,netcf-3.5"  overwrite="false"/>
+	<property name="product.buildserverPlatforms" value="mono-2.0,net-3.5,net-4.0,silverlight-5.0,silverlight-4.0,silverlight-3.0,silverlight-2.0,netcf-3.5"  overwrite="false"/>
 	<property name="dependencies" value="Ninject"  overwrite="false"/>
 
 	<include buildfile="Ninject.include" />
@@ -18,7 +18,7 @@
 	<target name="nuget-all" depends="nuget nuget-log4net nuget-nlog nuget-nlog2"/>
 
 	<target name="core" depends="init">
-		<csc noconfig="true" warnaserror="true" target="library" debug="${build.debug}" optimize="${build.optimize}" define="${build.defines}" output="${current.path.build}/${product.assembly}" doc="${current.path.build}/${product.docfile}" keyfile="${path.src}/${product.keyfile}">
+		<csc noconfig="true" nostdlib="true" warnaserror="true" target="library" debug="${build.debug}" optimize="${build.optimize}" define="${build.defines}" output="${current.path.build}/${product.assembly}" doc="${current.path.build}/${product.docfile}" keyfile="${path.src}/${product.keyfile}">
 			<arg line="/filealign:512" unless="${nant.settings.currentframework == 'mono-2.0'}"/>
 			<sources basedir="${path.src}">
 				<include name="${build.asminfo}"/>
@@ -45,7 +45,7 @@
 		<call target="CopyFluentAssertions"/>
 		<call target="CopyMoq"/>
 
-		<csc noconfig="true" warnaserror="true" target="library" debug="${build.debug}" optimize="${build.optimize}" define="${build.defines}"
+		<csc noconfig="true" nostdlib="true" warnaserror="true" target="library" debug="${build.debug}" optimize="${build.optimize}" define="${build.defines}"
 		 output="${current.path.test}/${product.assembly.test}">
 			<sources basedir="${path.src}">
 				<include name="${product.name}.Tests/**/*.cs"/>

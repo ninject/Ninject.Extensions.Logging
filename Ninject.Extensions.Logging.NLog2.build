@@ -13,7 +13,7 @@
 			</fileset>
 		</copy>
 		
-		<csc noconfig="true" warnaserror="true" target="library" debug="${build.debug}" optimize="${build.optimize}" define="${build.defines}" 
+		<csc noconfig="true" nostdlib="true" warnaserror="true" target="library" debug="${build.debug}" optimize="${build.optimize}" define="${build.defines}" 
 			 output="${current.path.build}/NLog2/${product.assembly.NLog2}" 
 			 doc="${current.path.build}/NLog2/${product.name}.NLog2.xml" keyfile="${path.src}/${product.keyfile}">
 			<arg line="/filealign:512" unless="${nant.settings.currentframework == 'mono-2.0'}"/>
@@ -71,7 +71,7 @@
 				<include name="FluentAssertions.dll"/>
 			</fileset>
 		</copy>
-		<csc noconfig="true" warnaserror="true" target="library" debug="${build.debug}" optimize="${build.optimize}" define="${build.defines}"
+		<csc noconfig="true" nostdlib="true" warnaserror="true" target="library" debug="${build.debug}" optimize="${build.optimize}" define="${build.defines}"
 			 output="${current.path.test.NLog2}/${product.assembly.test.NLog2}">
 			<sources basedir="${path.src}">
 				<include name="${product.name}.NLog2.Test/**/*.cs"/>
@@ -137,7 +137,7 @@
 				<include name="FluentAssertions.Silverlight.dll"/>
 			</fileset>
 		</copy>
-		<csc noconfig="true" warnaserror="true" target="library" debug="${build.debug}" optimize="${build.optimize}" define="${build.defines}"
+		<csc noconfig="true" nostdlib="true" warnaserror="true" target="library" debug="${build.debug}" optimize="${build.optimize}" define="${build.defines}"
 			 output="${current.path.test.NLog2}/${product.name}.NLog2.SilverlightTests.dll">
 			<sources basedir="${path.src}">
 				<include name="${product.name}.Tests/**/*.cs"/>
@@ -158,9 +158,9 @@
 				<include name="Microsoft.Phone.dll" if="${string::contains(build.platform, 'wp7')}"/>
 				<include name="Microsoft.Phone.Interop.dll" if="${string::contains(build.platform, 'wp7')}"/>
 				<include name="Moq.Silverlight.dll" unless="${string::contains(build.platform, 'wp7')}"/>
-				<include name="Castle.Core.dll" if="${build.platform == 'silverlight-4.0'}"/>
-				<include name="Castle.Core-Silverlight.dll" unless="${string::contains(build.platform, 'silverlight-4.0')}"/>
-				<include name="Castle.DynamicProxy-Silverlight.dll" unless="${string::contains(build.platform, 'silverlight-4.0')}"/>
+				<include name="Castle.Core.dll" if="${string::contains(build.platform, 'silverlight-4.0') or string::contains(build.platform, 'silverlight-5.0')}"/>
+				<include name="Castle.Core-Silverlight.dll" unless="${string::contains(build.platform, 'silverlight-4.0') or string::contains(build.platform, 'silverlight-5.0')}"/>
+				<include name="Castle.DynamicProxy-Silverlight.dll" unless="${build.platform == 'silverlight-4.0' or build.platform == 'silverlight-5.0'}"/>
 				<include name="xunit.runner.silverlight.dll"/>
 				<include name="xunit-silverlight.dll"/>
 				<include name="FluentAssertions.Silverlight.dll"/>
@@ -194,7 +194,7 @@
 	<target name="nuget-nlog2">
 		<property name="nuget.sourcedir" value="${path.base}/nuget-nlog2" />
 		<property name="nuget.basedir" value="${path.base}/build/nuget-nlog2" />
-		<property name="nuget.platforms" value="net-3.5,net-4.0,silverlight-4.0,silverlight-3.0,silverlight-2.0,silverlight-4.0-wp7" />
+		<property name="nuget.platforms" value="net-3.5,net-4.0,net-4.5,silverlight-5.0,silverlight-4.0,silverlight-3.0,silverlight-2.0,silverlight-4.0-wp7" />
 		<property name="nuget.name" value="${product.name}.nlog2" />
 		<property name="nuget.releaseDirectory" value="${path.build}\${build.platform}\release\nlog2" dynamic="true"/>
 		<property name="nuget.dependencies" value="Ninject.Extensions.Logging" />

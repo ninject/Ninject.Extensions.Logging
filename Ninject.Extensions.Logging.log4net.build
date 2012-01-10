@@ -13,7 +13,7 @@
 			</fileset>
 		</copy>
 		
-		<csc noconfig="true" warnaserror="true" target="library" debug="${build.debug}" optimize="${build.optimize}" define="${build.defines}" 
+		<csc noconfig="true" nostdlib="true" warnaserror="true" target="library" debug="${build.debug}" optimize="${build.optimize}" define="${build.defines}" 
 			 output="${current.path.build}/log4net/${product.assembly.log4net}" 
 			 doc="${current.path.build}/log4net/${product.name}.Log4Net.xml" keyfile="${path.src}/${product.keyfile}">
 			<arg line="/filealign:512" unless="${nant.settings.currentframework == 'mono-2.0'}"/>
@@ -71,7 +71,7 @@
 				<include name="FluentAssertions.dll"/>
 			</fileset>
 		</copy>
-		<csc noconfig="true" warnaserror="true" target="library" debug="${build.debug}" optimize="${build.optimize}" define="${build.defines}"
+		<csc noconfig="true" nostdlib="true" warnaserror="true" target="library" debug="${build.debug}" optimize="${build.optimize}" define="${build.defines}"
 			 output="${current.path.test.log4net}/${product.assembly.test.log4net}">
 			<sources basedir="${path.src}">
 				<include name="${product.name}.Log4Net.Test/**/*.cs"/>
@@ -102,7 +102,7 @@
 	<target name="nuget-log4net">
 		<property name="nuget.sourcedir" value="${path.base}/nuget-log4net" />
 		<property name="nuget.basedir" value="${path.base}/build/nuget-log4net" />
-		<property name="nuget.platforms" value="net-3.5,net-4.0" />
+		<property name="nuget.platforms" value="net-3.5,net-4.0,net-4.5" />
 		<property name="nuget.name" value="${product.name}.Log4Net" />
 		<property name="nuget.releaseDirectory" value="${path.build}\${build.platform}\release\log4net" dynamic="true"/>
 		<property name="nuget.dependencies" value="Ninject.Extensions.Logging" />

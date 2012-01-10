@@ -13,7 +13,7 @@
 			</fileset>
 		</copy>
 		
-		<csc noconfig="true" warnaserror="true" target="library" debug="${build.debug}" optimize="${build.optimize}" define="${build.defines}" 
+		<csc noconfig="true" nostdlib="true" warnaserror="true" target="library" debug="${build.debug}" optimize="${build.optimize}" define="${build.defines}" 
 			 output="${current.path.build}/NLog/${product.assembly.NLog}" 
 			 doc="${current.path.build}/NLog/${product.name}.NLog.xml" keyfile="${path.src}/${product.keyfile}">
 			<arg line="/filealign:512" unless="${nant.settings.currentframework == 'mono-2.0'}"/>
@@ -71,7 +71,7 @@
 				<include name="FluentAssertions.dll"/>
 			</fileset>
 		</copy>
-		<csc noconfig="true" warnaserror="true" target="library" debug="${build.debug}" optimize="${build.optimize}" define="${build.defines}"
+		<csc noconfig="true" nostdlib="true" warnaserror="true" target="library" debug="${build.debug}" optimize="${build.optimize}" define="${build.defines}"
 			 output="${current.path.test.NLog}/${product.assembly.test.NLog}">
 			<sources basedir="${path.src}">
 				<include name="${product.name}.NLog.Test/**/*.cs"/>
@@ -102,7 +102,7 @@
 	<target name="nuget-nlog">
 		<property name="nuget.sourcedir" value="${path.base}/nuget-nlog" />
 		<property name="nuget.basedir" value="${path.base}/build/nuget-nlog" />
-		<property name="nuget.platforms" value="net-3.5,net-4.0" />
+		<property name="nuget.platforms" value="net-3.5,net-4.0,net-4.5" />
 		<property name="nuget.name" value="${product.name}.nlog" />
 		<property name="nuget.releaseDirectory" value="${path.build}\${build.platform}\release\nlog" dynamic="true"/>
 		<property name="nuget.dependencies" value="Ninject.Extensions.Logging" />
