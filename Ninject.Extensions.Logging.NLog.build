@@ -5,7 +5,7 @@
 
 	<target name="buildNLog" unless="${string::contains(build.platform, 'silverlight')}">
 		<property name="current.path.lib.NLog" value="${path.lib}/NLog/net-3.5" unless="${nant.settings.currentframework == 'mono-2.0' or nant.settings.currentframework == 'netcf-3.5'}" />
-		<property name="current.path.lib.NLog" value="${path.lib}/NLog/${nant.settings.currentframework}" if="${nant.settings.currentframework == 'mono-2.0' or nant.settings.currentframework == 'netcf-3.5'}" />
+		<property name="current.path.lib.NLog" value="${path.lib}/NLog/${build.platform}" if="${nant.settings.currentframework == 'mono-2.0' or nant.settings.currentframework == 'netcf-3.5'}" />
 		<copy todir="${current.path.build}/NLog/lib">
 			<fileset basedir="${current.path.lib.NLog}">
 				<include name="**/*.dll"/>
@@ -13,7 +13,7 @@
 			</fileset>
 		</copy>
 		
-		<csc noconfig="true" nostdlib="true" warnaserror="true" target="library" debug="${build.debug}" optimize="${build.optimize}" define="${build.defines}" 
+		<csc noconfig="true" warnaserror="true" target="library" debug="${build.debug}" optimize="${build.optimize}" define="${build.defines}" 
 			 output="${current.path.build}/NLog/${product.assembly.NLog}" 
 			 doc="${current.path.build}/NLog/${product.name}.NLog.xml" keyfile="${path.src}/${product.keyfile}">
 			<arg line="/filealign:512" unless="${nant.settings.currentframework == 'mono-2.0'}"/>
@@ -36,24 +36,14 @@
 	<target name="compile-NLog-tests" depends="core compile-tests" unless="${skip.tests}" if="${not(string::contains(build.platform, 'silverlight') or build.platform == 'netcf-3.5')}">
 		<property name="current.path.test.NLog" value="${path.build}/${build.platform}/tests/NLog"/>
 		<mkdir dir="${current.path.test.NLog}"/>
+
+	    <property name="target" value="${current.path.test.NLog}" />
+		<call target="CopyXUnit-Target"/>
+		<call target="CopyMoq-Target"/>
+		<call target="CopyFluentAssertions-Target"/>
 		<copy todir="${current.path.test.NLog}" flatten="true">
 			<fileset basedir="${current.path.test}">
 				<include name="**/*.dll"/>
-			</fileset>
-		</copy>
-		<copy todir="${current.path.test.NLog}">
-			<fileset basedir="${path.tools.xunit}">
-				<include name="xunit.dll"/>
-			</fileset>
-		</copy>
-		<copy todir="${current.path.test.NLog}" if="${not(string::contains(build.platform, 'net-4.0'))}">
-			<fileset basedir="${path.tools.moq}/net35">
-				<include name="Moq.dll"/>
-			</fileset>
-		</copy>
-		<copy todir="${current.path.test.NLog}" if="${string::contains(build.platform, 'net-4.0')}">
-			<fileset basedir="${path.tools.moq}/net40">
-				<include name="Moq.dll"/>
 			</fileset>
 		</copy>
 		<copy todir="${current.path.test.NLog}" flatten="true">
@@ -61,17 +51,8 @@
 				<include name="**/*.dll"/>
 			</fileset>
 		</copy>		
-		<copy todir="${current.path.test.NLog}" if="${string::contains(build.platform, 'net-4.0')}">
-			<fileset basedir="${path.tools.fluentassertions}/Net-4.0">
-				<include name="FluentAssertions.dll"/>
-			</fileset>
-		</copy>
-		<copy todir="${current.path.test.NLog}" unless="${string::contains(build.platform, 'net-4.0')}">
-			<fileset basedir="${path.tools.fluentassertions}/Net-3.5">
-				<include name="FluentAssertions.dll"/>
-			</fileset>
-		</copy>
-		<csc noconfig="true" nostdlib="true" warnaserror="true" target="library" debug="${build.debug}" optimize="${build.optimize}" define="${build.defines}"
+
+		<csc noconfig="true" warnaserror="true" target="library" debug="${build.debug}" optimize="${build.optimize}" define="${build.defines}"
 			 output="${current.path.test.NLog}/${product.assembly.test.NLog}">
 			<sources basedir="${path.src}">
 				<include name="${product.name}.NLog.Test/**/*.cs"/>
@@ -96,13 +77,26 @@
 	</target>
  
 	<target name="testNLog" depends="compile-NLog-tests" unless="${skip.tests}" if="${not(string::contains(build.platform, 'silverlight') or build.platform == 'netcf-3.5')}">
-		<exec program="${path.tools.xunit.console}" workingdir="${current.path.test.NLog}" commandline="${product.assembly.test.NLog} /html ${current.path.test.NLog}/results.html" failonerror="true"/>
+		<exec 
+		    program="${path.tools.xunit.console}" 
+			workingdir="${current.path.test.NLog}" 
+			commandline="${product.assembly.test.NLog} /html ${current.path.test.NLog}/results.html" 
+			failonerror="true"
+			if="${not(string::contains(build.platform, 'mono')) or teamcity}"/>
+
+		<if test="${string::contains(build.platform, 'mono') and not(teamcity)}">
+			<exec 
+				program="${framework::get-runtime-engine(framework::get-target-framework())}" 
+    			workingdir="${current.path.test.NLog}" 
+				commandline="${path.tools.xunit.console} ${product.assembly.test.NLog} /html ${current.path.test.NLog}/results.html" 
+				failonerror="true"/>
+		</if>
 	</target>
 	
 	<target name="nuget-nlog">
 		<property name="nuget.sourcedir" value="${path.base}/nuget-nlog" />
 		<property name="nuget.basedir" value="${path.base}/build/nuget-nlog" />
-		<property name="nuget.platforms" value="net-3.5,net-4.0,net-4.5" />
+		<property name="nuget.platforms" value="net-3.5-client,net-4.0-client,net-4.5-client" />
 		<property name="nuget.name" value="${product.name}.nlog" />
 		<property name="nuget.releaseDirectory" value="${path.build}\${build.platform}\release\nlog" dynamic="true"/>
 		<property name="nuget.dependencies" value="Ninject.Extensions.Logging" />

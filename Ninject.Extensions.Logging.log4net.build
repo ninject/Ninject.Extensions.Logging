@@ -4,8 +4,9 @@
 	<property name="product.assembly.test.log4net" value="${product.name}.log4net.Test.dll" overwrite="false"/>
 	
 	<target name="buildLog4Net" unless="${string::contains(build.platform, 'silverlight')}">
-		<property name="current.path.lib.log4net" value="${path.lib}/log4Net/net-3.5" unless="${nant.settings.currentframework == 'mono-2.0' or nant.settings.currentframework == 'netcf-3.5'}" />
-		<property name="current.path.lib.log4net" value="${path.lib}/log4Net/${nant.settings.currentframework}" if="${nant.settings.currentframework == 'mono-2.0' or nant.settings.currentframework == 'netcf-3.5'}" />
+		<property name="current.path.lib.log4net" value="${path.lib}/log4Net/mono-2.0" if="${string::contains(build.platform, 'mono')}" />
+		<property name="current.path.lib.log4net" value="${path.lib}/log4Net/net-4.0" if="${string::contains(build.platform, 'net-4.')}" />
+		<property name="current.path.lib.log4net" value="${path.lib}/log4Net/${build.platform}" unless="${string::contains(build.platform, 'mono') or string::contains(build.platform, 'net-4.')}" />
 		<copy todir="${current.path.build}/log4net/lib">
 			<fileset basedir="${current.path.lib.log4net}">
 				<include name="**/*.dll"/>
@@ -13,7 +14,7 @@
 			</fileset>
 		</copy>
 		
-		<csc noconfig="true" nostdlib="true" warnaserror="true" target="library" debug="${build.debug}" optimize="${build.optimize}" define="${build.defines}" 
+		<csc noconfig="true" warnaserror="true" target="library" debug="${build.debug}" optimize="${build.optimize}" define="${build.defines}" 
 			 output="${current.path.build}/log4net/${product.assembly.log4net}" 
 			 doc="${current.path.build}/log4net/${product.name}.Log4Net.xml" keyfile="${path.src}/${product.keyfile}">
 			<arg line="/filealign:512" unless="${nant.settings.currentframework == 'mono-2.0'}"/>
@@ -25,7 +26,6 @@
 				<include name="mscorlib.dll"/>
 				<include name="System.dll"/>
 				<include name="System.Core.dll"/>
-				<include name="System.Web.dll" unless="${build.platform == 'silverlight-2.0'}"/>
 				<include name="${current.path.lib.log4net}/log4net.dll"/>
 				<include name="${path.lib}/Ninject/${build.platform}/Ninject.dll"/>
 				<include name="${current.path.build}/${product.assembly}"/>
@@ -71,7 +71,7 @@
 				<include name="FluentAssertions.dll"/>
 			</fileset>
 		</copy>
-		<csc noconfig="true" nostdlib="true" warnaserror="true" target="library" debug="${build.debug}" optimize="${build.optimize}" define="${build.defines}"
+		<csc noconfig="true" warnaserror="true" target="library" debug="${build.debug}" optimize="${build.optimize}" define="${build.defines}"
 			 output="${current.path.test.log4net}/${product.assembly.test.log4net}">
 			<sources basedir="${path.src}">
 				<include name="${product.name}.Log4Net.Test/**/*.cs"/>
@@ -96,13 +96,26 @@
 	</target>
  
 	<target name="testLog4Net" depends="compile-log4net-tests" unless="${skip.tests}" if="${not(string::contains(build.platform, 'silverlight') or build.platform == 'netcf-3.5')}">
-		<exec program="${path.tools.xunit.console}" workingdir="${current.path.test.log4net}" commandline="${product.assembly.test.log4net} /html ${current.path.test.log4net}/results.html" failonerror="true"/>
+		<exec 
+		    program="${path.tools.xunit.console}" 
+			workingdir="${current.path.test.log4net}" 
+			commandline="${product.assembly.test.log4net} /html ${current.path.test.log4net}/results.html" 
+			failonerror="true"
+			if="${not(string::contains(build.platform, 'mono')) or teamcity}"/>
+
+		<if test="${string::contains(build.platform, 'mono') and not(teamcity)}">
+			<exec 
+				program="${framework::get-runtime-engine(framework::get-target-framework())}" 
+    			workingdir="${current.path.test.log4net}" 
+				commandline="${path.tools.xunit.console} ${product.assembly.test.log4net} /html ${current.path.test.log4net}/results.html" 
+				failonerror="true"/>
+		</if>
 	</target>
 	
 	<target name="nuget-log4net">
 		<property name="nuget.sourcedir" value="${path.base}/nuget-log4net" />
 		<property name="nuget.basedir" value="${path.base}/build/nuget-log4net" />
-		<property name="nuget.platforms" value="net-3.5,net-4.0,net-4.5" />
+		<property name="nuget.platforms" value="net-3.5-client,net-4.0-client,net-4.5-client" />
 		<property name="nuget.name" value="${product.name}.Log4Net" />
 		<property name="nuget.releaseDirectory" value="${path.build}\${build.platform}\release\log4net" dynamic="true"/>
 		<property name="nuget.dependencies" value="Ninject.Extensions.Logging" />

@@ -4,8 +4,8 @@
 		<property name="product.assembly.test.NLog2" value="${product.name}.NLog2.Test.dll" overwrite="false"/>
 
 	<target name="buildNLog2">
-		<property name="current.path.lib.NLog2" value="${path.lib}/NLog2/net-3.5" unless="${string::contains(build.platform, 'silverlight') or nant.settings.currentframework == 'mono-2.0' or nant.settings.currentframework == 'netcf-3.5'}" />
-		<property name="current.path.lib.NLog2" value="${path.lib}/NLog2/${nant.settings.currentframework}" if="${string::contains(build.platform, 'silverlight') or nant.settings.currentframework == 'mono-2.0' or nant.settings.currentframework == 'netcf-3.5'}" />
+		<property name="current.path.lib.NLog2" value="${path.lib}/NLog2/mono-2.0" if="${string::contains(build.platform, 'mono')}" />
+		<property name="current.path.lib.NLog2" value="${path.lib}/NLog2/${build.platform}" unless="${string::contains(build.platform, 'mono')}" />
 		<copy todir="${current.path.build}/NLog2/lib">
 			<fileset basedir="${current.path.lib.NLog2}">
 				<include name="**/*.dll"/>
@@ -13,7 +13,7 @@
 			</fileset>
 		</copy>
 		
-		<csc noconfig="true" nostdlib="true" warnaserror="true" target="library" debug="${build.debug}" optimize="${build.optimize}" define="${build.defines}" 
+		<csc noconfig="true" warnaserror="true" target="library" debug="${build.debug}" optimize="${build.optimize}" define="${build.defines}" 
 			 output="${current.path.build}/NLog2/${product.assembly.NLog2}" 
 			 doc="${current.path.build}/NLog2/${product.name}.NLog2.xml" keyfile="${path.src}/${product.keyfile}">
 			<arg line="/filealign:512" unless="${nant.settings.currentframework == 'mono-2.0'}"/>
@@ -36,42 +36,23 @@
 	<target name="compile-NLog2-tests" depends="core compile-tests" unless="${skip.tests}" if="${not(string::contains(build.platform, 'silverlight') or build.platform == 'netcf-3.5')}">
 		<property name="current.path.test.NLog2" value="${path.build}/${build.platform}/tests/NLog2"/>
 		<mkdir dir="${current.path.test.NLog2}"/>
+
+	    <property name="target" value="${current.path.test.NLog2}" />
+		<call target="CopyXUnit-Target"/>
+		<call target="CopyMoq-Target"/>
+		<call target="CopyFluentAssertions-Target"/>
 		<copy todir="${current.path.test.NLog2}" flatten="true">
 			<fileset basedir="${current.path.test}">
-				<include name="*.dll"/>
+				<include name="**/*.dll"/>
 			</fileset>
 		</copy>
 		<copy todir="${current.path.test.NLog2}" flatten="true">
 			<fileset basedir="${current.path.build}/NLog2">
 				<include name="**/*.dll"/>
 			</fileset>
-		</copy>
-		<copy todir="${current.path.test.NLog2}">
-			<fileset basedir="${path.tools.xunit}">
-				<include name="xunit.dll"/>
-			</fileset>
-		</copy>
-		<copy todir="${current.path.test.NLog2}" if="${not(string::contains(build.platform, 'net-4.0'))}">
-			<fileset basedir="${path.tools.moq}/net35">
-				<include name="Moq.dll"/>
-			</fileset>
-		</copy>
-		<copy todir="${current.path.test.NLog2}" if="${string::contains(build.platform, 'net-4.0')}">
-			<fileset basedir="${path.tools.moq}/net40">
-				<include name="Moq.dll"/>
-			</fileset>
-		</copy>
-		<copy todir="${current.path.test.NLog2}" if="${string::contains(build.platform, 'net-4.0')}">
-			<fileset basedir="${path.tools.fluentassertions}/Net-4.0">
-				<include name="FluentAssertions.dll"/>
-			</fileset>
-		</copy>
-		<copy todir="${current.path.test.NLog2}" unless="${string::contains(build.platform, 'net-4.0')}">
-			<fileset basedir="${path.tools.fluentassertions}/Net-3.5">
-				<include name="FluentAssertions.dll"/>
-			</fileset>
-		</copy>
-		<csc noconfig="true" nostdlib="true" warnaserror="true" target="library" debug="${build.debug}" optimize="${build.optimize}" define="${build.defines}"
+		</copy>		
+
+		<csc noconfig="true" warnaserror="true" target="library" debug="${build.debug}" optimize="${build.optimize}" define="${build.defines}"
 			 output="${current.path.test.NLog2}/${product.assembly.test.NLog2}">
 			<sources basedir="${path.src}">
 				<include name="${product.name}.NLog2.Test/**/*.cs"/>
@@ -96,13 +77,31 @@
 	</target>
  
 	<target name="testNLog2" depends="compile-NLog2-tests" unless="${skip.tests}" if="${not(string::contains(build.platform, 'silverlight') or build.platform == 'netcf-3.5')}">
-		<exec program="${path.tools.xunit.console}" workingdir="${current.path.test.NLog2}" commandline="${product.assembly.test.NLog2} /html ${current.path.test.NLog2}/results.html" failonerror="true"/>
+		<exec 
+		    program="${path.tools.xunit.console}" 
+			workingdir="${current.path.test.NLog2}" 
+			commandline="${product.assembly.test.NLog2} /html ${current.path.test.NLog2}/results.html" 
+			failonerror="true"
+			if="${not(string::contains(build.platform, 'mono')) or teamcity}"/>
+
+		<if test="${string::contains(build.platform, 'mono') and not(teamcity)}">
+			<exec 
+				program="${framework::get-runtime-engine(framework::get-target-framework())}" 
+    			workingdir="${current.path.test.NLog2}" 
+				commandline="${path.tools.xunit.console} ${product.assembly.test.NLog2} /html ${current.path.test.NLog2}/results.html" 
+				failonerror="true"/>
+		</if>
 	</target>
 	
 	<target name="compile-silverlight-tests-NLog2" depends="core" unless="${skip.tests or skip.silverlightTests}" if="${string::contains(build.platform, 'silverlight')}">
 		<property name="current.path.test.NLog2" value="${path.build}/${build.platform}/tests/NLog2"/>
 		<property name="product.assembly.silverlighttest.NLog2" value="${product.name}.NLog2.SilverlightTests.xap"/>
 		<mkdir dir="${current.path.test}"/>
+
+	    <property name="target" value="${current.path.test.NLog2}" />
+		<call target="CopyXUnit-SL-Target"/>
+		<call target="CopyMoq-SL-Target"/>
+		<call target="CopyFluentAssertions-SL-Target"/>
 		<copy todir="${current.path.test.NLog2}" flatten="true">
 			<fileset basedir="${current.path.build}">
 				<include name="*.dll"/>
@@ -110,34 +109,17 @@
 			</fileset>
 		</copy>
 		<copy todir="${current.path.test.NLog2}" flatten="true">
-			<fileset basedir="${current.path.build}/NLog2">
+			<fileset basedir="${current.path.test}">
 				<include name="**/*.dll"/>
 			</fileset>
 		</copy>
-		<copy todir="${current.path.test.NLog2}" if="${string::contains(build.platform, 'silverlight-4.0')}">
-			<fileset basedir="${path.tools.moq}/silverlight4">
-				<include name="Moq.Silverlight.dll"/>
-				<include name="Castle.Core.dll"/>
+		<copy todir="${current.path.test.NLog2}" flatten="true">
+			<fileset basedir="${current.path.build}/NLog2">
+				<include name="**/*.dll"/>
 			</fileset>
-		</copy>
-		<copy todir="${current.path.test.NLog2}" unless="${string::contains(build.platform, 'silverlight-4.0')}">
-			<fileset basedir="${path.tools.moq}/silverlight3">
-				<include name="Moq.Silverlight.dll"/>
-				<include name="Castle.Core-Silverlight.dll"/>
-				<include name="Castle.DynamicProxy-Silverlight.dll"/>
-			</fileset>
-		</copy>
-		<copy todir="${current.path.test.NLog2}">
-			<fileset basedir="${path.tools.xunit.sl}${build.platform}">
-				<include name="*.dll"/>
-			</fileset>
-		</copy>
-		<copy todir="${current.path.test.NLog2}">
-			<fileset basedir="${path.tools.fluentassertions}/${build.platform}">
-				<include name="FluentAssertions.Silverlight.dll"/>
-			</fileset>
-		</copy>
-		<csc noconfig="true" nostdlib="true" warnaserror="true" target="library" debug="${build.debug}" optimize="${build.optimize}" define="${build.defines}"
+		</copy>		
+		
+		<csc noconfig="true" warnaserror="true" target="library" debug="${build.debug}" optimize="${build.optimize}" define="${build.defines}"
 			 output="${current.path.test.NLog2}/${product.name}.NLog2.SilverlightTests.dll">
 			<sources basedir="${path.src}">
 				<include name="${product.name}.Tests/**/*.cs"/>
@@ -194,7 +176,7 @@
 	<target name="nuget-nlog2">
 		<property name="nuget.sourcedir" value="${path.base}/nuget-nlog2" />
 		<property name="nuget.basedir" value="${path.base}/build/nuget-nlog2" />
-		<property name="nuget.platforms" value="net-3.5,net-4.0,net-4.5,silverlight-5.0,silverlight-4.0,silverlight-3.0,silverlight-2.0,silverlight-4.0-wp7" />
+		<property name="nuget.platforms" value="net-3.5-client,net-4.0-client,net-4.5-client,silverlight-5.0,silverlight-4.0,silverlight-3.0,silverlight-2.0,silverlight-4.0-wp7,silverlight-4.0-wp71" />
 		<property name="nuget.name" value="${product.name}.nlog2" />
 		<property name="nuget.releaseDirectory" value="${path.build}\${build.platform}\release\nlog2" dynamic="true"/>
 		<property name="nuget.dependencies" value="Ninject.Extensions.Logging" />
