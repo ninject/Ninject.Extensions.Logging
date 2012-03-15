@@ -115,7 +115,7 @@
 	<target name="nuget-log4net">
 		<property name="nuget.sourcedir" value="${path.base}/nuget-log4net" />
 		<property name="nuget.basedir" value="${path.base}/build/nuget-log4net" />
-		<property name="nuget.platforms" value="net-3.5-client,net-4.0-client,net-4.5-client" />
+		<property name="nuget.platforms" value="net-3.5-client,net-4.0-client,net-4.5" />
 		<property name="nuget.name" value="${product.name}.Log4Net" />
 		<property name="nuget.releaseDirectory" value="${path.build}\${build.platform}\release\log4net" dynamic="true"/>
 		<property name="nuget.dependencies" value="Ninject.Extensions.Logging" />

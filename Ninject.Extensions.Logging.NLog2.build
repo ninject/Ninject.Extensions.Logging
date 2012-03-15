@@ -179,7 +179,7 @@
 	<target name="nuget-nlog2">
 		<property name="nuget.sourcedir" value="${path.base}/nuget-nlog2" />
 		<property name="nuget.basedir" value="${path.base}/build/nuget-nlog2" />
-		<property name="nuget.platforms" value="net-3.5-client,net-4.0-client,net-4.5-client,silverlight-5.0,silverlight-4.0,silverlight-3.0,silverlight-2.0,silverlight-4.0-wp7,silverlight-4.0-wp71" />
+		<property name="nuget.platforms" value="net-3.5-client,net-4.0-client,net-4.5,silverlight-5.0,silverlight-4.0,silverlight-3.0,silverlight-2.0,silverlight-4.0-wp7,silverlight-4.0-wp71" />
 		<property name="nuget.name" value="${product.name}.nlog2" />
 		<property name="nuget.releaseDirectory" value="${path.build}\${build.platform}\release\nlog2" dynamic="true"/>
 		<property name="nuget.dependencies" value="Ninject.Extensions.Logging" />
