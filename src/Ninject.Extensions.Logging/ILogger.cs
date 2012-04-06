@@ -56,6 +56,12 @@ namespace Ninject.Extensions.Logging
         /// <summary>
         /// Logs the specified message with Debug severity.
         /// </summary>
+        /// <param name="message">The message.</param>
+        void Debug(string message);
+
+        /// <summary>
+        /// Logs the specified message with Debug severity.
+        /// </summary>
         /// <param name="format">The message or format template.</param>
         /// <param name="args">Any arguments required for the format template.</param>
         void Debug(string format, params object[] args);
@@ -67,6 +73,12 @@ namespace Ninject.Extensions.Logging
         /// <param name="format">The message or format template.</param>
         /// <param name="args">Any arguments required for the format template.</param>
         void Debug(Exception exception, string format, params object[] args);
+
+        /// <summary>
+        /// Logs the specified message with Info severity.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        void Info(string message);
 
         /// <summary>
         /// Logs the specified message with Info severity.
@@ -86,6 +98,12 @@ namespace Ninject.Extensions.Logging
         /// <summary>
         /// Logs the specified message with Trace severity.
         /// </summary>
+        /// <param name="message">The message.</param>
+        void Trace(string message);
+
+        /// <summary>
+        /// Logs the specified message with Trace severity.
+        /// </summary>
         /// <param name="format">The message or format template.</param>
         /// <param name="args">Any arguments required for the format template.</param>
         void Trace(string format, params object[] args);
@@ -97,6 +115,12 @@ namespace Ninject.Extensions.Logging
         /// <param name="format">The message or format template.</param>
         /// <param name="args">Any arguments required for the format template.</param>
         void Trace(Exception exception, string format, params object[] args);
+
+        /// <summary>
+        /// Logs the specified message with Warn severity.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        void Warn(string message);
 
         /// <summary>
         /// Logs the specified message with Warn severity.
@@ -116,6 +140,12 @@ namespace Ninject.Extensions.Logging
         /// <summary>
         /// Logs the specified message with Error severity.
         /// </summary>
+        /// <param name="message">The message.</param>
+        void Error(string message);
+
+        /// <summary>
+        /// Logs the specified message with Error severity.
+        /// </summary>
         /// <param name="format">The message or format template.</param>
         /// <param name="args">Any arguments required for the format template.</param>
         void Error(string format, params object[] args);
@@ -127,6 +157,12 @@ namespace Ninject.Extensions.Logging
         /// <param name="format">The message or format template.</param>
         /// <param name="args">Any arguments required for the format template.</param>
         void Error(Exception exception, string format, params object[] args);
+
+        /// <summary>
+        /// Logs the specified message with Fatal severity.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        void Fatal(string message);
 
         /// <summary>
         /// Logs the specified message with Fatal severity.

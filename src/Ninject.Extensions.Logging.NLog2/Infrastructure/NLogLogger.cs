@@ -105,6 +105,30 @@ namespace Ninject.Extensions.Logging.NLog2.Infrastructure
         }
 
         /// <summary>
+        /// Logs the specified message with Info severity.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        public override void Info(string message)
+        {
+            if (this.IsInfoEnabled)
+            {
+                this.Log(LogLevel.Info, "{0}", message);
+            }
+        }
+
+        /// <summary>
+        /// Logs the specified message with Debug severity.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        public override void Debug(string message)
+        {
+            if (this.IsDebugEnabled)
+            {
+                this.Log(LogLevel.Debug, "{0}", message);
+            }
+        }
+
+        /// <summary>
         /// Logs the specified message with Debug severity.
         /// </summary>
         /// <param name="format">The message or format template.</param>
@@ -128,6 +152,30 @@ namespace Ninject.Extensions.Logging.NLog2.Infrastructure
             if (this.IsErrorEnabled)
             {
                 this.Log(LogLevel.Error, exception, format, args);
+            }
+        }
+
+        /// <summary>
+        /// Logs the specified message with Fatal severity.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        public override void Fatal(string message)
+        {
+            if (this.IsFatalEnabled)
+            {
+                this.Log(LogLevel.Fatal, "{0}", message);
+            }
+        }
+
+        /// <summary>
+        /// Logs the specified message with Error severity.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        public override void Error(string message)
+        {
+            if (this.IsErrorEnabled)
+            {
+                this.Log(LogLevel.Error, "{0}", message);
             }
         }
 
@@ -201,6 +249,18 @@ namespace Ninject.Extensions.Logging.NLog2.Infrastructure
         /// <summary>
         /// Logs the specified message with Trace severity.
         /// </summary>
+        /// <param name="message">The message.</param>
+        public override void Trace(string message)
+        {
+            if (this.IsTraceEnabled)
+            {
+                this.Log(LogLevel.Trace, "{0}", message);
+            }
+        }
+
+        /// <summary>
+        /// Logs the specified message with Trace severity.
+        /// </summary>
         /// <param name="format">The message or format template.</param>
         /// <param name="args">Any arguments required for the format template.</param>
         public override void Trace(string format, params object[] args)
@@ -222,6 +282,18 @@ namespace Ninject.Extensions.Logging.NLog2.Infrastructure
             if (this.IsTraceEnabled)
             {
                 this.Log(LogLevel.Trace, exception, format, args);
+            }
+        }
+
+        /// <summary>
+        /// Logs the specified message with Warn severity.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        public override void Warn(string message)
+        {
+            if (this.IsWarnEnabled)
+            {
+                this.Log(LogLevel.Warn, "{0}", message);
             }
         }
 
