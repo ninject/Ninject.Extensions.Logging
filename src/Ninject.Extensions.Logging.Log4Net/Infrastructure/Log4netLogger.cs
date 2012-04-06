@@ -91,6 +91,15 @@ namespace Ninject.Extensions.Logging.Log4net.Infrastructure
         /// <summary>
         /// Logs the specified message with Debug severity.
         /// </summary>
+        /// <param name="message">The message.</param>
+        public override void Debug(string message)
+        {
+            this.log4NetLogger.DebugFormat("{0}", message);
+        }
+
+        /// <summary>
+        /// Logs the specified message with Debug severity.
+        /// </summary>
         /// <param name="format">The message or format template.</param>
         /// <param name="args">Any arguments required for the format template.</param>
         public override void Debug(string format, params object[] args)
@@ -107,6 +116,15 @@ namespace Ninject.Extensions.Logging.Log4net.Infrastructure
         public override void Debug(Exception exception, string format, params object[] args)
         {
             this.log4NetLogger.Debug(String.Format(format, args), exception);
+        }
+
+        /// <summary>
+        /// Logs the specified message with Info severity.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        public override void Info(string message)
+        {
+            this.log4NetLogger.InfoFormat("{0}", message);
         }
 
         /// <summary>
@@ -133,6 +151,15 @@ namespace Ninject.Extensions.Logging.Log4net.Infrastructure
         /// <summary>
         /// Logs the specified message with Trace severity.
         /// </summary>
+        /// <param name="message">The message.</param>
+        public override void Trace(string message)
+        {
+            this.log4NetLogger.Logger.Log(Type, Level.Trace, String.Format("{0}", message), null);
+        }
+
+        /// <summary>
+        /// Logs the specified message with Trace severity.
+        /// </summary>
         /// <param name="format">The message or format template.</param>
         /// <param name="args">Any arguments required for the format template.</param>
         public override void Trace(string format, params object[] args)
@@ -149,6 +176,15 @@ namespace Ninject.Extensions.Logging.Log4net.Infrastructure
         public override void Trace(Exception exception, string format, params object[] args)
         {
             this.log4NetLogger.Logger.Log(Type, Level.Trace, String.Format(format, args), exception);
+        }
+
+        /// <summary>
+        /// Logs the specified message with Warn severity.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        public override void Warn(string message)
+        {
+            this.log4NetLogger.WarnFormat("{0}", message);
         }
 
         /// <summary>
@@ -175,6 +211,15 @@ namespace Ninject.Extensions.Logging.Log4net.Infrastructure
         /// <summary>
         /// Logs the specified message with Error severity.
         /// </summary>
+        /// <param name="message">The message.</param>
+        public override void Error(string message)
+        {
+            this.log4NetLogger.ErrorFormat("{0}", message);
+        }
+
+        /// <summary>
+        /// Logs the specified message with Error severity.
+        /// </summary>
         /// <param name="format">The message or format template.</param>
         /// <param name="args">Any arguments required for the format template.</param>
         public override void Error(string format, params object[] args)
@@ -191,6 +236,15 @@ namespace Ninject.Extensions.Logging.Log4net.Infrastructure
         public override void Error(Exception exception, string format, params object[] args)
         {
             this.log4NetLogger.Error(String.Format(format, args), exception);
+        }
+
+        /// <summary>
+        /// Logs the specified message with Fatal severity.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        public override void Fatal(string message)
+        {
+            this.log4NetLogger.FatalFormat("{0}", message);
         }
 
         /// <summary>
