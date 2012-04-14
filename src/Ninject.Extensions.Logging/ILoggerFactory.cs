@@ -24,8 +24,9 @@ namespace Ninject.Extensions.Logging
         /// Gets the logger for the specified type, creating it if necessary.
         /// </summary>
         /// <param name="type">The type to create the logger for.</param>
+        /// <param name="name">The explicit name to create the logger for.  If null, the type's FullName will be used.</param>
         /// <returns>The newly-created logger.</returns>
-        ILogger GetLogger(Type type);
+        ILogger GetLogger(Type type, string name=null);
 
         /// <summary>
         /// Gets the logger for the specified activation context, creating it if necessary.
@@ -33,7 +34,7 @@ namespace Ninject.Extensions.Logging
         /// <param name="context">The context for which a logger is created.</param>
         /// <returns>The newly-created logger.</returns>
         ILogger GetLogger(IContext context);
-
+        
 #if !SILVERLIGHT && !NETCF
         /// <summary>
         /// Gets the logger for the class calling this method.

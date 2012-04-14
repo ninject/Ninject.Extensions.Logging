@@ -29,10 +29,10 @@ namespace Ninject.Extensions.Logging.NLog.Infrastructure
         /// Initializes a new instance of the <see cref="NLogLogger"/> class.
         /// </summary>
         /// <param name="type">The type to associate with the logger.</param>
-        public NLogLogger(Type type)
-            : base(type)
+        public NLogLogger(Type type, string name = null)
+            : base(type, name)
         {
-            this.nlogLogger = LogManager.GetLogger(type.FullName);
+            this.nlogLogger = LogManager.GetLogger(this.Name);
         }
 
         /// <summary>
