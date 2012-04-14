@@ -24,9 +24,16 @@ namespace Ninject.Extensions.Logging
         /// Gets the logger for the specified type, creating it if necessary.
         /// </summary>
         /// <param name="type">The type to create the logger for.</param>
+        /// <returns>The newly-created logger.</returns>
+        ILogger GetLogger(Type type);
+
+        /// <summary>
+        /// Gets a custom-named logger for the specified type, creating it if necessary.
+        /// </summary>
+        /// <param name="type">The type to create the logger for.</param>
         /// <param name="name">The explicit name to create the logger for.  If null, the type's FullName will be used.</param>
         /// <returns>The newly-created logger.</returns>
-        ILogger GetLogger(Type type, string name=null);
+        ILogger GetLogger(Type type, string name);
 
         /// <summary>
         /// Gets the logger for the specified activation context, creating it if necessary.
@@ -41,6 +48,12 @@ namespace Ninject.Extensions.Logging
         /// </summary>
         /// <returns>The newly-created logger.</returns>
         ILogger GetCurrentClassLogger();
+
+        /// <summary>
+        /// Gets a custom-named logger for the class calling this method.
+        /// </summary>
+        /// <returns>The newly-created logger.</returns>
+        ILogger GetCurrentClassLogger(string name);
 #endif
     }
 }

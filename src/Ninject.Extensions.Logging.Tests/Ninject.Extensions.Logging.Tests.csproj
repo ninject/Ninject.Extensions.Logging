@@ -75,6 +75,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\ObjectWithNamedLoggers.cs" />
     <Compile Include="Classes\CtorPropertyLoggerClass.cs" />
     <Compile Include="Classes\NonPublicPropertyLoggerClass.cs" />
     <Compile Include="Classes\ObjectGetsItsOwnLogger.cs" />

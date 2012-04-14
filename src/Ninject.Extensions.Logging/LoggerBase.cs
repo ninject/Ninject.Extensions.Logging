@@ -23,8 +23,17 @@ namespace Ninject.Extensions.Logging
         /// Initializes a new instance of the <see cref="LoggerBase"/> class.
         /// </summary>
         /// <param name="type">The type to associate with the logger.</param>
-        /// <param name="name">An alternative name to use for the logger.  If null, the type's FullName will be used.</param>
-        protected LoggerBase(Type type, string name = null)
+        protected LoggerBase(Type type)
+            : this(type, null)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LoggerBase"/> class.
+        /// </summary>
+        /// <param name="type">The type to associate with the logger.</param>
+        /// <param name="name">A custom name to use for the logger.  If null, the type's FullName will be used.</param>
+        protected LoggerBase(Type type, string name)
         {
             if (type == null)
             {

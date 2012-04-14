@@ -31,7 +31,17 @@ namespace Ninject.Extensions.Logging.Log4net.Infrastructure
         /// Initializes a new instance of the <see cref="Log4NetLogger"/> class.
         /// </summary>
         /// <param name="type">The type to create a logger for.</param>
-        public Log4NetLogger(Type type, string name = null)
+        public Log4NetLogger(Type type)
+            : this(type, null)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Log4NetLogger"/> class.
+        /// </summary>
+        /// <param name="type">The type to create a logger for.</param>
+        /// <param name="name">A custom name to use for the logger.  If null, the type's FullName will be used.</param>
+        public Log4NetLogger(Type type, string name)
             : base(type, name)
         {
             this.log4NetLogger = LogManager.GetLogger(this.Name);

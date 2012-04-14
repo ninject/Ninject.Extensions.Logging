@@ -35,8 +35,18 @@ namespace Ninject.Extensions.Logging.NLog2.Infrastructure
         /// <summary>
         /// Initializes a new instance of the <see cref="NLogLogger"/> class.
         /// </summary>
-        /// <param name="type">The type to associate with the logger.</param>
-        public NLogLogger(Type type, string name = null)
+        /// <param name="type">The type to create a logger for.</param>
+        public NLogLogger(Type type)
+            : this(type, null)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="NLogLogger"/> class.
+        /// </summary>
+        /// <param name="type">The type to create a logger for.</param>
+        /// <param name="name">A custom name to use for the logger.  If null, the type's FullName will be used.</param>
+        public NLogLogger(Type type, string name)
             : base(type, name)
         {
             this.nlogLogger = LogManager.GetLogger(this.Name);
