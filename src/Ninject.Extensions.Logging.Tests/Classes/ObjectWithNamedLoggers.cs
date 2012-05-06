@@ -6,6 +6,7 @@ using System.Reflection;
 
 namespace Ninject.Extensions.Logging.Classes
 {
+    #if !SILVERLIGHT && !NETCF
     public class ObjectWithNamedLoggers
     {
         private readonly ILogger _firstLogger;
@@ -16,7 +17,7 @@ namespace Ninject.Extensions.Logging.Classes
 // ReSharper restore SuggestBaseTypeForParameter
         {
             _firstLogger = loggerFactory.GetLogger(this.GetType(), "First");
-            _secondLogger = loggerFactory.GetCurrentClassLogger("Second");            
+            _secondLogger = loggerFactory.GetCurrentClassLogger("Second");
         }
 
         public ILogger FirstLogger
@@ -29,4 +30,5 @@ namespace Ninject.Extensions.Logging.Classes
             get { return _secondLogger; }
         }
     }
+    #endif
 }

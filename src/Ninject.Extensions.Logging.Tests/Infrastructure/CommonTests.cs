@@ -56,6 +56,20 @@
                 loggerClass.Logger.GetType().Should().Be(this.LoggerType);
             }
         }
+#endif
+
+#if !SILVERLIGHT && !NETCF
+        [Fact]
+        public void ObjectCanGetsItsOwnLoggerUsingGetCurrentClassLogger()
+        {
+            using (var kernel = this.CreateKernel())
+            {
+                var loggerClass = kernel.Get<ObjectGetsItsOwnLoggerUsingCurrentClassMethod>();
+                loggerClass.Logger.Should().NotBeNull();
+                loggerClass.Logger.Type.Should().Be(typeof(ObjectGetsItsOwnLoggerUsingCurrentClassMethod));
+                loggerClass.Logger.GetType().Should().Be(this.LoggerType);
+            }
+        }
 
         [Fact]
         public void ObjectCanGetNamedLoggers()
@@ -71,20 +85,6 @@
                 loggerClass.SecondLogger.Type.Should().Be(typeof(ObjectWithNamedLoggers));
                 loggerClass.SecondLogger.Name.Should().Be("Second");
                 loggerClass.SecondLogger.GetType().Should().Be(this.LoggerType);
-            }
-        }
-#endif
-
-#if !SILVERLIGHT && !NETCF
-        [Fact]
-        public void ObjectCanGetsItsOwnLoggerUsingGetCurrentClassLogger()
-        {
-            using (var kernel = this.CreateKernel())
-            {
-                var loggerClass = kernel.Get<ObjectGetsItsOwnLoggerUsingCurrentClassMethod>();
-                loggerClass.Logger.Should().NotBeNull();
-                loggerClass.Logger.Type.Should().Be(typeof(ObjectGetsItsOwnLoggerUsingCurrentClassMethod));
-                loggerClass.Logger.GetType().Should().Be(this.LoggerType);
             }
         }
 #endif
