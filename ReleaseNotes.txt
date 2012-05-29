@@ -1,3 +1,8 @@
+Version 3.0.1
+-------------
+Added: non string format message logging methods to the interface and implemented them in all implementations
+
+
 Version 3.0.0.0
 ---------------
 Removed: No web builds. All builds are have not reference to web anymore
