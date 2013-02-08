@@ -23,10 +23,11 @@ namespace Ninject.Extensions.Logging.NLog.Infrastructure
         /// Creates a logger for the specified type.
         /// </summary>
         /// <param name="type">The type to create the logger for.</param>
+        /// <param name="name">The explicit name to create the logger for.  If null, the type's FullName will be used.</param>
         /// <returns>The newly-created logger.</returns>
-        protected override ILogger CreateLogger(Type type)
+        protected override ILogger CreateLogger(Type type, string name)
         {
-            return new NLogLogger(type);
+            return new NLogLogger(type, name);
         }
     }
 }

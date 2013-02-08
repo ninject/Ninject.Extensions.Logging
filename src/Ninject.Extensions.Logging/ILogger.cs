@@ -24,6 +24,11 @@ namespace Ninject.Extensions.Logging
         Type Type { get; }
 
         /// <summary>
+        /// Gets the name of the logger.
+        /// </summary>
+        string Name { get; }
+
+        /// <summary>
         /// Gets a value indicating whether messages with Debug severity should be logged.
         /// </summary>
         bool IsDebugEnabled { get; }
