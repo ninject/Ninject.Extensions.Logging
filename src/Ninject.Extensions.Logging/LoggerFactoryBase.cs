@@ -89,13 +89,24 @@ namespace Ninject.Extensions.Logging
 
 #if !SILVERLIGHT && !NETCF
         /// <summary>
+        /// The method info for GetCurrentClassLogger
+        /// </summary>
+        private static readonly MethodInfo getCurrentClassLoggerMethodInfo =
+            typeof(LoggerFactoryBase).GetMethod("GetCurrentClassLogger", BindingFlags.Public | BindingFlags.Instance);
+
+        /// <summary>
         /// Gets the logger for the class calling this method.
         /// </summary>
         /// <returns>The newly-created logger.</returns>
         [MethodImpl(MethodImplOptions.NoInlining)]
         public ILogger GetCurrentClassLogger()
         {
-            var frame = new StackFrame(1, false);
+            var frame = new StackFrame(0, false);
+            if (frame.GetMethod() == getCurrentClassLoggerMethodInfo)
+            {
+                frame = new StackFrame(1, false);
+            }
+
             var type = frame.GetMethod().DeclaringType;
 
             if (type == null)
