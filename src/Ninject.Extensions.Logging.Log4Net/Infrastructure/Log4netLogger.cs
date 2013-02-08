@@ -94,7 +94,7 @@ namespace Ninject.Extensions.Logging.Log4net.Infrastructure
         /// <param name="message">The message.</param>
         public override void Debug(string message)
         {
-            this.log4NetLogger.DebugFormat("{0}", message);
+            this.log4NetLogger.Debug(message);
         }
 
         /// <summary>
@@ -124,7 +124,7 @@ namespace Ninject.Extensions.Logging.Log4net.Infrastructure
         /// <param name="message">The message.</param>
         public override void Info(string message)
         {
-            this.log4NetLogger.InfoFormat("{0}", message);
+            this.log4NetLogger.Info(message);
         }
 
         /// <summary>
@@ -154,7 +154,7 @@ namespace Ninject.Extensions.Logging.Log4net.Infrastructure
         /// <param name="message">The message.</param>
         public override void Trace(string message)
         {
-            this.log4NetLogger.Logger.Log(Type, Level.Trace, String.Format("{0}", message), null);
+            this.log4NetLogger.Logger.Log(Type, Level.Trace, message, null);
         }
 
         /// <summary>
@@ -184,7 +184,7 @@ namespace Ninject.Extensions.Logging.Log4net.Infrastructure
         /// <param name="message">The message.</param>
         public override void Warn(string message)
         {
-            this.log4NetLogger.WarnFormat("{0}", message);
+            this.log4NetLogger.Warn(message);
         }
 
         /// <summary>
@@ -214,7 +214,7 @@ namespace Ninject.Extensions.Logging.Log4net.Infrastructure
         /// <param name="message">The message.</param>
         public override void Error(string message)
         {
-            this.log4NetLogger.ErrorFormat("{0}", message);
+            this.log4NetLogger.Error(message);
         }
 
         /// <summary>
@@ -244,7 +244,7 @@ namespace Ninject.Extensions.Logging.Log4net.Infrastructure
         /// <param name="message">The message.</param>
         public override void Fatal(string message)
         {
-            this.log4NetLogger.FatalFormat("{0}", message);
+            this.log4NetLogger.Fatal(message);
         }
 
         /// <summary>
