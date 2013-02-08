@@ -119,6 +119,16 @@ namespace Ninject.Extensions.Logging.Log4net.Infrastructure
         }
 
         /// <summary>
+        /// Logs the specified exception with Debug severity.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        /// <param name="exception">The exception to log.</param>
+        public override void DebugException(string message, Exception exception)
+        {
+            this.log4NetLogger.Debug(message, exception);
+        }
+
+        /// <summary>
         /// Logs the specified message with Info severity.
         /// </summary>
         /// <param name="message">The message.</param>
@@ -146,6 +156,16 @@ namespace Ninject.Extensions.Logging.Log4net.Infrastructure
         public override void Info(Exception exception, string format, params object[] args)
         {
             this.log4NetLogger.Info(String.Format(format, args), exception);
+        }
+
+        /// <summary>
+        /// Logs the specified exception with Info severity.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        /// <param name="exception">The exception to log.</param>
+        public override void InfoException(string message, Exception exception)
+        {
+            this.log4NetLogger.Info(message, exception);
         }
 
         /// <summary>
@@ -179,6 +199,16 @@ namespace Ninject.Extensions.Logging.Log4net.Infrastructure
         }
 
         /// <summary>
+        /// Logs the specified exception with Trace severity.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        /// <param name="exception">The exception to log.</param>
+        public override void TraceException(string message, Exception exception)
+        {
+            this.log4NetLogger.Logger.Log(Type, Level.Trace, message, exception);
+        }
+
+        /// <summary>
         /// Logs the specified message with Warn severity.
         /// </summary>
         /// <param name="message">The message.</param>
@@ -206,6 +236,16 @@ namespace Ninject.Extensions.Logging.Log4net.Infrastructure
         public override void Warn(Exception exception, string format, params object[] args)
         {
             this.log4NetLogger.Warn(String.Format(format, args), exception);
+        }
+
+        /// <summary>
+        /// Logs the specified message with Warn severity.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        /// <param name="exception">The exception to log.</param>
+        public override void WarnException(string message, Exception exception)
+        {
+            this.log4NetLogger.Warn(message, exception);
         }
 
         /// <summary>
@@ -239,6 +279,16 @@ namespace Ninject.Extensions.Logging.Log4net.Infrastructure
         }
 
         /// <summary>
+        /// Logs the specified exception with Error severity.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        /// <param name="exception">The exception to log.</param>
+        public override void ErrorException(string message, Exception exception)
+        {
+            this.log4NetLogger.Error(message, exception);
+        }
+
+        /// <summary>
         /// Logs the specified message with Fatal severity.
         /// </summary>
         /// <param name="message">The message.</param>
@@ -266,6 +316,16 @@ namespace Ninject.Extensions.Logging.Log4net.Infrastructure
         public override void Fatal(Exception exception, string format, params object[] args)
         {
             this.log4NetLogger.Fatal(String.Format(format, args), exception);
+        }
+
+        /// <summary>
+        /// Logs the specified exception with Fatal severity.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        /// <param name="exception">The exception to log.</param>
+        public override void FatalException(string message, Exception exception)
+        {
+            this.log4NetLogger.Fatal(message, exception);
         }
     }
 }
