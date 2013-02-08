@@ -26,9 +26,14 @@ namespace Ninject.Extensions.Logging
     public abstract class LoggerFactoryBase : NinjectComponent, ILoggerFactory
     {
         /// <summary>
+        /// Maps types to loggers.
+        /// </summary>
+        private readonly Dictionary<Type, ILogger> loggersByType = new Dictionary<Type, ILogger>();
+
+        /// <summary>
         /// Maps names to loggers.
         /// </summary>
-        private readonly Dictionary<string, ILogger> loggers = new Dictionary<string, ILogger>();
+        private readonly Dictionary<string, ILogger> loggersByName = new Dictionary<string, ILogger>();
 
         /// <summary>
         /// Gets the logger for the specified type, creating it if necessary.
@@ -37,28 +42,36 @@ namespace Ninject.Extensions.Logging
         /// <returns>The newly-created logger.</returns>
         public ILogger GetLogger(Type type)
         {
-            return this.GetLogger(type, null);
+            lock (this.loggersByType)
+            {
+                if (this.loggersByType.ContainsKey(type))
+                {
+                    return this.loggersByType[type];
+                }
+
+                ILogger logger = this.CreateLogger(type);
+                this.loggersByType.Add(type, logger);
+
+                return logger;
+            }
         }
         
         /// <summary>
         /// Gets a custom-named logger for the specified type, creating it if necessary.
         /// </summary>
-        /// <param name="type">The type to create the logger for.</param>
         /// <param name="name">The explicit name to create the logger for.  If null, the type's FullName will be used.</param>
         /// <returns>The newly-created logger.</returns>
-        public ILogger GetLogger(Type type, string name)
+        public ILogger GetLogger(string name)
         {
-            name = name ?? type.FullName;
-
-            lock (this.loggers)
+            lock (this.loggersByName)
             {
-                if (this.loggers.ContainsKey(name))
+                if (this.loggersByName.ContainsKey(name))
                 {
-                    return this.loggers[name];
+                    return this.loggersByName[name];
                 }
 
-                ILogger logger = this.CreateLogger(type, name);
-                this.loggers.Add(name, logger);
+                ILogger logger = this.CreateLogger(name);
+                this.loggersByName.Add(name, logger);
 
                 return logger;
             }
@@ -85,25 +98,20 @@ namespace Ninject.Extensions.Logging
             var frame = new StackFrame(1, false);
             return this.GetLogger(frame.GetMethod().DeclaringType);
         }
-
-        /// <summary>
-        /// Gets a custom-named logger for the class calling this method.
-        /// </summary>
-        /// <returns>The newly-created logger.</returns>
-        [MethodImpl(MethodImplOptions.NoInlining)]
-        public ILogger GetCurrentClassLogger(string name)
-        {
-            var frame = new StackFrame(1, false);
-            return this.GetLogger(frame.GetMethod().DeclaringType, name);
-        }
 #endif
 
         /// <summary>
         /// Creates a logger for the specified type.
         /// </summary>
         /// <param name="type">The type to create the logger for.</param>
+        /// <returns>The newly-created logger.</returns>
+        protected abstract ILogger CreateLogger(Type type);
+
+        /// <summary>
+        /// Creates a logger with the specified name.
+        /// </summary>
         /// <param name="name">The explicit name to create the logger for.  If null, the type's FullName will be used.</param>
         /// <returns>The newly-created logger.</returns>
-        protected abstract ILogger CreateLogger(Type type, string name);
+        protected abstract ILogger CreateLogger(string name);
     }
 }

@@ -70,6 +70,7 @@
                 loggerClass.Logger.GetType().Should().Be(this.LoggerType);
             }
         }
+#endif
 
         [Fact]
         public void ObjectCanGetNamedLoggers()
@@ -77,17 +78,14 @@
             using (var kernel = this.CreateKernel())
             {
                 var loggerClass = kernel.Get<ObjectWithNamedLoggers>();
+
                 loggerClass.FirstLogger.Should().NotBeNull();
-                loggerClass.FirstLogger.Type.Should().Be(typeof(ObjectWithNamedLoggers));
                 loggerClass.FirstLogger.Name.Should().Be("First");
-                loggerClass.FirstLogger.GetType().Should().Be(this.LoggerType);
+
                 loggerClass.SecondLogger.Should().NotBeNull();
-                loggerClass.SecondLogger.Type.Should().Be(typeof(ObjectWithNamedLoggers));
                 loggerClass.SecondLogger.Name.Should().Be("Second");
-                loggerClass.SecondLogger.GetType().Should().Be(this.LoggerType);
             }
         }
-#endif
 
         protected virtual IKernel CreateKernel()
         {

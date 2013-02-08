@@ -36,22 +36,32 @@ namespace Ninject.Extensions.Logging.NLog2.Infrastructure
         /// Initializes a new instance of the <see cref="NLogLogger"/> class.
         /// </summary>
         /// <param name="type">The type to create a logger for.</param>
-        public NLogLogger(Type type)
-            : this(type, null)
+        public NLogLogger(Type type) : base(type)
         {
+            this.nlogLogger = LogManager.GetLogger(type.FullName);
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="NLogLogger"/> class.
         /// </summary>
-        /// <param name="type">The type to create a logger for.</param>
         /// <param name="name">A custom name to use for the logger.  If null, the type's FullName will be used.</param>
-        public NLogLogger(Type type, string name)
-            : base(type, name)
+        public NLogLogger(string name) : base(name)
         {
-            this.nlogLogger = LogManager.GetLogger(this.Name);
+            this.nlogLogger = LogManager.GetLogger(name);
         }
 
+        /// <summary>
+        /// Gets the name of the logger.
+        /// </summary>
+        /// <value>The name of the logger.</value>
+        public override string Name
+        {
+            get
+            {
+                return this.nlogLogger.Name;
+            }
+        }
+        
         /// <summary>
         /// Gets a value indicating whether messages with Debug severity should be logged.
         /// </summary>

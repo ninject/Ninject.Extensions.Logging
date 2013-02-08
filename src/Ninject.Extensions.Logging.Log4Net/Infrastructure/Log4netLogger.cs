@@ -12,8 +12,6 @@
 namespace Ninject.Extensions.Logging.Log4net.Infrastructure
 {
     using System;
-    using System.Diagnostics;
-    using System.Globalization;
     using log4net;
     using log4net.Core;
 
@@ -31,20 +29,30 @@ namespace Ninject.Extensions.Logging.Log4net.Infrastructure
         /// Initializes a new instance of the <see cref="Log4NetLogger"/> class.
         /// </summary>
         /// <param name="type">The type to create a logger for.</param>
-        public Log4NetLogger(Type type)
-            : this(type, null)
+        public Log4NetLogger(Type type) : base(type)
         {
+            this.log4NetLogger = LogManager.GetLogger(type);
         }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Log4NetLogger"/> class.
         /// </summary>
-        /// <param name="type">The type to create a logger for.</param>
         /// <param name="name">A custom name to use for the logger.  If null, the type's FullName will be used.</param>
-        public Log4NetLogger(Type type, string name)
-            : base(type, name)
+        public Log4NetLogger(string name) : base(name)
         {
-            this.log4NetLogger = LogManager.GetLogger(this.Name);
+            this.log4NetLogger = LogManager.GetLogger(name);
+        }
+
+        /// <summary>
+        /// Gets the name of the logger.
+        /// </summary>
+        /// <value>The name of the logger.</value>
+        public override string Name
+        {
+            get
+            {
+                return this.log4NetLogger.Logger.Name;
+            }
         }
 
         /// <summary>
