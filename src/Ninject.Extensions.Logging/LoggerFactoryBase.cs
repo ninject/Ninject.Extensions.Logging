@@ -96,7 +96,14 @@ namespace Ninject.Extensions.Logging
         public ILogger GetCurrentClassLogger()
         {
             var frame = new StackFrame(1, false);
-            return this.GetLogger(frame.GetMethod().DeclaringType);
+            var type = frame.GetMethod().DeclaringType;
+
+            if (type == null)
+            {
+                throw new InvalidOperationException(string.Format("Can not determine current class. Method: {0}", frame.GetMethod()));
+            }
+
+            return this.GetLogger(type);
         }
 #endif
 
