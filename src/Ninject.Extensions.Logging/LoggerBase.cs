@@ -24,6 +24,16 @@ namespace Ninject.Extensions.Logging
         /// </summary>
         /// <param name="type">The type to associate with the logger.</param>
         protected LoggerBase(Type type)
+            : this(type, null)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LoggerBase"/> class.
+        /// </summary>
+        /// <param name="type">The type to associate with the logger.</param>
+        /// <param name="name">A custom name to use for the logger.  If null, the type's FullName will be used.</param>
+        protected LoggerBase(Type type, string name)
         {
             if (type == null)
             {
@@ -31,12 +41,18 @@ namespace Ninject.Extensions.Logging
             }
 
             Type = type;
+            Name = name ?? type.FullName;
         }
-        
+
         /// <summary>
         /// Gets the type associated with the logger.
         /// </summary>
         public Type Type { get; private set; }
+
+        /// <summary>
+        /// Gets the name of the logger.
+        /// </summary>
+        public string Name { get; private set; }
 
         /// <summary>
         /// Gets a value indicating whether messages with Debug severity should be logged.
