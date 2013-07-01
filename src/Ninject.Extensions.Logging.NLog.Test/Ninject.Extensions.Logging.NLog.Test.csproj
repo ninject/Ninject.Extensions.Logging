@@ -67,10 +67,6 @@
     <Compile Include="Infrastructure\TestTarget.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Ninject.Extensions.Logging.NLog\Ninject.Extensions.Logging.NLog.csproj">
-      <Project>{3BDACDF8-ADCB-42FD-AB5F-E7E54A674D93}</Project>
-      <Name>Ninject.Extensions.Logging.NLog</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Ninject.Extensions.Logging.Tests\Ninject.Extensions.Logging.Tests.csproj">
       <Project>{60AE94DD-7F89-49D7-8A87-49511D59DCE2}</Project>
       <Name>Ninject.Extensions.Logging.Tests</Name>

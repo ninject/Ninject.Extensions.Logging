@@ -3,14 +3,15 @@
 	<property name="product.assembly.log4net" value="${product.name}.Log4Net.dll" overwrite="false"/>
 	<property name="product.assembly.test.log4net" value="${product.name}.log4net.Test.dll" overwrite="false"/>
 	
-	<target name="buildLog4Net" unless="${string::contains(build.platform, 'silverlight')}">
-		<property name="current.path.lib.log4net" value="${path.lib}/log4Net/mono-2.0" if="${string::contains(build.platform, 'mono')}" />
-		<property name="current.path.lib.log4net" value="${path.lib}/log4Net/net-4.0" if="${string::contains(build.platform, 'net-4.')}" />
-		<property name="current.path.lib.log4net" value="${path.lib}/log4Net/${build.platform}" unless="${string::contains(build.platform, 'mono') or string::contains(build.platform, 'net-4.')}" />
+	<target name="buildLog4Net" unless="${string::contains(build.platform, 'silverlight')}">	
+		<property name="packagepath.log4net" value="log4Net.*/lib/net40-client" if="${string::contains(build.platform, 'net-4.')}" />
+		<property name="packagepath.log4net" value="log4Net.*/lib/net35-client" unless="${string::contains(build.platform, 'net-4.')}" />
+		<property name="current.path.lib.log4net" value="${path.packages}/${packagepath.log4net}" />
+				
 		<copy todir="${current.path.build}/log4net/lib">
-			<fileset basedir="${current.path.lib.log4net}">
-				<include name="**/*.dll"/>
-				<include name="**/*.xml"/>
+			<fileset basedir="${path.packages}">
+				<include name="${packagepath.log4net}/*.dll"/>
+				<include name="${packagepath.log4net}/*.xml"/>
 			</fileset>
 		</copy>
 		

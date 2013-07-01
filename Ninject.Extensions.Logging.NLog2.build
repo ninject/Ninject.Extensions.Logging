@@ -3,16 +3,22 @@
 	<property name="product.assembly.NLog2" value="${product.name}.NLog2.dll" overwrite="false"/>
 		<property name="product.assembly.test.NLog2" value="${product.name}.NLog2.Test.dll" overwrite="false"/>
 
+	<property name="product.platforms" value="silverlight-4.0-wp71,silverlight-4.0-wp7"  overwrite="false"/>
+	
 	<target name="buildNLog2">
-		<property name="current.path.lib.NLog2" value="${path.lib}/NLog2/mono-2.0" if="${string::contains(build.platform, 'mono')}" />
-		<property name="current.path.lib.NLog2" value="${path.lib}/NLog2/${build.platform}" unless="${string::contains(build.platform, 'mono')}" />
-		<copy todir="${current.path.build}/NLog2/lib">
-			<fileset basedir="${current.path.lib.NLog2}">
-				<include name="**/*.dll"/>
-				<include name="**/*.xml"/>
-			</fileset>
-		</copy>
+		<property name="packagepath.NLog2" value="nlog.*/lib/${nuget.platform}" unless="${string::contains(build.platform, 'mono')}" />
+	    <property name="packagepath.NLog2" value="nlog.*/lib/net35" if="${string::contains(build.platform, 'mono')}" />
+	    <property name="packagepath.NLog2" value="nlog.*/lib/net45" if="${string::contains(build.platform, 'net-4.5')}" />
 		
+		<property name="current.path.lib.NLog2" value="${path.packages}/${packagepath.NLog2}" />
+
+		<copy todir="${current.path.build}/NLog2/lib">
+			<fileset basedir="${path.packages}">
+				<include name="${packagepath.NLog2}/*.dll"/>
+				<include name="${packagepath.NLog2}/*.xml"/>
+			</fileset>
+		</copy>	
+			
 		<csc noconfig="true" warnaserror="true" target="library" debug="${build.debug}" optimize="${build.optimize}" define="${build.defines}" 
 			 output="${current.path.build}/NLog2/${product.assembly.NLog2}" 
 			 doc="${current.path.build}/NLog2/${product.name}.NLog2.xml" keyfile="${path.src}/${product.keyfile}">
