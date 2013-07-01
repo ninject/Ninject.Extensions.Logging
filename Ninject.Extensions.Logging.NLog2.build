@@ -86,16 +86,23 @@
 		<exec 
 		    program="${path.tools.xunit.console}" 
 			workingdir="${current.path.test.NLog2}" 
-			commandline="${product.assembly.test.NLog2} /html ${current.path.test.NLog2}/results.html" 
 			failonerror="true"
-			if="${not(string::contains(build.platform, 'mono')) or teamcity}"/>
+			if="${not(string::contains(build.platform, 'mono')) or teamcity}">
+			<arg value="${product.assembly.test.NLog2}" />
+			<arg value="/html" />
+			<arg path="${current.path.test.NLog2}/results.html" />
+		</exec>
 
 		<if test="${string::contains(build.platform, 'mono') and not(teamcity)}">
 			<exec 
 				program="${framework::get-runtime-engine(framework::get-target-framework())}" 
     			workingdir="${current.path.test.NLog2}" 
-				commandline="${path.tools.xunit.console} ${product.assembly.test.NLog2} /html ${current.path.test.NLog2}/results.html" 
-				failonerror="true"/>
+				failonerror="true">
+				<arg valuu="${path.tools.xunit.console}" />
+				<arg value="${product.assembly.test.NLog2}" />
+				<arg value="/html" />
+				<arg path="${current.path.test.NLog2}/results.html" />
+			</exec>
 		</if>
 	</target>
 	
@@ -176,10 +183,12 @@
 	</target>
 
 	<target name="silverlight-test-NLog2" depends="compile-silverlight-tests-NLog2" unless="${skip.tests or skip.silverlightTests}" if="${string::contains(build.platform, 'silverlight')}">
-	    <property name="cmdLine" value='-x"${product.assembly.silverlighttest.NLog2}" --teamcity --debug' if="${teamcity}"/>
-		<property name="cmdLine" value='-x"${product.assembly.silverlighttest.NLog2}"' unless="${teamcity}"/>
-		<exec program="${path.tools.statlight}" workingdir="${current.path.test.NLog2}" commandline="${cmdLine}" failonerror="true" unless="${string::contains(build.platform, 'wp')}" />
-		<exec program="${path.tools.statlight}" workingdir="${current.path.test.NLog2}" commandline="${cmdLine} --UsePhoneEmulator" failonerror="true" if="${string::contains(build.platform, 'wp')}" />
+	    <if test="${not(skip.silverlightWPTests) or not(string::contains(build.platform, 'wp'))}">
+			<property name="cmdLine" value='-x"${product.assembly.silverlighttest.NLog2}" --teamcity --debug' if="${teamcity}"/>
+			<property name="cmdLine" value='-x"${product.assembly.silverlighttest.NLog2}"' unless="${teamcity}"/>
+			<exec program="${path.tools.statlight}" workingdir="${current.path.test.NLog2}" commandline="${cmdLine}" failonerror="true" unless="${string::contains(build.platform, 'wp')}" />
+			<exec program="${path.tools.statlight}" workingdir="${current.path.test.NLog2}" commandline="${cmdLine} --UsePhoneEmulator" failonerror="true" if="${string::contains(build.platform, 'wp')}" />
+		</if>
 	</target>
 	
 	<target name="nuget-nlog2">

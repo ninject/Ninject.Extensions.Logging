@@ -72,6 +72,21 @@
         }
 #endif
 
+        [Fact]
+        public void ObjectCanGetNamedLoggers()
+        {
+            using (var kernel = this.CreateKernel())
+            {
+                var loggerClass = kernel.Get<ObjectWithNamedLoggers>();
+
+                loggerClass.FirstLogger.Should().NotBeNull();
+                loggerClass.FirstLogger.Name.Should().Be("First");
+
+                loggerClass.SecondLogger.Should().NotBeNull();
+                loggerClass.SecondLogger.Name.Should().Be("Second");
+            }
+        }
+
         protected virtual IKernel CreateKernel()
         {
             var settings = this.CreateSettings();

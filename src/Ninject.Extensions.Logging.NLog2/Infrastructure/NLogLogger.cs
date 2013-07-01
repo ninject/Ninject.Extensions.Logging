@@ -35,13 +35,33 @@ namespace Ninject.Extensions.Logging.NLog2.Infrastructure
         /// <summary>
         /// Initializes a new instance of the <see cref="NLogLogger"/> class.
         /// </summary>
-        /// <param name="type">The type to associate with the logger.</param>
-        public NLogLogger(Type type)
-            : base(type)
+        /// <param name="type">The type to create a logger for.</param>
+        public NLogLogger(Type type) : base(type)
         {
             this.nlogLogger = LogManager.GetLogger(type.FullName);
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="NLogLogger"/> class.
+        /// </summary>
+        /// <param name="name">A custom name to use for the logger.  If null, the type's FullName will be used.</param>
+        public NLogLogger(string name) : base(name)
+        {
+            this.nlogLogger = LogManager.GetLogger(name);
+        }
+
+        /// <summary>
+        /// Gets the name of the logger.
+        /// </summary>
+        /// <value>The name of the logger.</value>
+        public override string Name
+        {
+            get
+            {
+                return this.nlogLogger.Name;
+            }
+        }
+        
         /// <summary>
         /// Gets a value indicating whether messages with Debug severity should be logged.
         /// </summary>
@@ -105,6 +125,19 @@ namespace Ninject.Extensions.Logging.NLog2.Infrastructure
         }
 
         /// <summary>
+        /// Logs the specified exception with Debug severity.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        /// <param name="exception">The exception to log.</param>
+        public override void DebugException(string message, Exception exception)
+        {
+            if (this.IsDebugEnabled)
+            {
+                nlogLogger.DebugException(message, exception);
+            }
+        }
+
+        /// <summary>
         /// Logs the specified message with Info severity.
         /// </summary>
         /// <param name="message">The message.</param>
@@ -156,6 +189,19 @@ namespace Ninject.Extensions.Logging.NLog2.Infrastructure
         }
 
         /// <summary>
+        /// Logs the specified exception with Error severity.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        /// <param name="exception">The exception to log.</param>
+        public override void ErrorException(string message, Exception exception)
+        {
+            if (this.IsErrorEnabled)
+            {
+                this.nlogLogger.ErrorException(message, exception);
+            }
+        }
+
+        /// <summary>
         /// Logs the specified message with Fatal severity.
         /// </summary>
         /// <param name="message">The message.</param>
@@ -164,6 +210,19 @@ namespace Ninject.Extensions.Logging.NLog2.Infrastructure
             if (this.IsFatalEnabled)
             {
                 this.Log(LogLevel.Fatal, "{0}", message);
+            }
+        }
+
+        /// <summary>
+        /// Logs the specified message with Warn severity.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        /// <param name="exception">The exception to log.</param>
+        public override void WarnException(string message, Exception exception)
+        {
+            if (this.IsWarnEnabled)
+            {
+                this.nlogLogger.WarnException(message, exception);
             }
         }
 
@@ -220,6 +279,19 @@ namespace Ninject.Extensions.Logging.NLog2.Infrastructure
         }
 
         /// <summary>
+        /// Logs the specified exception with Fatal severity.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        /// <param name="exception">The exception to log.</param>
+        public override void FatalException(string message, Exception exception)
+        {
+            if (this.IsFatalEnabled)
+            {
+                this.nlogLogger.FatalException(message, exception);
+            }
+        }
+
+        /// <summary>
         /// Logs the specified message with Info severity.
         /// </summary>
         /// <param name="format">The message or format template.</param>
@@ -243,6 +315,19 @@ namespace Ninject.Extensions.Logging.NLog2.Infrastructure
             if (this.IsInfoEnabled)
             {
                 this.Log(LogLevel.Info, exception, format, args);
+            }
+        }
+
+        /// <summary>
+        /// Logs the specified exception with Info severity.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        /// <param name="exception">The exception to log.</param>
+        public override void InfoException(string message, Exception exception)
+        {
+            if (this.IsInfoEnabled)
+            {
+                this.nlogLogger.InfoException(message, exception);
             }
         }
 
@@ -282,6 +367,19 @@ namespace Ninject.Extensions.Logging.NLog2.Infrastructure
             if (this.IsTraceEnabled)
             {
                 this.Log(LogLevel.Trace, exception, format, args);
+            }
+        }
+
+        /// <summary>
+        /// Logs the specified exception with Trace severity.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        /// <param name="exception">The exception to log.</param>
+        public override void TraceException(string message, Exception exception)
+        {
+            if (this.IsTraceEnabled)
+            {
+                this.nlogLogger.TraceException(message, exception);
             }
         }
 
