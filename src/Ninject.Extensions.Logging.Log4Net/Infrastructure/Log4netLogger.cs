@@ -133,7 +133,7 @@ namespace Ninject.Extensions.Logging.Log4net.Infrastructure
         /// <param name="args">Any arguments required for the format template.</param>
         public override void Debug(Exception exception, string format, params object[] args)
         {
-            this.log4NetLogger.Debug(String.Format(format, args), exception);
+            this.log4NetLogger.Debug(args.Length > 0 ? String.Format(format, args) : format, exception);
         }
 
         /// <summary>
@@ -173,7 +173,7 @@ namespace Ninject.Extensions.Logging.Log4net.Infrastructure
         /// <param name="args">Any arguments required for the format template.</param>
         public override void Info(Exception exception, string format, params object[] args)
         {
-            this.log4NetLogger.Info(String.Format(format, args), exception);
+            this.log4NetLogger.Info(args.Length > 0 ? String.Format(format, args) : format, exception);
         }
 
         /// <summary>
@@ -202,7 +202,7 @@ namespace Ninject.Extensions.Logging.Log4net.Infrastructure
         /// <param name="args">Any arguments required for the format template.</param>
         public override void Trace(string format, params object[] args)
         {
-            this.log4NetLogger.Logger.Log(Type, Level.Trace, String.Format(format, args), null);
+            this.log4NetLogger.Logger.Log(Type, Level.Trace, args.Length > 0 ? String.Format(format, args) : format, null);
         }
 
         /// <summary>
@@ -213,7 +213,7 @@ namespace Ninject.Extensions.Logging.Log4net.Infrastructure
         /// <param name="args">Any arguments required for the format template.</param>
         public override void Trace(Exception exception, string format, params object[] args)
         {
-            this.log4NetLogger.Logger.Log(Type, Level.Trace, String.Format(format, args), exception);
+            this.log4NetLogger.Logger.Log(Type, Level.Trace, args.Length > 0 ? String.Format(format, args) : format, exception);
         }
 
         /// <summary>
@@ -253,7 +253,7 @@ namespace Ninject.Extensions.Logging.Log4net.Infrastructure
         /// <param name="args">Any arguments required for the format template.</param>
         public override void Warn(Exception exception, string format, params object[] args)
         {
-            this.log4NetLogger.Warn(String.Format(format, args), exception);
+            this.log4NetLogger.Warn(args.Length > 0 ? String.Format(format, args) : format, exception);
         }
 
         /// <summary>
@@ -293,7 +293,7 @@ namespace Ninject.Extensions.Logging.Log4net.Infrastructure
         /// <param name="args">Any arguments required for the format template.</param>
         public override void Error(Exception exception, string format, params object[] args)
         {
-            this.log4NetLogger.Error(String.Format(format, args), exception);
+            this.log4NetLogger.Error(args.Length > 0 ? String.Format(format, args) : format, exception);
         }
 
         /// <summary>
@@ -333,7 +333,7 @@ namespace Ninject.Extensions.Logging.Log4net.Infrastructure
         /// <param name="args">Any arguments required for the format template.</param>
         public override void Fatal(Exception exception, string format, params object[] args)
         {
-            this.log4NetLogger.Fatal(String.Format(format, args), exception);
+            this.log4NetLogger.Fatal(args.Length > 0 ? String.Format(format, args) : format, exception);
         }
 
         /// <summary>
