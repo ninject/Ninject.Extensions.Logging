@@ -22,7 +22,9 @@
 		<csc noconfig="true" warnaserror="true" target="library" debug="${build.debug}" optimize="${build.optimize}" define="${build.defines}" 
 			 output="${current.path.build}/NLog2/${product.assembly.NLog2}" 
 			 doc="${current.path.build}/NLog2/${product.name}.NLog2.xml" keyfile="${path.src}/${product.keyfile}">
-			<arg line="/filealign:512" unless="${nant.settings.currentframework == 'mono-2.0'}"/>
+			<arg line="/filealign:512"/>
+      <arg value="-sdk:2" if="${string::contains(build.platform, 'mono-3.5')}"/>
+      <arg value="-sdk:4" if="${string::contains(build.platform, 'mono-4.0')}"/>
 			<sources basedir="${path.src}">
 				<include name="${build.asminfo}"/>
 				<include name="${product.name}.NLog2/**/*.cs"/>
@@ -60,6 +62,8 @@
 
 		<csc noconfig="true" warnaserror="true" target="library" debug="${build.debug}" optimize="${build.optimize}" define="${build.defines}"
 			 output="${current.path.test.NLog2}/${product.assembly.test.NLog2}">
+      <arg value="-sdk:2" if="${string::contains(build.platform, 'mono-3.5')}"/>
+      <arg value="-sdk:4" if="${string::contains(build.platform, 'mono-4.0')}"/>
 			<sources basedir="${path.src}">
 				<include name="${product.name}.NLog2.Test/**/*.cs"/>
 			</sources>
@@ -98,7 +102,7 @@
 				program="${framework::get-runtime-engine(framework::get-target-framework())}" 
     			workingdir="${current.path.test.NLog2}" 
 				failonerror="true">
-				<arg valuu="${path.tools.xunit.console}" />
+				<arg value="${path.tools.xunit.console}" />
 				<arg value="${product.assembly.test.NLog2}" />
 				<arg value="/html" />
 				<arg path="${current.path.test.NLog2}/results.html" />
