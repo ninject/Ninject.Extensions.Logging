@@ -93,7 +93,7 @@ namespace Ninject.Extensions.Logging
                     return cachedLogger;
                 }
 
-                ILogger logger = this.CreateLogger(name);
+                var logger = this.CreateLogger(name);
                 this.loggersByName.Add(name, new WeakReference(logger));
 
                 return logger;
@@ -146,16 +146,22 @@ namespace Ninject.Extensions.Logging
         /// </summary>
         public void Prune()
         {
-            var deadLoggersByName = this.loggersByName.Where(kvp => !kvp.Value.IsAlive);
-            foreach (var kvp in deadLoggersByName)
+            lock (this.loggersByName)
             {
-                this.loggersByName.Remove(kvp.Key);
+                var deadLoggersByName = this.loggersByName.Where(kvp => !kvp.Value.IsAlive).ToList();
+                foreach (var kvp in deadLoggersByName)
+                {
+                    this.loggersByName.Remove(kvp.Key);
+                }
             }
 
-            var deadLoggersByType = this.loggersByType.Where(kvp => !kvp.Value.IsAlive);
-            foreach (var kvp in deadLoggersByType)
+            lock (this.loggersByType)
             {
-                this.loggersByType.Remove(kvp.Key);
+                var deadLoggersByType = this.loggersByType.Where(kvp => !kvp.Value.IsAlive).ToList();
+                foreach (var kvp in deadLoggersByType)
+                {
+                    this.loggersByType.Remove(kvp.Key);
+                }
             }
         }
 
