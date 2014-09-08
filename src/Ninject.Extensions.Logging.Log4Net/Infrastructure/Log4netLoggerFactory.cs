@@ -19,6 +19,13 @@ namespace Ninject.Extensions.Logging.Log4net.Infrastructure
     public class Log4NetLoggerFactory : LoggerFactoryBase
     {
         /// <summary>
+        /// Initializes a new instance of the <see cref="Log4NetLoggerFactory"/> class.
+        /// </summary>
+        /// <param name="kernel">The kernel.</param>
+        public Log4NetLoggerFactory(IKernel kernel)
+            : base(kernel) { }
+
+        /// <summary>
         /// Creates a logger for the specified type.
         /// </summary>
         /// <param name="type">The type to create the logger for.</param>

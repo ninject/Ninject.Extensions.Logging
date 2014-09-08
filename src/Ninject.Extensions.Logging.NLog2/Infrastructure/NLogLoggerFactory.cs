@@ -27,6 +27,13 @@ namespace Ninject.Extensions.Logging.NLog2.Infrastructure
     public class NLogLoggerFactory : LoggerFactoryBase
     {
         /// <summary>
+        /// Initializes a new instance of the <see cref="NLogLoggerFactory"/> class.
+        /// </summary>
+        /// <param name="kernel">The kernel.</param>
+        public NLogLoggerFactory(IKernel kernel)
+            : base(kernel) { }
+
+        /// <summary>
         /// Creates a logger for the specified type.
         /// </summary>
         /// <param name="type">The type to create the logger for.</param>
