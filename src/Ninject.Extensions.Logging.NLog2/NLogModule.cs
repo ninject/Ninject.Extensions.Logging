@@ -32,7 +32,7 @@ namespace Ninject.Extensions.Logging.NLog2
         /// </summary>
         public override void Load()
         {
-            this.Bind<ILoggerFactory>().To<NLogLoggerFactory>().InSingletonScope();
+            this.Bind<ILoggerFactory>().ToConstant(new NLogLoggerFactory());
             base.Load();
         }
     }

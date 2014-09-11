@@ -12,40 +12,17 @@
 namespace Ninject.Extensions.Logging
 {
     using System;
-    using System.Collections.Generic;
     using System.Diagnostics;
-    using System.Linq;
     using System.Reflection;
     using System.Runtime.CompilerServices;
     using Ninject.Activation;
-    using Ninject.Activation.Caching;
-    using Ninject.Components;
 
     /// <summary>
     /// A baseline definition of a logger factory, which tracks loggers as flyweights by type.
     /// Custom logger factories should generally extend this type.
     /// </summary>
-    public abstract class LoggerFactoryBase : NinjectComponent, ILoggerFactory, IPruneable
+    public abstract class LoggerFactoryBase : ILoggerFactory
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="LoggerFactoryBase"/> class.
-        /// </summary>
-        /// <param name="kernel">The kernel.</param>
-        public LoggerFactoryBase(IKernel kernel)
-        {
-            kernel.Components.Get<ICachePruner>().Start(this);
-        }
-
-        /// <summary>
-        /// Maps types to loggers.
-        /// </summary>
-        private readonly Dictionary<Type, WeakReference> loggersByType = new Dictionary<Type, WeakReference>();
-
-        /// <summary>
-        /// Maps names to loggers.
-        /// </summary>
-        private readonly Dictionary<string, WeakReference> loggersByName = new Dictionary<string, WeakReference>();
-
         /// <summary>
         /// Gets the logger for the specified type, creating it if necessary.
         /// </summary>
@@ -53,24 +30,7 @@ namespace Ninject.Extensions.Logging
         /// <returns>The newly-created logger.</returns>
         public ILogger GetLogger(Type type)
         {
-            lock (this.loggersByType)
-            {
-                if (this.loggersByType.ContainsKey(type))
-                {
-                    var cachedLogger = this.loggersByType[type].Target as ILogger;
-                    if (cachedLogger == null)
-                    {
-                        cachedLogger = this.CreateLogger(type);
-                    }
-
-                    return cachedLogger;
-                }
-
-                var logger = this.CreateLogger(type);
-                this.loggersByType.Add(type, new WeakReference(logger));
-
-                return logger;
-            }
+            return this.CreateLogger(type);
         }
 
         /// <summary>
@@ -80,24 +40,7 @@ namespace Ninject.Extensions.Logging
         /// <returns>The newly-created logger.</returns>
         public ILogger GetLogger(string name)
         {
-            lock (this.loggersByName)
-            {
-                if (this.loggersByName.ContainsKey(name))
-                {
-                    var cachedLogger = this.loggersByName[name].Target as ILogger;
-                    if (cachedLogger == null)
-                    {
-                        cachedLogger = this.CreateLogger(name);
-                    }
-
-                    return cachedLogger;
-                }
-
-                var logger = this.CreateLogger(name);
-                this.loggersByName.Add(name, new WeakReference(logger));
-
-                return logger;
-            }
+            return this.CreateLogger(name);
         }
 
         /// <summary>
@@ -140,30 +83,6 @@ namespace Ninject.Extensions.Logging
             return this.GetLogger(type);
         }
 #endif
-
-        /// <summary>
-        /// Prune dead loggers.
-        /// </summary>
-        public void Prune()
-        {
-            lock (this.loggersByName)
-            {
-                var deadLoggersByName = this.loggersByName.Where(kvp => !kvp.Value.IsAlive).ToList();
-                foreach (var kvp in deadLoggersByName)
-                {
-                    this.loggersByName.Remove(kvp.Key);
-                }
-            }
-
-            lock (this.loggersByType)
-            {
-                var deadLoggersByType = this.loggersByType.Where(kvp => !kvp.Value.IsAlive).ToList();
-                foreach (var kvp in deadLoggersByType)
-                {
-                    this.loggersByType.Remove(kvp.Key);
-                }
-            }
-        }
 
         /// <summary>
         /// Creates a logger for the specified type.

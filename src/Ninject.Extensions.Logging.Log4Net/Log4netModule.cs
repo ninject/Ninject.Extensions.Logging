@@ -24,7 +24,7 @@ namespace Ninject.Extensions.Logging.Log4net
         /// </summary>
         public override void Load()
         {
-            this.Bind<ILoggerFactory>().To<Log4NetLoggerFactory>().InSingletonScope();
+            this.Bind<ILoggerFactory>().ToConstant(new Log4NetLoggerFactory());
             base.Load();
         }
     }
