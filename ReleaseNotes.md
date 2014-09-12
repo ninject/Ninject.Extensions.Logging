@@ -1,3 +1,8 @@
+Version 3.2.1
+-------------
+Changed: loggers by name or type will not be cached in dictionaroes.
+
+
 Version 3.0.1
 -------------
 Added: non string format message logging methods to the interface and implemented them in all implementations
