@@ -12,29 +12,17 @@
 namespace Ninject.Extensions.Logging
 {
     using System;
-    using System.Collections.Generic;
     using System.Diagnostics;
     using System.Reflection;
     using System.Runtime.CompilerServices;
     using Ninject.Activation;
-    using Ninject.Components;
 
     /// <summary>
     /// A baseline definition of a logger factory, which tracks loggers as flyweights by type.
     /// Custom logger factories should generally extend this type.
     /// </summary>
-    public abstract class LoggerFactoryBase : NinjectComponent, ILoggerFactory
+    public abstract class LoggerFactoryBase : ILoggerFactory
     {
-        /// <summary>
-        /// Maps types to loggers.
-        /// </summary>
-        private readonly Dictionary<Type, ILogger> loggersByType = new Dictionary<Type, ILogger>();
-
-        /// <summary>
-        /// Maps names to loggers.
-        /// </summary>
-        private readonly Dictionary<string, ILogger> loggersByName = new Dictionary<string, ILogger>();
-
         /// <summary>
         /// Gets the logger for the specified type, creating it if necessary.
         /// </summary>
@@ -42,20 +30,9 @@ namespace Ninject.Extensions.Logging
         /// <returns>The newly-created logger.</returns>
         public ILogger GetLogger(Type type)
         {
-            lock (this.loggersByType)
-            {
-                if (this.loggersByType.ContainsKey(type))
-                {
-                    return this.loggersByType[type];
-                }
-
-                ILogger logger = this.CreateLogger(type);
-                this.loggersByType.Add(type, logger);
-
-                return logger;
-            }
+            return this.CreateLogger(type);
         }
-        
+
         /// <summary>
         /// Gets a custom-named logger for the specified type, creating it if necessary.
         /// </summary>
@@ -63,20 +40,9 @@ namespace Ninject.Extensions.Logging
         /// <returns>The newly-created logger.</returns>
         public ILogger GetLogger(string name)
         {
-            lock (this.loggersByName)
-            {
-                if (this.loggersByName.ContainsKey(name))
-                {
-                    return this.loggersByName[name];
-                }
-
-                ILogger logger = this.CreateLogger(name);
-                this.loggersByName.Add(name, logger);
-
-                return logger;
-            }
+            return this.CreateLogger(name);
         }
-        
+
         /// <summary>
         /// Gets the logger for the specified activation context, creating it if necessary.
         /// </summary>

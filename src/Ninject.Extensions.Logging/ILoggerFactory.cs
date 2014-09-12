@@ -13,12 +13,11 @@ namespace Ninject.Extensions.Logging
 {
     using System;
     using Ninject.Activation;
-    using Ninject.Components;
 
     /// <summary>
     /// Factory for loggers
     /// </summary>
-    public interface ILoggerFactory : INinjectComponent
+    public interface ILoggerFactory
     {
         /// <summary>
         /// Gets the logger for the specified type, creating it if necessary.
