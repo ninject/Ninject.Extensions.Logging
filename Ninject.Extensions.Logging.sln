@@ -1,6 +1,8 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ninject.Extensions.Logging", "src\Ninject.Extensions.Logging\Ninject.Extensions.Logging.csproj", "{1C0E875E-B2D2-4DDA-874B-D8A9E45A3888}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ninject.Extensions.Logging.Log4net", "src\Ninject.Extensions.Logging.Log4Net\Ninject.Extensions.Logging.Log4net.csproj", "{17FBF64E-E523-412D-B507-077B5DE726AD}"
@@ -12,6 +14,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ninject.Extensions.Logging.NLog2", "src\Ninject.Extensions.Logging.NLog2\Ninject.Extensions.Logging.NLog2.csproj", "{293232FC-F44C-4419-A281-61918ABC666E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ninject.Extensions.Logging.NLog2.Test", "src\Ninject.Extensions.Logging.NLog2.Test\Ninject.Extensions.Logging.NLog2.Test.csproj", "{F968F25B-97A5-4E47-8C6C-6FB59B21641C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ninject.Extensions.Logging.NLog3", "src\Ninject.Extensions.Logging.NLog3\Ninject.Extensions.Logging.NLog3.csproj", "{C502867B-7748-469A-9C83-A3760DF79D6D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ninject.Extensions.Logging.NLog3.Test", "src\Ninject.Extensions.Logging.NLog3.Test\Ninject.Extensions.Logging.NLog3.Test.csproj", "{BB1808C2-83ED-4F37-9A4E-D6B6D671FA91}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -83,6 +89,26 @@ Global
 		{F968F25B-97A5-4E47-8C6C-6FB59B21641C}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{F968F25B-97A5-4E47-8C6C-6FB59B21641C}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{F968F25B-97A5-4E47-8C6C-6FB59B21641C}.Release|x86.ActiveCfg = Release|Any CPU
+		{C502867B-7748-469A-9C83-A3760DF79D6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C502867B-7748-469A-9C83-A3760DF79D6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C502867B-7748-469A-9C83-A3760DF79D6D}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{C502867B-7748-469A-9C83-A3760DF79D6D}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{C502867B-7748-469A-9C83-A3760DF79D6D}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C502867B-7748-469A-9C83-A3760DF79D6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C502867B-7748-469A-9C83-A3760DF79D6D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C502867B-7748-469A-9C83-A3760DF79D6D}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{C502867B-7748-469A-9C83-A3760DF79D6D}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{C502867B-7748-469A-9C83-A3760DF79D6D}.Release|x86.ActiveCfg = Release|Any CPU
+		{BB1808C2-83ED-4F37-9A4E-D6B6D671FA91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB1808C2-83ED-4F37-9A4E-D6B6D671FA91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB1808C2-83ED-4F37-9A4E-D6B6D671FA91}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{BB1808C2-83ED-4F37-9A4E-D6B6D671FA91}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{BB1808C2-83ED-4F37-9A4E-D6B6D671FA91}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{BB1808C2-83ED-4F37-9A4E-D6B6D671FA91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB1808C2-83ED-4F37-9A4E-D6B6D671FA91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB1808C2-83ED-4F37-9A4E-D6B6D671FA91}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{BB1808C2-83ED-4F37-9A4E-D6B6D671FA91}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{BB1808C2-83ED-4F37-9A4E-D6B6D671FA91}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
