@@ -133,7 +133,7 @@ namespace Ninject.Extensions.Logging.NLog3.Infrastructure
         {
             if (this.IsDebugEnabled)
             {
-                nlogLogger.DebugException(message, exception);
+                nlogLogger.Debug(message, exception);
             }
         }
 
@@ -197,7 +197,7 @@ namespace Ninject.Extensions.Logging.NLog3.Infrastructure
         {
             if (this.IsErrorEnabled)
             {
-                this.nlogLogger.ErrorException(message, exception);
+                this.nlogLogger.Error(message, exception);
             }
         }
 
@@ -222,7 +222,7 @@ namespace Ninject.Extensions.Logging.NLog3.Infrastructure
         {
             if (this.IsWarnEnabled)
             {
-                this.nlogLogger.WarnException(message, exception);
+                this.nlogLogger.Warn(message, exception);
             }
         }
 
@@ -287,7 +287,7 @@ namespace Ninject.Extensions.Logging.NLog3.Infrastructure
         {
             if (this.IsFatalEnabled)
             {
-                this.nlogLogger.FatalException(message, exception);
+                this.nlogLogger.Fatal(message, exception);
             }
         }
 
@@ -327,7 +327,7 @@ namespace Ninject.Extensions.Logging.NLog3.Infrastructure
         {
             if (this.IsInfoEnabled)
             {
-                this.nlogLogger.InfoException(message, exception);
+                this.nlogLogger.Info(message, exception);
             }
         }
 
@@ -379,7 +379,7 @@ namespace Ninject.Extensions.Logging.NLog3.Infrastructure
         {
             if (this.IsTraceEnabled)
             {
-                this.nlogLogger.TraceException(message, exception);
+                this.nlogLogger.Trace(message, exception);
             }
         }
 
