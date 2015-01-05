@@ -5,15 +5,16 @@
     <version></version>
     <authors>Ninject Project Contributors</authors>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
-	<licenseUrl>https://github.com/ninject/ninject.extensions.logging/raw/master/LICENSE.txt</licenseUrl>
+    <licenseUrl>https://github.com/ninject/ninject.extensions.logging/raw/master/LICENSE.txt</licenseUrl>
     <description>Log4net Logging extension for Ninject</description>
+    <releaseNotes>https://github.com/ninject/Ninject.Extensions.Logging/blob/master/ReleaseNotes.md</releaseNotes>
     <language>en-US</language>
-	<tags>Ninject ioc di logging log4net</tags>
-	<iconUrl>https://github.com/ninject/ninject/raw/master/logos/Ninject-Logo32.png</iconUrl>
-	<projectUrl>http://www.ninject.org</projectUrl>
+    <tags>Ninject ioc di logging log4net</tags>
+    <iconUrl>https://github.com/ninject/ninject/raw/master/logos/Ninject-Logo32.png</iconUrl>
+    <projectUrl>http://www.ninject.org</projectUrl>
     <dependencies>
       <dependency id="Ninject.Extensions.Logging" version="" />
       <dependency id="log4net" version="1.2.11" />
-    </dependencies> 
+    </dependencies>
   </metadata>
 </package>

@@ -1,20 +1,20 @@
 <?xml version="1.0"?>
 <package xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <metadata xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
-    <id>Ninject.Extensions.Logging.nlog2</id>
+    <id>Ninject.Extensions.Logging.Serilog</id>
     <version></version>
     <authors>Ninject Project Contributors</authors>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <licenseUrl>https://github.com/ninject/ninject.extensions.logging/raw/master/LICENSE.txt</licenseUrl>
-    <description>NLog2 Logging extension for Ninject</description>
+    <description>Serilog Logging extension for Ninject</description>
     <releaseNotes>https://github.com/ninject/Ninject.Extensions.Logging/blob/master/ReleaseNotes.md</releaseNotes>
     <language>en-US</language>
-    <tags>Ninject ioc di logging nlog2</tags>
+    <tags>Ninject ioc di logging Serilog</tags>
     <iconUrl>https://github.com/ninject/ninject/raw/master/logos/Ninject-Logo32.png</iconUrl>
     <projectUrl>http://www.ninject.org</projectUrl>
     <dependencies>
       <dependency id="Ninject.Extensions.Logging" version="" />
-      <dependency id="NLog" version="[2.0.0.0,3.0.0.0)" />
+      <dependency id="Serilog" version="[1.4,2.0)" />
     </dependencies>
   </metadata>
 </package>
