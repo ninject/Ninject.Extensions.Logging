@@ -10,3 +10,4 @@ build
 *.dotCover
 /lib/Ninject/*.zip
 /lib/Ninject/*/**
+/packages/xunit.runner.visualstudio*/**

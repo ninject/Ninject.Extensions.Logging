@@ -8,6 +8,7 @@
 	<target name="buildNLog2">
 		<property name="packagepath.NLog2" value="nlog.*/lib/${nuget.platform}" unless="${string::contains(build.platform, 'mono')}" />
 	    <property name="packagepath.NLog2" value="nlog.*/lib/net35" if="${string::contains(build.platform, 'mono')}" />
+	    <property name="packagepath.NLog2" value="nlog.*/lib/net40" if="${build.platform == 'net-4.0'}" />
 	    <property name="packagepath.NLog2" value="nlog.*/lib/net45" if="${string::contains(build.platform, 'net-4.5')}" />
 		
 		<property name="current.path.lib.NLog2" value="${path.packages}/${packagepath.NLog2}" />

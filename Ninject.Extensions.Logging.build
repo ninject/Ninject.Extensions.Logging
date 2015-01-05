@@ -12,9 +12,10 @@
 	<include buildfile="Ninject.include" />
 	<include buildfile="Ninject.Extensions.Logging.log4net.build" />
 	<include buildfile="Ninject.Extensions.Logging.NLog2.build" />
+	<include buildfile="Ninject.Extensions.Logging.Serilog.build" />
 
-	<target name="all" depends="core buildLog4Net  buildNLog2 testLog4Net testNLog2 silverlight-test-NLog2"/>
-	<target name="nuget-all" depends="nuget nuget-log4net nuget-nlog2"/>
+	<target name="all" depends="core buildLog4Net  buildNLog2 buildSerilog testLog4Net testNLog2 testSerilog silverlight-test-NLog2"/>
+	<target name="nuget-all" depends="nuget nuget-log4net nuget-nlog2 nuget-Serilog"/>
 
 	<target name="core" depends="init">
 		<csc noconfig="true" warnaserror="true" target="library" debug="${build.debug}" optimize="${build.optimize}" define="${build.defines}" output="${current.path.build}/${product.assembly}" doc="${current.path.build}/${product.docfile}" keyfile="${path.src}/${product.keyfile}">
