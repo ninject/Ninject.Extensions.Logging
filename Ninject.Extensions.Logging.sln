@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ninject.Extensions.Logging", "src\Ninject.Extensions.Logging\Ninject.Extensions.Logging.csproj", "{1C0E875E-B2D2-4DDA-874B-D8A9E45A3888}"
 EndProject
@@ -18,6 +18,12 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ninject.Extensions.Logging.Serilog", "src\Ninject.Extensions.Logging.Serilog\Ninject.Extensions.Logging.Serilog.csproj", "{6D3FB02C-181D-40B5-8AF2-EE999C0A7B0D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ninject.Extensions.Logging.Serilog.Test", "src\Ninject.Extensions.Logging.Serilog.Test\Ninject.Extensions.Logging.Serilog.Test.csproj", "{1900695D-E89C-419E-ADB5-AD88E98B74E7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{039F5A59-CEB8-4ACF-9E61-9E93D6CAE4E6}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+		ReleaseNotes.md = ReleaseNotes.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
