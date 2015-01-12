@@ -5,7 +5,7 @@
 
 	<property name="product.platforms" value="silverlight-4.0-wp71,silverlight-4.0-wp7"  overwrite="false"/>
 	
-	<target name="buildNLog3">
+	<target name="buildNLog3" unless="${string::contains(build.platform, 'silverlight-4.0-wp') or string::contains(build.platform, 'silverlight-3.0') or string::contains(build.platform, 'silverlight-2.0')}">
 		<property name="packagepath.NLog3" value="nlog.3.*/lib/${nuget.platform}" unless="${string::contains(build.platform, 'mono')}" />
 	    <property name="packagepath.NLog3" value="nlog.3.*/lib/net35" if="${string::contains(build.platform, 'mono')}" />
 	    <property name="packagepath.NLog3" value="nlog.3.*/lib/net45" if="${string::contains(build.platform, 'net-4.5')}" />
@@ -110,7 +110,7 @@
 		</if>
 	</target>
 	
-	<target name="compile-silverlight-tests-NLog3" depends="core" unless="${skip.tests or skip.silverlightTests}" if="${string::contains(build.platform, 'silverlight')}">
+	<target name="compile-silverlight-tests-NLog3" depends="core" unless="${skip.tests or skip.silverlightTests}" if="${string::contains(build.platform, 'silverlight') and not(string::contains(build.platform, 'silverlight-4.0-wp') or string::contains(build.platform, 'silverlight-3.0') or string::contains(build.platform, 'silverlight-2.0'))}">
 		<property name="current.path.test.NLog3" value="${path.build}/${build.platform}/tests/NLog3"/>
 		<property name="product.assembly.silverlighttest.NLog3" value="${product.name}.NLog3.SilverlightTests.xap"/>
 		<mkdir dir="${current.path.test}"/>
@@ -183,7 +183,7 @@
 		</zip>
 	</target>
 
-	<target name="silverlight-test-NLog3" depends="compile-silverlight-tests-NLog3" unless="${skip.tests or skip.silverlightTests}" if="${string::contains(build.platform, 'silverlight')}">
+	<target name="silverlight-test-NLog3" depends="compile-silverlight-tests-NLog3" unless="${skip.tests or skip.silverlightTests}" if="${string::contains(build.platform, 'silverlight') and not(string::contains(build.platform, 'silverlight-4.0-wp') or string::contains(build.platform, 'silverlight-3.0') or string::contains(build.platform, 'silverlight-2.0'))}">
 	    <if test="${not(skip.silverlightWPTests) or not(string::contains(build.platform, 'wp'))}">
 			<property name="cmdLine" value='-x"${product.assembly.silverlighttest.NLog3}" --teamcity --debug' if="${teamcity}"/>
 			<property name="cmdLine" value='-x"${product.assembly.silverlighttest.NLog3}"' unless="${teamcity}"/>
