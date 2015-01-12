@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{F968F25B-97A5-4E47-8C6C-6FB59B21641C}</ProjectGuid>
+    <ProjectGuid>{BB1808C2-83ED-4F37-9A4E-D6B6D671FA91}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Ninject.Extensions.Logging.NLog2</RootNamespace>
-    <AssemblyName>Ninject.Extensions.Logging.NLog2.Test</AssemblyName>
+    <RootNamespace>Ninject.Extensions.Logging.NLog3</RootNamespace>
+    <AssemblyName>Ninject.Extensions.Logging.NLog3.Test</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
@@ -18,7 +18,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\build\debug\NLog2\</OutputPath>
+    <OutputPath>..\..\build\debug\NLog3\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -26,7 +26,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\..\build\release\NLog2\</OutputPath>
+    <OutputPath>..\..\build\release\NLog3\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -38,9 +38,9 @@
     <Reference Include="Ninject">
       <HintPath>..\..\lib\Ninject\net-3.5\Ninject.dll</HintPath>
     </Reference>
-    <Reference Include="NLog, Version=2.0.1.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+    <Reference Include="NLog, Version=3.1.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\NLog.2.0.1.2\lib\net40\NLog.dll</HintPath>
+      <HintPath>..\..\packages\NLog.3.1.0.0\lib\net40\NLog.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -60,9 +60,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Ninject.Extensions.Logging.NLog2\Ninject.Extensions.Logging.NLog2.csproj">
-      <Project>{293232FC-F44C-4419-A281-61918ABC666E}</Project>
-      <Name>Ninject.Extensions.Logging.NLog2</Name>
+    <ProjectReference Include="..\Ninject.Extensions.Logging.NLog3\Ninject.Extensions.Logging.NLog3.csproj">
+      <Project>{C502867B-7748-469A-9C83-A3760DF79D6D}</Project>
+      <Name>Ninject.Extensions.Logging.NLog3</Name>
     </ProjectReference>
     <ProjectReference Include="..\Ninject.Extensions.Logging.Tests\Ninject.Extensions.Logging.Tests.csproj">
       <Project>{60AE94DD-7F89-49D7-8A87-49511D59DCE2}</Project>

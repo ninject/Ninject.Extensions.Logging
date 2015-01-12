@@ -6,10 +6,10 @@
 	<property name="product.platforms" value="silverlight-4.0-wp71,silverlight-4.0-wp7"  overwrite="false"/>
 	
 	<target name="buildNLog2">
-		<property name="packagepath.NLog2" value="nlog.*/lib/${nuget.platform}" unless="${string::contains(build.platform, 'mono')}" />
-	    <property name="packagepath.NLog2" value="nlog.*/lib/net35" if="${string::contains(build.platform, 'mono')}" />
-	    <property name="packagepath.NLog2" value="nlog.*/lib/net40" if="${build.platform == 'net-4.0'}" />
-	    <property name="packagepath.NLog2" value="nlog.*/lib/net45" if="${string::contains(build.platform, 'net-4.5')}" />
+		<property name="packagepath.NLog2" value="nlog.2.*/lib/${nuget.platform}" unless="${string::contains(build.platform, 'mono')}" />
+	    <property name="packagepath.NLog2" value="nlog.2.*/lib/net35" if="${string::contains(build.platform, 'mono')}" />
+	    <property name="packagepath.NLog2" value="nlog.2.*/lib/net40" if="${build.platform == 'net-4.0'}" />
+	    <property name="packagepath.NLog2" value="nlog.2.*/lib/net45" if="${string::contains(build.platform, 'net-4.5')}" />
 		
 		<property name="current.path.lib.NLog2" value="${path.packages}/${packagepath.NLog2}" />
 
@@ -52,7 +52,7 @@
 		<call target="CopyFluentAssertions-Target"/>
 		<copy todir="${current.path.test.NLog2}" flatten="true">
 			<fileset basedir="${current.path.test}">
-				<include name="**/*.dll"/>
+				<include name="*.dll"/>
 			</fileset>
 		</copy>
 		<copy todir="${current.path.test.NLog2}" flatten="true">
@@ -128,7 +128,7 @@
 		</copy>
 		<copy todir="${current.path.test.NLog2}" flatten="true">
 			<fileset basedir="${current.path.test}">
-				<include name="**/*.dll"/>
+				<include name="*.dll"/>
 			</fileset>
 		</copy>
 		<copy todir="${current.path.test.NLog2}" flatten="true">
