@@ -6,6 +6,7 @@
 	<target name="buildNLog3" unless="${string::contains(build.platform, 'silverlight-4.0-wp') or string::contains(build.platform, 'silverlight-3.0') or string::contains(build.platform, 'silverlight-2.0')}">
 		<property name="packagepath.NLog3" value="nlog.3.*/lib/${nuget.platform}" unless="${string::contains(build.platform, 'mono')}" />
 	    <property name="packagepath.NLog3" value="nlog.3.*/lib/net35" if="${string::contains(build.platform, 'mono')}" />
+	    <property name="packagepath.NLog2" value="nlog.3.*/lib/net40" if="${build.platform == 'net-4.0'}" />
 	    <property name="packagepath.NLog3" value="nlog.3.*/lib/net45" if="${string::contains(build.platform, 'net-4.5')}" />
 		
 		<property name="current.path.lib.NLog3" value="${path.packages}/${packagepath.NLog3}" />

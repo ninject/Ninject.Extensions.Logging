@@ -1,3 +1,7 @@
+Version 3.2.2
+-------------
+Added: Support Serilog.
+
 Version 3.2.1
 -------------
 Changed: loggers by name or type will not be cached in dictionaroes.
