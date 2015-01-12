@@ -3,8 +3,6 @@
 	<property name="product.assembly.NLog3" value="${product.name}.NLog3.dll" overwrite="false"/>
 		<property name="product.assembly.test.NLog3" value="${product.name}.NLog3.Test.dll" overwrite="false"/>
 
-	<property name="product.platforms" value="silverlight-4.0-wp71,silverlight-4.0-wp7"  overwrite="false"/>
-	
 	<target name="buildNLog3" unless="${string::contains(build.platform, 'silverlight-4.0-wp') or string::contains(build.platform, 'silverlight-3.0') or string::contains(build.platform, 'silverlight-2.0')}">
 		<property name="packagepath.NLog3" value="nlog.3.*/lib/${nuget.platform}" unless="${string::contains(build.platform, 'mono')}" />
 	    <property name="packagepath.NLog3" value="nlog.3.*/lib/net35" if="${string::contains(build.platform, 'mono')}" />
