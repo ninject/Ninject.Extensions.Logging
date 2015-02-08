@@ -15,4 +15,4 @@ Version 3.0.1
 
 Version 3.0.0.0
 ---------------
-- Removed: No web builds. All builds are have not reference to web anymore
+- Removed: No web builds. All builds are have not reference to web anymore.
