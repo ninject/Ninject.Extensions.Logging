@@ -18,6 +18,7 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ninject.Extensions.Logging.NLog3", "src\Ninject.Extensions.Logging.NLog3\Ninject.Extensions.Logging.NLog3.csproj", "{C502867B-7748-469A-9C83-A3760DF79D6D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ninject.Extensions.Logging.NLog3.Test", "src\Ninject.Extensions.Logging.NLog3.Test\Ninject.Extensions.Logging.NLog3.Test.csproj", "{BB1808C2-83ED-4F37-9A4E-D6B6D671FA91}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ninject.Extensions.Logging.Serilog", "src\Ninject.Extensions.Logging.Serilog\Ninject.Extensions.Logging.Serilog.csproj", "{6D3FB02C-181D-40B5-8AF2-EE999C0A7B0D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ninject.Extensions.Logging.Serilog.Test", "src\Ninject.Extensions.Logging.Serilog.Test\Ninject.Extensions.Logging.Serilog.Test.csproj", "{1900695D-E89C-419E-ADB5-AD88E98B74E7}"
@@ -27,6 +28,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 		ReleaseNotes.md = ReleaseNotes.md
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ninject.Extensions.Logging.NLog4", "src\Ninject.Extensions.Logging.NLog4\Ninject.Extensions.Logging.NLog4.csproj", "{6CECD0A6-2C8F-44F9-94BD-9D8280AF2C93}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ninject.Extensions.Logging.NLog4.Test", "src\Ninject.Extensions.Logging.NLog4.Test\Ninject.Extensions.Logging.NLog4.Test.csproj", "{B6A475F3-70B8-4EFE-A724-6EA62081B7DC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -138,6 +143,26 @@ Global
 		{1900695D-E89C-419E-ADB5-AD88E98B74E7}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{1900695D-E89C-419E-ADB5-AD88E98B74E7}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{1900695D-E89C-419E-ADB5-AD88E98B74E7}.Release|x86.ActiveCfg = Release|Any CPU
+		{6CECD0A6-2C8F-44F9-94BD-9D8280AF2C93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6CECD0A6-2C8F-44F9-94BD-9D8280AF2C93}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6CECD0A6-2C8F-44F9-94BD-9D8280AF2C93}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{6CECD0A6-2C8F-44F9-94BD-9D8280AF2C93}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{6CECD0A6-2C8F-44F9-94BD-9D8280AF2C93}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6CECD0A6-2C8F-44F9-94BD-9D8280AF2C93}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6CECD0A6-2C8F-44F9-94BD-9D8280AF2C93}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6CECD0A6-2C8F-44F9-94BD-9D8280AF2C93}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{6CECD0A6-2C8F-44F9-94BD-9D8280AF2C93}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{6CECD0A6-2C8F-44F9-94BD-9D8280AF2C93}.Release|x86.ActiveCfg = Release|Any CPU
+		{B6A475F3-70B8-4EFE-A724-6EA62081B7DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6A475F3-70B8-4EFE-A724-6EA62081B7DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6A475F3-70B8-4EFE-A724-6EA62081B7DC}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{B6A475F3-70B8-4EFE-A724-6EA62081B7DC}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{B6A475F3-70B8-4EFE-A724-6EA62081B7DC}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B6A475F3-70B8-4EFE-A724-6EA62081B7DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6A475F3-70B8-4EFE-A724-6EA62081B7DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6A475F3-70B8-4EFE-A724-6EA62081B7DC}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{B6A475F3-70B8-4EFE-A724-6EA62081B7DC}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{B6A475F3-70B8-4EFE-A724-6EA62081B7DC}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
