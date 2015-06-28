@@ -34,9 +34,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject />
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="log4net, Version=1.2.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\..\packages\log4net.2.0.0\lib\net40-full\log4net.dll</HintPath>
@@ -51,6 +48,12 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="FluentAssertions">
+      <HintPath>..\..\tools\FluentAssertions\Net-3.5\FluentAssertions.dll</HintPath>
+    </Reference>
+    <Reference Include="xunit">
+      <HintPath>..\..\tools\xunit.net\xunit.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Infrastructure\Log4netTestingContext.cs" />
