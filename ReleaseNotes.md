@@ -1,3 +1,8 @@
+Version 3.2.3
+-------------
+
+- Added: Support NLog4.
+
 Version 3.2.2
 -------------
 - Added: Support Serilog.
