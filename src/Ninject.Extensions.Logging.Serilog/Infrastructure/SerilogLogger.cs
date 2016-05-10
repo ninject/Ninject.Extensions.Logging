@@ -338,7 +338,7 @@ namespace Ninject.Extensions.Logging.Serilog.Infrastructure
         {
             if (this.IsInfoEnabled)
             {
-                this.serilogLogger.Fatal(exception, message);
+                this.serilogLogger.Information(exception, message);
             }
         }
 
@@ -415,7 +415,7 @@ namespace Ninject.Extensions.Logging.Serilog.Infrastructure
         {
             if (this.IsWarnEnabled)
             {
-                this.serilogLogger.Fatal(format, args);
+                this.serilogLogger.Warning(format, args);
             }
         }
 
@@ -429,7 +429,7 @@ namespace Ninject.Extensions.Logging.Serilog.Infrastructure
         {
             if (this.IsWarnEnabled)
             {
-                this.serilogLogger.Fatal(exception, format, args);
+                this.serilogLogger.Warning(exception, format, args);
             }
         }
     }
