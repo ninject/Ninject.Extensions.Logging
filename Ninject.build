@@ -1,3 +1,0 @@
-<project name="NinjectMain" default="rebuild">
-	<include buildfile="Ninject.Extensions.Logging.build" />
-</project>

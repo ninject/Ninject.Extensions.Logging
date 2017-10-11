@@ -1,0 +1,52 @@
+configuration: Release
+
+image: Visual Studio 2017
+
+init:
+  - ps: >-
+      if ($env:APPVEYOR_REPO_TAG -eq "true")
+      {
+          Update-AppveyorBuild -Version "$env:APPVEYOR_REPO_TAG_NAME"
+      }
+      else
+      {
+          Update-AppveyorBuild -Version "3.3.0-ci.$($env:APPVEYOR_BUILD_NUMBER)+sha.$($env:APPVEYOR_REPO_COMMIT.substring(0,7))"
+      }
+
+dotnet_csproj:
+  patch: true
+  file: '**\*.csproj'
+  version: '{version}'
+  package_version: '{version}'
+
+cache:
+  - C:\ProgramData\chocolatey\bin -> appveyor.yml
+  - C:\ProgramData\chocolatey\lib -> appveyor.yml
+  - '%LocalAppData%\NuGet\v3-cache -> **\*.csproj'
+
+before_build:
+  - dotnet restore --verbosity quiet
+  - choco install opencover.portable
+  - choco install codecov
+
+build:
+  parallel: true
+  verbosity: minimal
+
+test_script:
+  - OpenCover.Console.exe -oldstyle -returntargetcode -register:user -target:"C:\Program Files\dotnet\dotnet.exe" -targetargs:"test --configuration Release --no-build src\Ninject.Extensions.Logging.Log4net.Test" -filter:"+[Ninject.Extensions.Logging]* +[Ninject.Extensions.Logging.Log4net]*" -excludebyattribute:*.ExcludeFromCodeCoverage*;*.Obsolete* -output:"Ninject.Extensions.Logging.Log4net_coverage.xml"
+  - OpenCover.Console.exe -oldstyle -returntargetcode -register:user -target:"C:\Program Files\dotnet\dotnet.exe" -targetargs:"test --configuration Release --no-build src\Ninject.Extensions.Logging.NLog4.Test" -filter:"+[Ninject.Extensions.Logging]* +[Ninject.Extensions.Logging.NLog4]*" -excludebyattribute:*.ExcludeFromCodeCoverage*;*.Obsolete* -output:"Ninject.Extensions.Logging.NLog4_coverage.xml"
+  - OpenCover.Console.exe -oldstyle -returntargetcode -register:user -target:"C:\Program Files\dotnet\dotnet.exe" -targetargs:"test --configuration Release --no-build src\Ninject.Extensions.Logging.Serilog.Test" -filter:"+[Ninject.Extensions.Logging]* +[Ninject.Extensions.Logging.Serilog]*" -excludebyattribute:*.ExcludeFromCodeCoverage*;*.Obsolete* -output:"Ninject.Extensions.Logging.Serilog_coverage.xml"
+  - codecov -f "Ninject.Extensions.Logging.Log4net_coverage.xml"
+  - codecov -f "Ninject.Extensions.Logging.NLog4_coverage.xml"
+  - codecov -f "Ninject.Extensions.Logging.Serilog_coverage.xml"
+
+artifacts:
+  - path: '**\*.nupkg'
+
+deploy:
+  provider: NuGet
+  api_key:
+    secure: Sn05A/FiUAlID5v31uaf5EZuYCSo4frLONtrCY+cwY265dU2JUZsl2+sjVeLQyz/
+  on:
+    appveyor_repo_tag: true

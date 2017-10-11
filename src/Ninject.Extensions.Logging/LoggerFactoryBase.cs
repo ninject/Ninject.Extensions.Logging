@@ -1,13 +1,11 @@
-// 
-// Author: Nate Kohari <nate@enkari.com>
-// Copyright (c) 2007-2010, Enkari, Ltd.
-// 
-// Co-Author: Remo Gloor <remo.gloor@gmail.com>
-// Copyright (c) 2010, bbv Software Engineering AG
-//
-// Dual-licensed under the Apache License, Version 2.0, and the Microsoft Public License (Ms-PL).
-// See the file LICENSE.txt for details.
-// 
+// -------------------------------------------------------------------------------------------------
+// <copyright file="LoggerFactoryBase.cs" company="Ninject Project Contributors">
+//   Copyright (c) 2007-2010 Enkari, Ltd.
+//   Copyright (c) 2010 bbv Software Engineering AG
+//   Copyright (c) 2011-2017 Ninject Project Contributors
+//   Dual-licensed under the Apache License, Version 2.0, and the Microsoft Public License (Ms-PL).
+// </copyright>
+// -------------------------------------------------------------------------------------------------
 
 namespace Ninject.Extensions.Logging
 {
@@ -23,6 +21,12 @@ namespace Ninject.Extensions.Logging
     /// </summary>
     public abstract class LoggerFactoryBase : ILoggerFactory
     {
+        /// <summary>
+        /// The method info for GetCurrentClassLogger
+        /// </summary>
+        private static readonly MethodInfo GetCurrentClassLoggerMethodInfo =
+            typeof(LoggerFactoryBase).GetMethod("GetCurrentClassLogger", BindingFlags.Public | BindingFlags.Instance);
+
         /// <summary>
         /// Gets the logger for the specified type, creating it if necessary.
         /// </summary>
@@ -53,13 +57,6 @@ namespace Ninject.Extensions.Logging
             return this.GetLogger(context.Request.Target.Member.DeclaringType);
         }
 
-#if !SILVERLIGHT && !NETCF
-        /// <summary>
-        /// The method info for GetCurrentClassLogger
-        /// </summary>
-        private static readonly MethodInfo getCurrentClassLoggerMethodInfo =
-            typeof(LoggerFactoryBase).GetMethod("GetCurrentClassLogger", BindingFlags.Public | BindingFlags.Instance);
-
         /// <summary>
         /// Gets the logger for the class calling this method.
         /// </summary>
@@ -68,7 +65,7 @@ namespace Ninject.Extensions.Logging
         public ILogger GetCurrentClassLogger()
         {
             var frame = new StackFrame(0, false);
-            if (frame.GetMethod() == getCurrentClassLoggerMethodInfo)
+            if (frame.GetMethod() == GetCurrentClassLoggerMethodInfo)
             {
                 frame = new StackFrame(1, false);
             }
@@ -82,7 +79,6 @@ namespace Ninject.Extensions.Logging
 
             return this.GetLogger(type);
         }
-#endif
 
         /// <summary>
         /// Creates a logger for the specified type.

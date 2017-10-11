@@ -1,13 +1,11 @@
-// 
-// Author: Ian Davis <ian@innovatian.com>
-// Copyright (c) 2009-2010, Innovatian Software, LLC
-//
-// Co-Author: Remo Gloor <remo.gloor@gmail.com>
-// Copyright (c) 2010, bbv Software Engineering AG
-// 
-// Dual-licensed under the Apache License, Version 2.0, and the Microsoft Public License (Ms-PL).
-// See the file LICENSE.txt for details.
-// 
+// -------------------------------------------------------------------------------------------------
+// <copyright file="LoggerModuleBase.cs" company="Ninject Project Contributors">
+//   Copyright (c) 2007-2010 Enkari, Ltd.
+//   Copyright (c) 2010 bbv Software Engineering AG
+//   Copyright (c) 2011-2017 Ninject Project Contributors
+//   Dual-licensed under the Apache License, Version 2.0, and the Microsoft Public License (Ms-PL).
+// </copyright>
+// -------------------------------------------------------------------------------------------------
 
 namespace Ninject.Extensions.Logging
 {

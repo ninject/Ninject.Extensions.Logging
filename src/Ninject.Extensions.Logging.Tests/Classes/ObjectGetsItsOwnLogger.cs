@@ -14,12 +14,12 @@ namespace Ninject.Extensions.Logging.Classes
         public ObjectGetsItsOwnLogger( IKernel kernel )
 // ReSharper restore SuggestBaseTypeForParameter
         {
-            _logger = kernel.Get<ILoggerFactory>().GetLogger( MethodBase.GetCurrentMethod().DeclaringType );
+            this._logger = kernel.Get<ILoggerFactory>().GetLogger( MethodBase.GetCurrentMethod().DeclaringType );
         }
 
         public ILogger Logger
         {
-            get { return _logger; }
+            get { return this._logger; }
         }
     }
 }

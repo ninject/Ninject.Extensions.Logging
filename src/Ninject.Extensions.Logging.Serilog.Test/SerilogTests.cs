@@ -1,8 +1,7 @@
-﻿namespace Ninject.Extensions.Logging.Test.Serilog
+﻿namespace Ninject.Extensions.Logging.Serilog
 {
     using Ninject;
     using Ninject.Extensions.Logging.Serilog.Infrastructure;
-    using Ninject.Extensions.Logging.Serilog.Test.Infrastructure;
     using Ninject.Modules;
 
     public class SerilogTests : SerilogTestingContext

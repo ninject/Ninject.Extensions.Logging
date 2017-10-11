@@ -1,84 +1,26 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B6A475F3-70B8-4EFE-A724-6EA62081B7DC}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Ninject.Extensions.Logging.NLog4</RootNamespace>
-    <AssemblyName>Ninject.Extensions.Logging.NLog4.Test</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
+    <TargetFrameworks>netcoreapp2.0;net452</TargetFrameworks>
+    <IsPackable>false</IsPackable>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="FluentAssertions">
-      <HintPath>..\..\tools\FluentAssertions\Net-4.0\FluentAssertions.dll</HintPath>
-    </Reference>
-    <Reference Include="Ninject">
-      <HintPath>..\..\lib\Ninject\net-3.5\Ninject.dll</HintPath>
-    </Reference>
-    <Reference Include="NLog">
-      <HintPath>..\..\packages\NLog.4.0.1\lib\net45\NLog.dll</HintPath>
-    </Reference>
+    <PackageReference Include="FluentAssertions" Version="4.19.4" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.3.0" />
+    <PackageReference Include="Moq" Version="4.7.99" />
+    <PackageReference Include="xunit" Version="2.3.0" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.3.0" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net452' ">
     <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
-    <Reference Include="xunit">
-      <HintPath>..\..\tools\xunit.net\xunit.dll</HintPath>
-    </Reference>
+    <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
+
   <ItemGroup>
-    <Compile Include="NLogAutoloadTests.cs" />
-    <Compile Include="Infrastructure\NLogTestingContext.cs" />
-    <Compile Include="Infrastructure\TestTarget.cs" />
-    <Compile Include="NLogTests.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <ProjectReference Include="..\Ninject.Extensions.Logging.NLog4\Ninject.Extensions.Logging.NLog4.csproj" />
+    <ProjectReference Include="..\Ninject.Extensions.Logging.Tests\Ninject.Extensions.Logging.Tests.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Ninject.Extensions.Logging.NLog4\Ninject.Extensions.Logging.NLog4.csproj">
-      <Project>{6cecd0a6-2c8f-44f9-94bd-9d8280af2c93}</Project>
-      <Name>Ninject.Extensions.Logging.NLog4</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Ninject.Extensions.Logging.Tests\Ninject.Extensions.Logging.Tests.csproj">
-      <Project>{60ae94dd-7f89-49d7-8a87-49511d59dce2}</Project>
-      <Name>Ninject.Extensions.Logging.Tests</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Ninject.Extensions.Logging\Ninject.Extensions.Logging.csproj">
-      <Project>{1c0e875e-b2d2-4dda-874b-d8a9e45a3888}</Project>
-      <Name>Ninject.Extensions.Logging</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+
 </Project>

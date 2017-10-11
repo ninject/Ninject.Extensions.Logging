@@ -1,10 +1,9 @@
-﻿namespace Ninject.Extensions.Logging.Serilog.Test.Infrastructure
+﻿namespace Ninject.Extensions.Logging.Serilog.Infrastructure
 {
     using System;
     using global::Serilog;
     using Ninject.Extensions.Logging.Infrastructure;
     using Ninject.Extensions.Logging.Serilog;
-    using Ninject.Extensions.Logging.Serilog.Infrastructure;
     using Ninject.Modules;
 
     public abstract class SerilogTestingContext : CommonTests
@@ -13,10 +12,10 @@
 
         static SerilogTestingContext()
         {
-            Log.Logger = new LoggerConfiguration().WriteTo.ColoredConsole().CreateLogger();
+            Log.Logger = new LoggerConfiguration().CreateLogger();
         }
 
-        public SerilogTestingContext()
+        protected SerilogTestingContext()
         {
             this.module = new SerilogModule();
         }

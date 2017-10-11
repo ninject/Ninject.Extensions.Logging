@@ -1,13 +1,5 @@
-_ReSharper.*
-Bin
+.vs
+*.user
 bin
 obj
-dist
-build
-*.suo
-*resharper*
-*.user
-*.dotCover
-/lib/Ninject/*.zip
-/lib/Ninject/*/**
-/packages/xunit.runner.visualstudio*/**
+TestResults

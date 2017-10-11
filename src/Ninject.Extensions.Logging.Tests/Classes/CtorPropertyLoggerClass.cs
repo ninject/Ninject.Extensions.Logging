@@ -6,7 +6,7 @@ namespace Ninject.Extensions.Logging.Classes
     {
         public CtorPropertyLoggerClass( ILogger logger )
         {
-            Logger = logger;
+            this.Logger = logger;
         }
 
         public void LogInfo(string format, params object[] args)

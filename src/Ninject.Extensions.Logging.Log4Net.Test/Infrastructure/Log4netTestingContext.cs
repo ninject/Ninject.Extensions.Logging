@@ -1,6 +1,8 @@
 namespace Ninject.Extensions.Logging.Log4Net.Infrastructure
 {
     using System;
+    using System.Reflection;
+    using log4net;
     using log4net.Config;
     using Ninject.Extensions.Logging.Infrastructure;
     using Ninject.Extensions.Logging.Log4net;
@@ -13,10 +15,10 @@ namespace Ninject.Extensions.Logging.Log4Net.Infrastructure
 
         static Log4netTestingContext()
         {
-            XmlConfigurator.Configure();
+            XmlConfigurator.Configure(LogManager.GetRepository(Assembly.GetCallingAssembly()));
         }
 
-        public Log4netTestingContext()
+        protected Log4netTestingContext()
         {
             this.module = new Log4NetModule();
         }
@@ -28,7 +30,7 @@ namespace Ninject.Extensions.Logging.Log4Net.Infrastructure
 
         public override Type LoggerType
         {
-            get { return typeof (Log4NetLogger); }
+            get { return typeof(Log4NetLogger); }
         }
     }
 }
