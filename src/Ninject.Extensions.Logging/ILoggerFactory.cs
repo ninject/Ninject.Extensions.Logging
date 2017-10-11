@@ -37,7 +37,7 @@ namespace Ninject.Extensions.Logging
         /// <param name="context">The context for which a logger is created.</param>
         /// <returns>The newly-created logger.</returns>
         ILogger GetLogger(IContext context);
-        
+
 #if !SILVERLIGHT && !NETCF
         /// <summary>
         /// Gets the logger for the class calling this method.
