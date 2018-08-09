@@ -46,7 +46,7 @@ namespace Ninject.Extensions.Logging.Log4Net
         }
 
         /// <summary>
-        /// Tests info logging
+        /// Tests trace logging
         /// </summary>
         [Fact]
         public void LogTrace()
@@ -55,7 +55,7 @@ namespace Ninject.Extensions.Logging.Log4Net
         }
 
         /// <summary>
-        /// Tests info logging
+        /// Tests trace logging with arguments
         /// </summary>
         [Fact]
         public void LogTraceWithArguments()
@@ -64,7 +64,7 @@ namespace Ninject.Extensions.Logging.Log4Net
         }
 
         /// <summary>
-        /// Tests Trace logging
+        /// Tests trace exception logging
         /// </summary>
         [Fact]
         public void LogTraceException()
@@ -73,7 +73,7 @@ namespace Ninject.Extensions.Logging.Log4Net
         }
 
         /// <summary>
-        /// Tests Trace logging with exception
+        /// Tests trace exception logging with arguments
         /// </summary>
         [Fact]
         public void LogTraceWithException()
@@ -91,7 +91,7 @@ namespace Ninject.Extensions.Logging.Log4Net
         }
 
         /// <summary>
-        /// Tests info logging
+        /// Tests info logging with arguments
         /// </summary>
         [Fact]
         public void LogInfoWithArguments()
@@ -100,7 +100,7 @@ namespace Ninject.Extensions.Logging.Log4Net
         }
 
         /// <summary>
-        /// Tests info logging
+        /// Tests info exception logging
         /// </summary>
         [Fact]
         public void LogInfoException()
@@ -109,7 +109,7 @@ namespace Ninject.Extensions.Logging.Log4Net
         }
 
         /// <summary>
-        /// Tests info logging with exception
+        /// Tests info exception logging with arguments
         /// </summary>
         [Fact]
         public void LogInfoWithException()
@@ -127,7 +127,7 @@ namespace Ninject.Extensions.Logging.Log4Net
         }
 
         /// <summary>
-        /// Tests debug logging
+        /// Tests debug logging with arguments
         /// </summary>
         [Fact]
         public void LogDebugWithArguments()
@@ -145,7 +145,7 @@ namespace Ninject.Extensions.Logging.Log4Net
         }
 
         /// <summary>
-        /// Tests debug logging with exception
+        /// Tests debug exception logging with arguments
         /// </summary>
         [Fact]
         public void LogDebugWithException()
@@ -163,7 +163,7 @@ namespace Ninject.Extensions.Logging.Log4Net
         }
 
         /// <summary>
-        /// Tests warn logging
+        /// Tests warn logging with arguments
         /// </summary>
         [Fact]
         public void LogWarnWithArguments()
@@ -181,7 +181,7 @@ namespace Ninject.Extensions.Logging.Log4Net
         }
 
         /// <summary>
-        /// Tests warn logging with exception
+        /// Tests warn exception logging with arguments
         /// </summary>
         [Fact]
         public void LogWarnWithException()
@@ -199,7 +199,7 @@ namespace Ninject.Extensions.Logging.Log4Net
         }
 
         /// <summary>
-        /// Tests error logging
+        /// Tests error logging with arguments
         /// </summary>
         [Fact]
         public void LogErrorWithArguments()
@@ -217,7 +217,7 @@ namespace Ninject.Extensions.Logging.Log4Net
         }
 
         /// <summary>
-        /// Tests error logging with exception
+        /// Tests error exception logging with arguments
         /// </summary>
         [Fact]
         public void LogErrorWithException()
@@ -235,7 +235,7 @@ namespace Ninject.Extensions.Logging.Log4Net
         }
 
         /// <summary>
-        /// Tests fatal logging
+        /// Tests fatal logging with arguments
         /// </summary>
         [Fact]
         public void LogFatalWithArguments()
@@ -253,7 +253,7 @@ namespace Ninject.Extensions.Logging.Log4Net
         }
 
         /// <summary>
-        /// Tests fatal logging with exception
+        /// Tests fatal exception logging with arguments
         /// </summary>
         [Fact]
         public void LogFatalWithException()
